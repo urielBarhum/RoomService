@@ -1,7 +1,14 @@
 <h1>כאן יוצגו הנתונים</h1>
 <div >
     
+<div *ngFor="let item of hotels" class="card bg-dark text-center text-info ">
+<h3>{{item.nameHotel}}</h3>
+<h3>{{item.city}}</h3>
+<h3>{{item.street}}</h3>
+<h3>{{item.numberStreet}}</h3>
 
+
+</div>
     <div class="card text-center bg-info" *ngFor="let item of custumers">
         <h3>{{item.fullName}}</h3>
         <h3>{{item.address}}</h3>

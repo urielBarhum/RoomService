@@ -10,6 +10,6 @@ export class HotelService {
 
   constructor(private http:HttpClient) { }
   getHotels() : Observable<Hotel[]>{
-return this.http.get<Hotel[]>('kjjoiioj')
+return this.http.get<Hotel[]>('https://localhost:44382/api/hotel/gethotels')
   }
 }
