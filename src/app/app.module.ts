@@ -11,12 +11,16 @@ import { HeaderMainComponent } from './components/header-main/header-main.compon
 import { FooterMainComponent } from './components/footer-main/footer-main.component';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
+import { MenuComponent } from './components/menu/menu.component';
+import { LoginComponent } from './components/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     HeaderMainComponent,
-    FooterMainComponent
+    FooterMainComponent,
+    MenuComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

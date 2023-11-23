@@ -1,0 +1,14 @@
+<div class="headerLogin text-center m-5">
+    <h2>כניסת אורחים</h2>
+    <div class="inputUser m-2">
+        <label class="ml-3" for="id">הכנס מספר זהות</label>
+        <input [(ngModel)]="tzuser" type="text" placeholder="הכנס מס זהות">
+    </div>
+    <div class="inputRoom m-2">
+        <label class="ml-3" for="numRoom">הכנס מספר חדר</label>
+        <input [(ngModel)]="roomNumber" type="text" placeholder="הכנס מספר חדר">
+    </div>
+    <div class="m-2">
+<button class="btnIn" (click)="logIN()" >היכנס</button>
+    </div>
+</div>
