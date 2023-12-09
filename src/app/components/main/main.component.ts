@@ -25,10 +25,10 @@ this.hotelService.getHotels().subscribe((h:Hotel[])=>{
 
 
 
-    this.custumerService.getCustumers().subscribe((c: Custumer[]) => {
-      this.custumers = c;
-    }
-    )
+    // this.custumerService.getCustumers().subscribe((c: Custumer[]) => {
+    //   this.custumers = c;
+    // }
+    // )
     this.employeesService.getEmployees().subscribe((e: Employee[]) => {
          this.employees = e;
     }

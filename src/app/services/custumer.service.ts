@@ -11,8 +11,11 @@ export class CustumerService {
   constructor(private http:HttpClient) {
 
    }
+   custumeres!:Custumer[]
 
-   getCustumers() :Observable<Custumer[]>{
-    return this.http.get<Custumer[]>('https://localhost:44382/api/Custumer/GetCustumers')
+   getCustumers() :void{
+     this.http.get<Custumer[]>('https://localhost:44382/api/Custumer/GetCustumers').subscribe(custumer => {
+      this.custumeres = custumer;
+     })
    }
 }

@@ -13,6 +13,8 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { MenuComponent } from './components/menu/menu.component';
 import { LoginComponent } from './components/login/login.component';
+import { ORSComponent } from './components/ors/ors.component';
+import { CustumerComponent } from './components/custumer/custumer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +22,9 @@ import { LoginComponent } from './components/login/login.component';
     HeaderMainComponent,
     FooterMainComponent,
     MenuComponent,
-    LoginComponent
+    LoginComponent,
+    ORSComponent,
+    CustumerComponent
   ],
   imports: [
     BrowserModule,
