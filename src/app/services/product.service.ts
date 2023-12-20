@@ -12,6 +12,6 @@ export class ProductService {
 
    }
    getProduct() : Observable<Product[]>{
-    return this.http.get<Product[]>('https://localhost:44382/api/Product/GetProduct')
+    return this.http.get<Product[]>('https://localhost:44382/api/Product/GetProducts')
    }
 }

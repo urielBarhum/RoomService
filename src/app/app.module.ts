@@ -13,8 +13,11 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { MenuComponent } from './components/menu/menu.component';
 import { LoginComponent } from './components/login/login.component';
-import { ORSComponent } from './components/ors/ors.component';
-import { CustumerComponent } from './components/custumer/custumer.component';
+import { OrderRoomServiceByCustumerComponent } from './components/order-room-service-by-custumer/order-room-service-by-custumer.component';
+import { HeaderRoomServiceClientComponent } from './components/header-room-service-client/header-room-service-client.component';
+import { MainRoomServiceClientComponent } from './components/main-room-service-client/main-room-service-client.component';
+import { ProductComponent } from './components/product/product.component';
+import { ProductsComponent } from './components/products/products.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,8 +26,11 @@ import { CustumerComponent } from './components/custumer/custumer.component';
     FooterMainComponent,
     MenuComponent,
     LoginComponent,
-    ORSComponent,
-    CustumerComponent
+    OrderRoomServiceByCustumerComponent,
+    HeaderRoomServiceClientComponent,
+    MainRoomServiceClientComponent,
+    ProductComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,

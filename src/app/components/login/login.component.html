@@ -9,6 +9,11 @@
         <input [(ngModel)]="roomNumber" type="number" placeholder="הכנס מספר חדר">
     </div>
     <div class="m-2">
-<button class="btnIn" (click)="logIN()" >היכנס</button>
+        <button class="btnIn" (click)="logIN()">היכנס</button>
     </div>
+</div>
+<div *ngIf="wrngMesseg" class="wrngMesseg card text-center bg-danger col-2">
+    <p>
+        {{wrngMesseg}}
+    <p>
 </div>

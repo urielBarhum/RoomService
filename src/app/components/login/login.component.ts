@@ -10,21 +10,37 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  constructor(private http:HttpClient , private router:Router,private aute:AuthService){
+  constructor(private http: HttpClient, private router: Router, private aute: AuthService) {
 
   }
-authRequest!:AuthRequest 
-tzuser!:string
-roomNumber !: number
-  logIN(){
-this.authRequest= new AuthRequest();
- console.log(this.tzuser,this.roomNumber);
-this.authRequest.misparZehut = this.tzuser
-this.authRequest.roomNumber = this.roomNumber
+  a = ""
+  authRequest!: AuthRequest
+  tzuser!: string
+  roomNumber !: number
+  wrngMesseg: string = ""
+  succsesMesseg: string = "הנך מועבר לאתר"
+
+  logIN() {
+    this.authRequest = new AuthRequest();
+    console.log(this.tzuser, this.roomNumber);
+    this.authRequest.misparZehut = this.tzuser
+    this.authRequest.roomNumber = this.roomNumber
 
 
-this.aute.logIN(this.authRequest)
+    this.aute.logIN(this.authRequest).subscribe(
+      data => {
 
-
+        sessionStorage.setItem("token", data);
+        this.wrngMesseg = ""
+        console.log(data);
+        this.router.navigateByUrl("orderRoomServiceByCustumer")
+      },
+      err => {
+        this.wrngMesseg = "לא הכנסת נתונים נכונים אנא נסה שוב"
+      }
+    )
   }
+
+
 }
+
