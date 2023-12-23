@@ -15,12 +15,30 @@
 
         <p>{{product.priceProduct}}</p>
     </div>
-    <div >
+    <div>
 
         <img class="imageP" src="../../../assets/images/{{product.productImage}}" alt="{{product.productImage}}">
     </div>
-    <!-- <button (click)="addOne()">+</button> -->
-    
+    <div class="optinon">
 
+        <button (click)="addOne()">
+            <i class="fa-solid fa-plus"></i>
+
+        </button>
+        <button *ngIf="add > 0 " (click)="subOne()">
+            <i class="fa-solid fa-minus"></i>
+        </button>
+        <button>
+            <i class="fa-solid fa-star"></i>
+
+        </button>
+        <button (click)="removAll()">
+            <i class="fa-solid fa-trash"></i>
+        </button>
+        <button>
+            <i class="fa" style="font-size:13px">&#xf07a;</i>
+            <span class='badge badge-warning' id='lblCartCount'> {{add}} </span>
+        </button>
+    </div>
 
 </div>

@@ -12,5 +12,14 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductComponent {
   @Input() product !:Product
   constructor(private productService: ProductService, http: HttpClient) { }
-
+add:number = 0;
+  addOne(){
+    this.add++;
+  }
+  subOne(){
+    this.add --;
+  }
+  removAll(){
+    this.add = 0;
+  }
 }

@@ -18,6 +18,7 @@ import { HeaderRoomServiceClientComponent } from './components/header-room-servi
 import { MainRoomServiceClientComponent } from './components/main-room-service-client/main-room-service-client.component';
 import { ProductComponent } from './components/product/product.component';
 import { ProductsComponent } from './components/products/products.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +43,7 @@ import { ProductsComponent } from './components/products/products.component';
     HttpClientModule,
     CardModule,
     ButtonModule
+   
   ],
   providers: [],
   bootstrap: [AppComponent]
