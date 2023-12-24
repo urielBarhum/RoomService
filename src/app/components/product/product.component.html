@@ -21,7 +21,7 @@
     </div>
     <div class="optinon">
 
-        <button (click)="addOne()">
+        <button *ngIf="product.qTY > 0 " (click)="addOne()">
             <i class="fa-solid fa-plus"></i>
 
         </button>
