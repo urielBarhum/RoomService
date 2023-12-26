@@ -1,9 +1,15 @@
+<button  (click)="sendToCart()">לחץ לאישור הזמנה</button>
+<p>{{priceForAll}}</p>
 <div class="col-12">
    <div class="row">
 
-      <div *ngFor="let item of products" class="product card col-sm-12 col-lg-3 text-center m-5 p-5 bg-info">
-         <app-product [product]="item"></app-product>
+      <div *ngFor="let item of products" class="product card col-sm-5 col-lg-3 text-center m-3 p-3 bg-info">
+         <app-product (productEvent)="productFromChildToSave($event)" [product]="item"></app-product>
       </div>
    </div>
-
+   <!-- <div  *ngIf="productFromChild" class="row">
+      <div (click)="show()" class="col-12">
+         {{productFromChild.nameProduct}}
+      </div>
+   </div> -->
 </div>

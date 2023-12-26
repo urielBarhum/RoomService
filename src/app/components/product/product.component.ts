@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { orderRoomService } from 'src/app/models/orderRoomService';
 import { Product } from 'src/app/models/product';
@@ -13,11 +13,13 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductComponent {
   @Input() product !: Product
+  @Output() productEvent = new EventEmitter<Product>();
   constructor(private productService: ProductService, http: HttpClient, private orderRoomServices: OrderRoomServiceService) { }
   add: number = 0;
-  addOne() {
+  sendOne() {
     this.add++;
-    this.orderRoomServices.addOrderRoomService(this.product.iDProduct)
+    this.productEvent.emit(this.product)
+    // this.orderRoomServices.addOrderRoomService(this.product.iDProduct)
   }
   subOne() {
     this.add--;
