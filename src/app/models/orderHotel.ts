@@ -1,8 +1,8 @@
 
 export class orderHotel {
-    IDOrderHotel !: number
-    iDHotel!: number;
-    iDCustomer!: number;
+    idOrderHotel !: number
+    idHotel!: number;
+    idCustomer!: number;
     dateFrom!: Date;
     dateTo!: Date;
     sumPrice!: number | null;

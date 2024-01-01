@@ -1,7 +1,7 @@
 export class orderRoomService {
     iDOrderRoomService!: number;
-    iDOrderHotel!: number;
-    iDProduct!: number;
-    iDEmployee!: number;
+    idOrderHotel!: number;
+    idProduct!: number;
+    idEmployee!: number;
     orderNumber!: number;
 }

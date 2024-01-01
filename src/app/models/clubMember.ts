@@ -1,5 +1,5 @@
 export class ClubMember {
-    iDClubMember!: number;
-    iDCustumer!: number;
+    idClubMember!: number;
+    idCustumer!: number;
     isPlatinum!: boolean;
 }

@@ -14,9 +14,10 @@ export class ProductsComponent implements OnChanges {
 
   products: Product[] = []
   productFromChild!:Product 
-  productsToCart :Product [] =[]
+  productsToSentToCart :Product [] =[]
   cartProducts :cart []=[]
   priceForAll: number = 0
+   
   ngOnChanges(changes: SimpleChanges): void {
   
   }
@@ -27,33 +28,56 @@ export class ProductsComponent implements OnChanges {
   }
   productFromChildToSave(product :Product){
     this.productFromChild = product
-    this.productsToCart.push(product);
-    this.productsToCart.forEach(element => {
-      this.priceForAll+= element.priceProduct
-    });
+    this.productsToSentToCart.push(product);
+    // this.productsToSentToCart.forEach(element => {
+    //   this.priceForAll+= element.priceProduct
+    // });
   }
   sendToCart(){
-    console.log(this.productsToCart);
-    console.log(this.priceForAll);
-    debugger;
-    for (let index = 0; index < this.productsToCart.length; index++) {
-      const element = this.productsToCart[index];
-      
-      const productExist = this.cartProducts.find(item => item.productID ===element.iDProduct)
-      if(productExist){
-        productExist.QTYProduct++
+    console.log(this.productsToSentToCart);
+ 
+  debugger
+    this.productsToSentToCart.forEach(element => {
+      // console.log("this is the element ",element);
+      const exsiteProduct = this.cartProducts.find(item => item.productID == element.idProduct)
+      if(exsiteProduct){
+        exsiteProduct.QTYProduct++
       }
       else{
-        let comper: cart = new cart(this.productsToCart[index].iDProduct)
+       let comper: cart = new  cart()
+        comper.productID = element.idProduct
+        comper.QTYProduct = 1
         this.cartProducts.push(comper)
-        console.log(comper,comper.productID);
+        console.log(comper );
         
       }
-    }
-  
-    console.log(this.cartProducts);
+      
+      
+      
+    });
     
   }
-  
 
 }
+
+
+
+    // for (let index = 0; index < this.productsToSentToCart.length; index++) {
+    //   const element = this.productsToSentToCart[index];
+      
+    //   const productExist = this.cartProducts.find(item => item.productID ===element.iDProduct)
+    //   if(productExist){
+    //     productExist.QTYProduct++
+    //   }
+    //   else{
+    //    this.comper = {productID: this.productsToSentToCart[index].iDProduct ,QTYProduct: 1}
+    //     this.cartProducts.push(this.comper)
+    //     console.log(this.comper,this.comper.productID);
+        
+    //   }
+    // }
+  
+
+    
+  
+

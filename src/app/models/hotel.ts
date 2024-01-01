@@ -1,5 +1,5 @@
 export class Hotel {
-    iDHotel!: number;
+    idHotel!: number;
     nameHotel!: string;
     firma!: string;
     country!: string;

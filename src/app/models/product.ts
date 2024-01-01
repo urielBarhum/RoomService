@@ -1,5 +1,5 @@
 export class Product {
-    iDProduct!: number;
+    idProduct!: number;
     nameProduct!: string;
     descriptionProduct!: string | null;
     manufacturer!: string;

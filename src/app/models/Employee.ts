@@ -1,7 +1,7 @@
 export class Employee{
 
 
-iDEmployee!:number
+idEmployee!:number
      dHotel !:number
       firstName !:string 
       lastName!: string 

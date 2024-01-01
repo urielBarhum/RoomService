@@ -1,5 +1,5 @@
 export class Custumer {
-    iDCustomer!: string;
+    idCustomer!: string;
     firstName!: string;
     lastName!: string;
     city!: string | null;
