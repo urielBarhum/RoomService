@@ -4,4 +4,6 @@ export class orderRoomService {
     idProduct!: number;
     idEmployee!: number;
     orderNumber!: number;
+    riceForAll !:number 
+    qtyProduct !:number
 }

@@ -1,0 +1,55 @@
+import { Injectable } from '@angular/core';
+import { cart } from '../models/cart';
+import { Product } from '../models/product';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CartService {
+  myCart: cart[] = []
+  constructor(private http: HttpClient) { }
+  addToCart(product: Product) {
+    const exsiteProduct = this.myCart.find(item => item.productID == product.idProduct)
+    if (exsiteProduct) {
+      exsiteProduct.qtyProduct++
+      exsiteProduct.priceForAll += product.priceProduct
+    }
+    else {
+      let comper: cart = new cart()
+      comper.productID = product.idProduct
+      comper.qtyProduct = 1
+      comper.priceForAll = product.priceProduct
+      this.myCart.push(comper)
+      console.log(comper);
+
+    }
+    console.log(this.myCart);
+
+  }
+  subOne(product: Product) {
+    const exsiteProduct = this.myCart.find(item => item.productID == product.idProduct)
+    if (exsiteProduct) {
+      if (exsiteProduct.qtyProduct > 1) {
+
+        exsiteProduct.qtyProduct--
+        exsiteProduct.priceForAll -= product.priceProduct
+      }
+      else {
+        let index = this.myCart.findIndex(item => item.productID == product.idProduct)
+        this.myCart.splice(index, 1)
+      }
+    }
+    console.log(this.myCart);
+
+  }
+  sendToServer(): void {
+    let token = sessionStorage.getItem('token');
+    let options = { headers: { "Authorization": token ?? "" } };
+    this.http.post('https://localhost:44382/api/OrderRoomService/AddOrderRoomService', this.myCart, options).subscribe(s => {
+      console.log(s)
+
+    })
+  }
+
+}
