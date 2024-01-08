@@ -7,31 +7,36 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CartService {
-  myCart: cart[] = []
+  myCart: cart[] = [];
+  priceForAll: number = 0;
   constructor(private http: HttpClient) { }
   addToCart(product: Product) {
     const exsiteProduct = this.myCart.find(item => item.productID == product.idProduct)
     if (exsiteProduct) {
       exsiteProduct.qtyProduct++
-      exsiteProduct.priceForAll += product.priceProduct
+      exsiteProduct.priceForAll += product.priceProduct;
+      this.priceForAll += product.priceProduct;
     }
     else {
       let comper: cart = new cart()
       comper.productID = product.idProduct
       comper.qtyProduct = 1
       comper.priceForAll = product.priceProduct
-      this.myCart.push(comper)
-      console.log(comper);
+      this.myCart.push(comper);
+      this.priceForAll += product.priceProduct;
+
+
 
     }
     console.log(this.myCart);
+    console.log(this.priceForAll);
 
   }
   subOne(product: Product) {
     const exsiteProduct = this.myCart.find(item => item.productID == product.idProduct)
     if (exsiteProduct) {
+      this.priceForAll-= product.priceProduct
       if (exsiteProduct.qtyProduct > 1) {
-
         exsiteProduct.qtyProduct--
         exsiteProduct.priceForAll -= product.priceProduct
       }
@@ -41,6 +46,8 @@ export class CartService {
       }
     }
     console.log(this.myCart);
+    console.log(this.priceForAll);
+
 
   }
   sendToServer(): void {
@@ -50,6 +57,8 @@ export class CartService {
       console.log(s)
 
     })
+    this.myCart =[]
+    this.priceForAll = 0;
   }
 
 }

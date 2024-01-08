@@ -12,27 +12,9 @@ import { HotelService } from 'src/app/services/hotel.service';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  constructor(private employeesService: EmployeeService, private custumerService: CustumerService, private hotelService:HotelService) {
-
-  }
-  custumers !: Custumer[]
-  employees !: Employee[]
-  hotels !:Hotel[]
+  constructor() {}
   ngOnInit(): void {
-this.hotelService.getHotels().subscribe((h:Hotel[])=>{
-  this.hotels= h;
-})
-
-
-
-    // this.custumerService.getCustumers().subscribe((c: Custumer[]) => {
-    //   this.custumers = c;
-    // }
-    // )
-    this.employeesService.getEmployees().subscribe((e: Employee[]) => {
-         this.employees = e;
-    }
-    )
+   
   }
 
 }

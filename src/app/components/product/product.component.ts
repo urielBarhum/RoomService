@@ -15,18 +15,25 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductComponent {
   @Input() product !: Product
   @Output() productEvent = new EventEmitter<Product>();
+  priceForAll!: number ;
+
   constructor(private productService: ProductService, http: HttpClient, private orderRoomServices: OrderRoomServiceService,private cart:CartService
     ) { }
   add: number = 0;
   addOne() {
     this.add++;
     this.cart.addToCart(this.product)
-    this.productEvent.emit(this.product)
+    this.productEvent.emit(this.product);
     // this.orderRoomServices.addOrderRoomService(this.product.iDProduct)
+    this.priceForAll = this.cart.priceForAll
   }
   subOne() {
     this.add--;
-    this.cart.subOne(this.product)
+    this.cart.subOne(this.product);
+    this.priceForAll = this.cart.priceForAll
+    this.productEvent.emit(this.product);
+
+    
   }
   removAll() {
     this.add = 0;

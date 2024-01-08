@@ -8,14 +8,12 @@ import { Observable } from 'rxjs';
 })
 export class CustumerService {
 
-  constructor(private http:HttpClient) {
+  constructor(private http: HttpClient) {
 
+  }
+  custumeres!: Custumer[]
+  getCusrumers() : Observable<Custumer[]>{
+    return this.http.get<Custumer[]>('https://localhost:44382/api/Custumer/GetCustumers')
    }
-   custumeres!:Custumer[]
-
-   getCustumers() :void{
-     this.http.get<Custumer[]>('https://localhost:44382/api/Custumer/GetCustumers').subscribe(custumer => {
-      this.custumeres = custumer;
-     })
-   }
+  
 }

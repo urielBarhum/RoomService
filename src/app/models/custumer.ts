@@ -5,6 +5,6 @@ export class Custumer {
     city!: string | null;
     address!: string | null;
     numHoues!: number | null;
-    tZCustomer!: string;
+    tzCustomer!: string;
     fullName!: string;
 }

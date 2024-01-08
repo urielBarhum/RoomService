@@ -15,12 +15,9 @@ export class ProductsComponent implements OnChanges {
 
   products: Product[] = []
   productFromChild!:Product 
-  productsToSentToCart :Product [] =[]
-  cartProducts :cart []=[]
-  priceForAll: number = 0
+  priceForAll: number =0;
    
   ngOnChanges(changes: SimpleChanges): void {
-  
   }
   constructor(private productService: ProductService, http: HttpClient , private cart:CartService) {
     productService.getProduct().subscribe(res => {
@@ -29,7 +26,7 @@ export class ProductsComponent implements OnChanges {
   }
   productFromChildToSave(product :Product){
     this.productFromChild = product
-
+    this.priceForAll=  this.cart.priceForAll
   }
   sendToCart(){
     this.cart.sendToServer();

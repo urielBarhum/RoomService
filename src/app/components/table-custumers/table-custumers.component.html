@@ -1,0 +1,51 @@
+<p-table [value]="custumeres" [tableStyle]="{'min-width': '60rem'}" >
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="code" style="width:20%"> שם מלא 
+                <p-sortIcon field="code"></p-sortIcon>
+            </th>
+            <th pSortableColumn="name" style="width:20%">מספר הזמנה <p-sortIcon field="name"></p-sortIcon></th>
+            <th pSortableColumn="category" style="width:20%">תעודת זהות אורח <p-sortIcon field="category"></p-sortIcon>
+            </th>
+            <th pSortableColumn="quantity" style="width:20%">עיר <p-sortIcon field="quantity"></p-sortIcon>
+            </th>
+            <th pSortableColumn="price" style="width:20%">רחוב <p-sortIcon field="price"></p-sortIcon></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-custumer>
+        <tr>
+            <td class="text-center">{{ custumer.fullName }}</td>
+            <td class="text-center">{{ custumer.idCustomer }}</td>
+            <td class="text-center">{{ custumer.tzCustomer }}</td>
+            <td class="text-center">{{ custumer.city }}</td>
+            <td class="text-center">{{ custumer.address }}</td>
+
+            <!-- <td>{{product.price | currency: 'USD'}}</td> -->
+        </tr>
+    </ng-template>
+</p-table>
+<div class="card text-center">
+
+</div>
+
+<!-- <div class="card">
+    <div class="row">
+        <table>
+            <thead>
+                <td>שם</td>
+                <td>מספר הזמנה</td>
+                <td>תז</td>
+                <td>עיר</td>
+                <td>רחוב</td>
+
+            </thead>
+            <tbody *ngFor="let custumer of custumeres">
+                <td>{{ custumer.fullName }}</td>
+                <td>{{ custumer.idCustomer }}</td>
+                <td>{{ custumer.tzCustomer }}</td>
+                <td>{{ custumer.city }}</td>
+                <td>{{ custumer.address }}</td>
+            </tbody>
+        </table>
+    </div>
+</div> -->

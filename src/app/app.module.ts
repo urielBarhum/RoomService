@@ -18,6 +18,9 @@ import { HeaderRoomServiceClientComponent } from './components/header-room-servi
 import { MainRoomServiceClientComponent } from './components/main-room-service-client/main-room-service-client.component';
 import { ProductComponent } from './components/product/product.component';
 import { ProductsComponent } from './components/products/products.component';
+import { TableModule } from 'primeng/table';
+import { AdminComponent } from './admin/admin.component';
+import { TableCustumersComponent } from './components/table-custumers/table-custumers.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,9 @@ import { ProductsComponent } from './components/products/products.component';
     HeaderRoomServiceClientComponent,
     MainRoomServiceClientComponent,
     ProductComponent,
-    ProductsComponent
+    ProductsComponent,
+    AdminComponent,
+    TableCustumersComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +47,8 @@ import { ProductsComponent } from './components/products/products.component';
     AutoCompleteModule,
     HttpClientModule,
     CardModule,
-    ButtonModule
+    ButtonModule,
+    TableModule
    
   ],
   providers: [],
