@@ -16,10 +16,24 @@ export class TableCustumersComponent implements OnInit {
       this.custumeres = res;
       console.log(this.custumeres);
       console.log(this.custumeres[0].tzCustomer);
-      
+
     });
   }
   ngOnInit(): void {
 
+  }
+  customSort(event: any, field: string) {
+    event.data.sort((data1: any, data2: any) => {
+      const value1 = parseFloat(data1[field]);
+      const value2 = parseFloat(data2[field]);
+
+      if (value1 < value2) {
+        return event.order === 1 ? -1 : 1;
+      } else if (value1 > value2) {
+        return event.order === 1 ? 1 : -1;
+      } else {
+        return 0;
+      }
+    });
   }
 }
