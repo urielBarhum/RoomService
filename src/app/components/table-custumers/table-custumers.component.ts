@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Route } from '@angular/router';
 import { Custumer } from 'src/app/models/custumer';
+import { CustumersAndOrdersHotels } from 'src/app/models/custumersAndOrdersHotels';
+import { orderHotel } from 'src/app/models/orderHotel';
 import { CustumerService } from 'src/app/services/custumer.service';
+import { OrderHotelService } from 'src/app/services/order-hotel.service';
 
 @Component({
   selector: 'app-table-custumers',
@@ -9,15 +12,26 @@ import { CustumerService } from 'src/app/services/custumer.service';
   styleUrls: ['./table-custumers.component.scss']
 })
 export class TableCustumersComponent implements OnInit {
-  custumeres: Custumer[] = []
-
-  constructor(private custumerService: CustumerService) {
+  custumeres: Custumer[] = [];
+  ordersHotel: orderHotel[] = [];
+  custumersAndOrdersHotels :CustumersAndOrdersHotels[]=[];
+  constructor(private custumerService: CustumerService, private ordersHotelService: OrderHotelService) {
+    console.log("i from table");
+    
     this.custumerService.getCusrumers().subscribe(res => {
       this.custumeres = res;
-      console.log(this.custumeres);
-      console.log(this.custumeres[0].tzCustomer);
+    
+    });
+    this.ordersHotelService.getOrderHotel().subscribe(res => {
+      this.ordersHotel = res;
+      console.log(this.ordersHotel);
 
     });
+    this.custumerService.getCustumersAndOrdersHotels().subscribe(res => {
+      this.custumersAndOrdersHotels = res;
+      console.log(this.custumersAndOrdersHotels);
+      
+    })
   }
   ngOnInit(): void {
 
