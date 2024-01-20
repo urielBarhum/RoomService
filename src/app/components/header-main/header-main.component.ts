@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -7,5 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header-main.component.scss']
 })
 export class HeaderMainComponent  {
-  
+ constructor(private router:Router){
+
+ }
+ logInCustumers(){
+this.router.navigateByUrl('logInCustumers');
+  }
+  logInAdmin(){
+    this.router.navigateByUrl('logInAdmin')
+  }
 }

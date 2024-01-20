@@ -1,0 +1,19 @@
+<div class="headerLogin text-center m-5 card">
+    <h2 class="text-danger">כניסת מנהלים</h2>
+    <div class="inputUser m-2">
+        <label class="ml-3" for="idEmployee"> הכנס מספר זהות</label>
+        <input [(ngModel)]="tzAdmin" type="text" id="idEmployee" placeholder="הכנס מס זהות">
+    </div>
+    <div class="inputRoom m-2">
+        <label class="ml-3" for="passWordAdmin">הכנס סיסמת מנהל</label>
+        <input [(ngModel)]="passWord" type="text" id="" placeholder="הכנס סיסמא">
+    </div>
+    <div class="m-2">
+        <button class="btnIn" (click)="logINAdmin()">היכנס</button>
+    </div>
+</div>
+<div *ngIf="wrngMesseg" class="wrngMesseg card text-center bg-danger col-2">
+    <p>
+        {{wrngMesseg}}
+    <p>
+</div>

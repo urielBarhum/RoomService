@@ -21,6 +21,9 @@ import { ProductsComponent } from './components/products/products.component';
 import { TableModule } from 'primeng/table';
 import { AdminComponent } from './admin/admin.component';
 import { TableCustumersComponent } from './components/table-custumers/table-custumers.component';
+import { TablePrimeComponent } from './components/table-prime/table-prime.component';
+import { LogInAdminComponent } from './components/log-in-admin/log-in-admin.component';
+import { MenuAdminComponent } from './components/menu-admin/menu-admin.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import { TableCustumersComponent } from './components/table-custumers/table-cust
     ProductComponent,
     ProductsComponent,
     AdminComponent,
-    TableCustumersComponent
+    TableCustumersComponent,
+    TablePrimeComponent,
+    LogInAdminComponent,
+    MenuAdminComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,17 @@
+.headerLogin{
+    border: 5px green solid;
+    border-radius: 30px;
+}
+.btnIn{
+    border-radius: 10px;
+    
+}
+.btnIn:hover{
+    background-color: greenyellow;
+}
+.wrngMesseg{
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

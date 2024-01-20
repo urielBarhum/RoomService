@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Custumer } from 'src/app/models/custumer';
 
 @Component({
@@ -12,7 +13,9 @@ export class OrderRoomServiceByCustumerComponent implements OnInit{
   ngOnInit(): void {
     
   }
-constructor(private http:HttpClient){}
+constructor(private http:HttpClient , private router: Router){}
 
-
+goToMarket(){
+  this.router.navigateByUrl("market")
+}
 }
