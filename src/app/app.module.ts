@@ -24,7 +24,9 @@ import { TableCustumersComponent } from './components/table-custumers/table-cust
 import { TablePrimeComponent } from './components/table-prime/table-prime.component';
 import { LogInAdminComponent } from './components/log-in-admin/log-in-admin.component';
 import { MenuAdminComponent } from './components/menu-admin/menu-admin.component';
-
+import { ImageModule } from 'primeng/image';
+import { GalleriaModule } from 'primeng/galleria';
+import { HeaderAdminComponent } from './components/header-admin/header-admin.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +44,8 @@ import { MenuAdminComponent } from './components/menu-admin/menu-admin.component
     TableCustumersComponent,
     TablePrimeComponent,
     LogInAdminComponent,
-    MenuAdminComponent
+    MenuAdminComponent,
+    HeaderAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,9 @@ import { MenuAdminComponent } from './components/menu-admin/menu-admin.component
     HttpClientModule,
     CardModule,
     ButtonModule,
-    TableModule
+    TableModule,
+    ImageModule,
+    GalleriaModule
    
   ],
   providers: [],
