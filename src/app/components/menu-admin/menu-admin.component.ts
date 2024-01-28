@@ -8,12 +8,19 @@ import { Router } from '@angular/router';
 })
 export class MenuAdminComponent implements OnInit {
 
-  constructor(private router : Router){}
+  constructor(private router: Router) { }
   ngOnInit(): void {
-    
+
   }
-  oreders(){
+  goToEmployee() {
+    this.router.navigateByUrl('tableEmployees');
+  }
+  goToOreders() {
     this.router.navigateByUrl('tableCustumers')
   }
+  goToProducts(){
+
+  }
+  
 
 }

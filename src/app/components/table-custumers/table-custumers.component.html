@@ -1,3 +1,4 @@
+<app-header-admin class="mb-2"></app-header-admin>
 <h1 class="card text-center text-warning m-2 bg-primary">טבלת ניהול אורחים </h1>
 
 
@@ -11,8 +12,7 @@
             <th class="text-center" pSortableColumn="tzCustomer" style="width:10%">תעודת זהות אורח
                 <p-sortIcon [field]="'tzCustomer'"></p-sortIcon>
             </th>
-            <th class="text-center" pSortableColumn="idOrderHotel" style="width:10%"
-                (sort)="customSort($event, 'idOrderHotel')">מספר הזמנה
+            <th class="text-center" pSortableColumn="idOrderHotel" style="width:10%">מספר הזמנה
                 <p-sortIcon [field]="'idOrderHotel'"></p-sortIcon>
             </th>
             <th class="text-center" pSortableColumn="dateFrom" style="width:10%">מתאריך
