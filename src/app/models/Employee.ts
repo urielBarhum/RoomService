@@ -7,7 +7,7 @@ idEmployee!:number
       lastName!: string 
       isWorkNow !: boolean 
       isBusy !:boolean 
-      tZEmployee !:number 
+      tzEmployee !:string 
       passWord !:string
       isManger !:boolean 
       fullName !: string

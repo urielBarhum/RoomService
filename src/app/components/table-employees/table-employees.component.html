@@ -1,4 +1,6 @@
 <app-header-admin></app-header-admin>
+<button (click)="add != add">לחץ כאן להוספת עובד</button>
+<button (click)="kuku()">לחץ לניסוי</button>
 <p-table  [value]="employees" [tableStyle]="{'min-width': '60rem'}">
     <ng-template pTemplate="header">
         <tr>
@@ -14,8 +16,8 @@
             <th class="text-center" pSortableColumn="isBusy" style="width:10%"> האם פנוי עכשיו
                 <p-sortIcon [field]="'isBusy'"></p-sortIcon>
             </th>
-            <th class="text-center" pSortableColumn="tZEmployee" style="width:10%"> תעודת זהות עובד
-                <p-sortIcon [field]="'tZEmployee'"></p-sortIcon>
+            <th class="text-center" pSortableColumn="tzEmployee" style="width:10%"> תעודת זהות עובד
+                <p-sortIcon [field]="'tzEmployee'"></p-sortIcon>
             </th>
             <th class="text-center" pSortableColumn="isManger" style="width:10%"> מנהל/עובד
                 <p-sortIcon [field]="'isManger'"></p-sortIcon>
@@ -40,15 +42,15 @@
             <td class="bg-warning text-center" *ngIf="employee.isBusy">  
                 <i class="fa-solid fa-x bg-warning"></i>  
             </td>
-            <td class="text-center">{{ employee.tZEmployee}}</td>
+            <td class="text-center">{{ employee.tzEmployee}}</td>
             <td class="text-center">{{ employee.isManger}}</td>
             <td class="text-center">
-                <button>
+                <button (click)="editEmployee()">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </button>
             </td>
             <td class="text-center">
-                <button>
+                <button (click)="deleteEmployee(employee.idEmployee)">
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </td>
