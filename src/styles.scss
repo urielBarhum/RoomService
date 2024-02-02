@@ -15,6 +15,9 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
+// input[type=number] {
+//   -moz-appearance: textfield;
+// }
+.p-sidebar-left{
+  width: 45%;
+  }

@@ -1,0 +1,106 @@
+<app-header-admin class="mb-2"></app-header-admin>
+<h1 class="card text-center text-warning m-2 bg-primary">טבלת ניהול מוצרים</h1>
+<button (click)="openForm()">לחץ כאן להוספת מוצר</button>
+
+<p-sidebar [(visible)]="add" position="left">
+  <h2>הוספת מוצר</h2>
+  <form [formGroup]="profileForm">
+   
+      <label for="nameProduct">שם מוצר: </label>
+      <input id="nameProduct" type="text" formControlName="nameProduct" />
+
+      <label for="descriptionProduct">Last Name: </label>
+      <input
+        id="descriptionProduct"
+        type="text"
+        formControlName="descriptionProduct"
+      />
+
+      <label for="manufacturer">יצרן: </label>
+      <input id="manufacturer" type="text" formControlName="manufacturer" />
+
+      <label for="qTY">כמות במלאי: </label>
+      <input id="qTY" type="number" formControlName="qTY" />
+
+      <label for="priceProduct">מחיר מוצר: </label>
+      <input id="priceProduct" type="number" formControlName="priceProduct" />
+
+      <label for="productImage">מיקום התמונה: </label>
+      <input id="productImage" type="text" formControlName="productImage" />
+    
+  </form>
+  <button (click)="addProduct()">לחץ להוספה</button>
+</p-sidebar>
+
+<p-table [value]="products" [tableStyle]="{ 'min-width': '60rem' }">
+  <ng-template pTemplate="header">
+    <tr>
+      <th class="text-center" pSortableColumn="nameProduct" style="width: 10%">
+        שם מוצר
+        <p-sortIcon [field]="'nameProduct'"></p-sortIcon>
+      </th>
+
+      <th class="text-center" pSortableColumn="priceProduct" style="width: 10%">
+        מחיר מוצר <p-sortIcon [field]="'priceProduct'"></p-sortIcon>
+      </th>
+      <th class="text-center" pSortableColumn="idProduct" style="width: 10%">
+        ברקוד מוצר
+        <p-sortIcon [field]="'idProduct'"></p-sortIcon>
+      </th>
+      <th
+        class="text-center"
+        pSortableColumn="descriptionProduct"
+        style="width: 10%"
+      >
+        תיאור פרטי המוצר
+        <p-sortIcon [field]="'descriptionProduct'"></p-sortIcon>
+      </th>
+      <th class="text-center" pSortableColumn="manufacturer" style="width: 10%">
+        יצרן
+        <p-sortIcon [field]="'manufacturer'"></p-sortIcon>
+      </th>
+      <th class="text-center" pSortableColumn="qTY" style="width: 10%">
+        כמות במלאי
+        <p-sortIcon [field]="'qTY'"></p-sortIcon>
+      </th>
+      <th class="text-center" pSortableColumn="productImage" style="width: 10%">
+        מיקום התמונה
+        <p-sortIcon [field]="'productImage'"></p-sortIcon>
+      </th>
+      <th class="text-center" pSortableColumn="edit" style="width: 5%">
+        עריכה
+        <p-sortIcon [field]="'edit'"></p-sortIcon>
+      </th>
+      <th class="text-center" pSortableColumn="delete" style="width: 5%">
+        מחיקה
+        <p-sortIcon [field]="'delet'"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-product>
+    <tr class="deteles">
+      <td class="text-center">{{ product.nameProduct }}</td>
+      <td class="text-center">{{ product.priceProduct }}</td>
+      <td class="text-center">{{ product.idProduct }}</td>
+      <td class="text-center">
+        {{ product.descriptionProduct }}
+      </td>
+      <td class="text-center">
+        {{ product.manufacturer }}
+      </td>
+      <td class="text-center">{{ product.qTY }}</td>
+      <td class="text-center">{{ product.productImage }}</td>
+      <td class="text-center">
+        <button>
+          <i class="fa-solid fa-pen-to-square"></i>
+        </button>
+      </td>
+      <td class="text-center">
+        <button>
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

@@ -27,6 +27,8 @@ import { ImageModule } from 'primeng/image';
 import { GalleriaModule } from 'primeng/galleria';
 import { HeaderAdminComponent } from './components/header-admin/header-admin.component';
 import { TableEmployeesComponent } from './components/table-employees/table-employees.component';
+import { TableProductComponent } from './components/table-product/table-product.component';
+import { SidebarModule } from 'primeng/sidebar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +47,8 @@ import { TableEmployeesComponent } from './components/table-employees/table-empl
     LogInAdminComponent,
     MenuAdminComponent,
     HeaderAdminComponent,
-    TableEmployeesComponent
+    TableEmployeesComponent,
+    TableProductComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,8 @@ import { TableEmployeesComponent } from './components/table-employees/table-empl
     ButtonModule,
     TableModule,
     ImageModule,
-    GalleriaModule
+    GalleriaModule,
+    SidebarModule
    
   ],
   providers: [],

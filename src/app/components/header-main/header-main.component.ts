@@ -15,6 +15,9 @@ export class HeaderMainComponent  {
 this.router.navigateByUrl('logInCustumers');
   }
   logInAdmin(){
-    this.router.navigateByUrl('logInAdmin')
+
+    // this.router.navigateByUrl('logInAdmin')
+     this.router.navigateByUrl('menuAdmin')
+
   }
 }

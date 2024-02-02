@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { employee } from 'src/app/models/Employee';
 import { EmployeeService } from 'src/app/services/employee.service';
 
@@ -26,7 +27,11 @@ export class TableEmployeesComponent implements OnInit {
 
   }
   deleteEmployee(employeeID: number) {
-    this.employeeService.deleteEmployee(employeeID)
+    this.employeeService.deleteEmployee(employeeID).subscribe(
+      res =>{
+        this.employees= res
+      }
+    )
   }
   addOne() {
     this.add != this.add;
@@ -50,16 +55,18 @@ export class TableEmployeesComponent implements OnInit {
     newEmployee.fullName = newEmployee.firstName + " " + newEmployee.lastName;
 
     console.log(newEmployee); // Output the newly created
-    this.employeeService.addEmployee(newEmployee);
+    this.employeeService.addEmployee(newEmployee).subscribe(
+      res =>{
 
-    // לבדוק אם יעיל
-    let exsistItem = this.employees.find(element => {
-      return element.tzEmployee === newEmployee.tzEmployee;
-    });
-    console.log(exsistItem);
-    
-    if (exsistItem == undefined || exsistItem == null) {
-      this.employees.push(newEmployee);
-    }
+        let exsistItem = this.employees.find(element => {
+          return element.tzEmployee === newEmployee.tzEmployee;
+        });
+        console.log(exsistItem);
+        
+        if (exsistItem == undefined || exsistItem == null) {
+          this.employees.push(newEmployee);
+        }
+      }
+        )
   }
 }

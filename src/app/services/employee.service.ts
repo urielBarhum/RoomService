@@ -14,30 +14,14 @@ export class EmployeeService {
   getEmployees(): Observable<employee[]> {
     return this.http.get<employee[]>('https://localhost:44382/api/employee/getemployees')
   }
-  deleteEmployee(idEmployee: number) {
+  deleteEmployee(idEmployee: number) : Observable<employee[]>{
 
-    this.http.delete('https://localhost:44382/api/employee/deleteEmployee/{idEmployee}', {
-      body: idEmployee
-    }).subscribe(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    return this.http.delete<employee[]>('https://localhost:44382/api/employee/deleteEmployee/'+idEmployee)
   }
-  addEmployee(newEmployee: employee) {
+  addEmployee(newEmployee: employee) :Observable<employee[]> {
     console.log(newEmployee);
 
-    this.http.post('https://localhost:44382/api/employee/addNewEmployee', newEmployee)
-      .subscribe(
-        (response) => {
-          console.log('הוספת עובד צלחה:', response);
-        },
-        (error) => {
-          console.error('שגיאה בהוספת עובד:', error);
-        }
-      );
+   return this.http.post<employee[]>('https://localhost:44382/api/employee/addNewEmployee', newEmployee)
+      
   }
 }
