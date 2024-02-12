@@ -2,34 +2,130 @@
 <h1 class="card text-center text-warning m-2 bg-primary">טבלת ניהול מוצרים</h1>
 <button (click)="openForm()">לחץ כאן להוספת מוצר</button>
 
-<p-sidebar [(visible)]="add" position="left">
+<p-sidebar [(visible)]="add" position="right">
   <h2>הוספת מוצר</h2>
-  <form [formGroup]="profileForm">
-   
-      <label for="nameProduct">שם מוצר: </label>
-      <input id="nameProduct" type="text" formControlName="nameProduct" />
+  <form [formGroup]="productForm" (ngSubmit)="addProduct()">
+    <div class="row">
+      <div class="col-6">
 
-      <label for="descriptionProduct">Last Name: </label>
-      <input
-        id="descriptionProduct"
-        type="text"
-        formControlName="descriptionProduct"
-      />
+        <label for="nameProduct">שם מוצר: </label>
+        <input class="form-control" required id="nameProduct" type="text" formControlName="nameProduct" />
+      </div>
 
-      <label for="manufacturer">יצרן: </label>
-      <input id="manufacturer" type="text" formControlName="manufacturer" />
+    </div>
+    <div class="row">
+      <div class="col-6">
 
-      <label for="qTY">כמות במלאי: </label>
-      <input id="qTY" type="number" formControlName="qTY" />
+        <label for="descriptionProduct">תיאור מוצר: </label>
+        <input class="form-control" id="descriptionProduct" type="text" formControlName="descriptionProduct" />
+      </div>
+    </div>
 
-      <label for="priceProduct">מחיר מוצר: </label>
-      <input id="priceProduct" type="number" formControlName="priceProduct" />
+    <div class="row">
+      <div class="col-6">
+        <label for="manufacturer">יצרן: </label>
+        <input class="form-control" id="manufacturer" type="text" formControlName="manufacturer" />
+      </div>
+    </div>
 
-      <label for="productImage">מיקום התמונה: </label>
-      <input id="productImage" type="text" formControlName="productImage" />
-    
+    <div class="row">
+      <div class="col-6">
+        <label for="qty">כמות במלאי: </label>
+        <input class="form-control" id="qty" type="number" formControlName="qty" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <label for="priceProduct">מחיר מוצר: </label>
+        <input class="form-control" id="priceProduct" type="number" formControlName="priceProduct" />
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-6">
+        <label for="productImage">מיקום התמונה: </label>
+        <input class="form-control" id="productImage" type="text" formControlName="productImage" />
+      </div>
+    </div>
+    <br>
+    <input class="btn btn-success" type="submit" value="לחץ להוספה" [disabled]="!productForm.valid">
+
   </form>
-  <button (click)="addProduct()">לחץ להוספה</button>
+  <!-- <button (click)="addProduct()">לחץ להוספה</button> -->
+</p-sidebar>
+
+
+
+<div *ngIf="erorAddProduct === true" class="row">
+  <p-messages [(value)]="erorSaveMaseeg" [enableService]="false" [closable]="false"></p-messages>
+
+</div>
+
+<div *ngIf="erorEditProduct === true" class="card">
+  <p-messages [(value)]="erorEditMaseeg" [enableService]="false" [closable]="false"></p-messages>
+</div>
+
+<!-- עריכת המוצר -->
+<p-sidebar [(visible)]="edit" position="left">
+  <h2>עריכת מוצר</h2>
+  <form [formGroup]="productFormToEdit" (ngSubmit)="saveChanges()">
+    <div class="row">
+      <div class="col-6">
+
+        <label for="nameProduct">שם מוצר: </label>
+        <input class="form-control" required id="nameProduct" type="text" formControlName="nameProduct" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+
+        <label for="descriptionProduct">תיאור מוצר: </label>
+        <input class="form-control" id="descriptionProduct" type="text" formControlName="descriptionProduct" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <label for="manufacturer">יצרן מוצר: </label>
+        <input class="form-control" id="manufacturer" type="text" formControlName="manufacturer" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <label for="qty">כמות במלאי: </label>
+        <input class="form-control" id="qty" type="number" formControlName="qty" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <label for="priceProduct">מחיר מוצר: </label>
+        <input class="form-control" id="priceProduct" type="number" formControlName="priceProduct" />
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-6">
+        <label for="productImage">מיקום התמונה: </label>
+        <input class="form-control" id="productImage" type="text" formControlName="productImage" />
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-6">
+        <label for="idProduct"></label>
+        <input class="form-control" id="idProduct" type="hidden" formControlName="idProduct" />
+      </div>
+    </div>
+
+    <input class="btn btn-primary" type="submit" value="לחץ לעריכה" [disabled]="!productFormToEdit.valid">
+  </form>
+  <!-- <button (click)="addProduct()">לחץ להוספה</button> -->
 </p-sidebar>
 
 <p-table [value]="products" [tableStyle]="{ 'min-width': '60rem' }">
@@ -47,11 +143,7 @@
         ברקוד מוצר
         <p-sortIcon [field]="'idProduct'"></p-sortIcon>
       </th>
-      <th
-        class="text-center"
-        pSortableColumn="descriptionProduct"
-        style="width: 10%"
-      >
+      <th class="text-center" pSortableColumn="descriptionProduct" style="width: 10%">
         תיאור פרטי המוצר
         <p-sortIcon [field]="'descriptionProduct'"></p-sortIcon>
       </th>
@@ -59,9 +151,9 @@
         יצרן
         <p-sortIcon [field]="'manufacturer'"></p-sortIcon>
       </th>
-      <th class="text-center" pSortableColumn="qTY" style="width: 10%">
+      <th class="text-center" pSortableColumn="qty" style="width: 10%">
         כמות במלאי
-        <p-sortIcon [field]="'qTY'"></p-sortIcon>
+        <p-sortIcon [field]="'qty'"></p-sortIcon>
       </th>
       <th class="text-center" pSortableColumn="productImage" style="width: 10%">
         מיקום התמונה
@@ -89,15 +181,15 @@
       <td class="text-center">
         {{ product.manufacturer }}
       </td>
-      <td class="text-center">{{ product.qTY }}</td>
+      <td class="text-center">{{ product.qty }}</td>
       <td class="text-center">{{ product.productImage }}</td>
       <td class="text-center">
-        <button>
+        <button (click)="editProduct(product)">
           <i class="fa-solid fa-pen-to-square"></i>
         </button>
       </td>
       <td class="text-center">
-        <button>
+        <button (click)="deleteProduct(product.idProduct)">
           <i class="fa-solid fa-trash"></i>
         </button>
       </td>

@@ -3,7 +3,7 @@ export class Product {
     nameProduct!: string;
     descriptionProduct!: string | null;
     manufacturer!: string;
-    qTY!: number;
+    qty!: number;
     priceProduct!: number;
     productImage!: string | null;
 }

@@ -7,7 +7,7 @@ import { Product } from '../models/product';
   providedIn: 'root',
 })
 export class ProductService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
   productsService: Product[] = [
     {
       idProduct: 1,
@@ -15,7 +15,7 @@ export class ProductService {
       descriptionProduct:
         'טלפון סלולרי בעל מסך LCD צבעוני גדול ופונקציות מתקדמות',
       manufacturer: 'Samsung',
-      qTY: 100,
+      qty: 100,
       priceProduct: 1500,
       productImage: 'https://example.com/phone1.jpg',
     },
@@ -24,7 +24,7 @@ export class ProductService {
       nameProduct: 'מחשב נייד',
       descriptionProduct: 'מחשב נייד דק וקל בעל מעבד מהיר וזיכרון גדול',
       manufacturer: 'HP',
-      qTY: 50,
+      qty: 50,
       priceProduct: 3000,
       productImage: 'https://example.com/laptop1.jpg',
     },
@@ -34,7 +34,7 @@ export class ProductService {
       descriptionProduct:
         "טלוויזיה חכמה בגודל 55 אינץ', עם תמיכה באפליקציות נפוצות ותכנים בעלי איכות גבוהה",
       manufacturer: 'LG',
-      qTY: 30,
+      qty: 30,
       priceProduct: 2500,
       productImage: 'https://example.com/tv1.jpg',
     },
@@ -44,7 +44,7 @@ export class ProductService {
       descriptionProduct:
         'אוזניות אלחוטיות בעלות איכות סאונד מעולה וטכנולוגיה לידי הפעלה נוחה',
       manufacturer: 'Sony',
-      qTY: 80,
+      qty: 80,
       priceProduct: 200,
       productImage: 'https://example.com/earphones1.jpg',
     },
@@ -53,7 +53,7 @@ export class ProductService {
       nameProduct: 'מקרן קולנוע ביתי',
       descriptionProduct: 'מקרן קולנוע ביתי ברזולוציה גבוהה וצבעים חיים',
       manufacturer: 'Epson',
-      qTY: 20,
+      qty: 20,
       priceProduct: 4000,
       productImage: 'https://example.com/projector1.jpg',
     },
@@ -62,7 +62,7 @@ export class ProductService {
       nameProduct: 'ספסל גינה',
       descriptionProduct: 'ספסל גינה נוח ואיכותי בעל עיצוב ייחודי',
       manufacturer: 'GardenTech',
-      qTY: 10,
+      qty: 10,
       priceProduct: 300,
       productImage: 'https://example.com/bench1.jpg',
     },
@@ -71,7 +71,7 @@ export class ProductService {
       nameProduct: 'שולחן עבודה',
       descriptionProduct: 'שולחן עבודה מרווח ואיכותי לשימוש במשרד או בבית',
       manufacturer: 'OfficePro',
-      qTY: 25,
+      qty: 25,
       priceProduct: 600,
       productImage: 'https://example.com/desk1.jpg',
     },
@@ -80,7 +80,7 @@ export class ProductService {
       nameProduct: 'תרמיל טיולים',
       descriptionProduct: 'תרמיל טיולים עמיד ונוח בעל מערכות תיקונים מתקדמות',
       manufacturer: 'NorthFace',
-      qTY: 40,
+      qty: 40,
       priceProduct: 250,
       productImage: 'https://example.com/backpack1.jpg',
     },
@@ -90,7 +90,7 @@ export class ProductService {
       descriptionProduct:
         'מכונת קפה אוטומטית עם טכנולוגיה חכמה להכנת קפה מושלם',
       manufacturer: 'DeLonghi',
-      qTY: 15,
+      qty: 15,
       priceProduct: 1000,
       productImage: 'https://example.com/coffeemachine1.jpg',
     },
@@ -100,7 +100,7 @@ export class ProductService {
       descriptionProduct:
         'מסילת רולר בליידס מקצועית ואיכותית לשימוש בפארקים וברחובות',
       manufacturer: 'RollerBlade',
-      qTY: 60,
+      qty: 60,
       priceProduct: 150,
       productImage: 'https://example.com/rollerblades1.jpg',
     },
@@ -111,7 +111,17 @@ export class ProductService {
       'https://localhost:44382/api/Product/GetProducts'
     );
   }
-  deleteProduct(idProduct:number): Observable<Product[]> {
-    return this.http.delete<Product[]>('https://localhost:44382/api/Product/DeleteProduct/'+idProduct);
+
+  deleteProduct(idProduct: number): Observable<Product[]> {
+    return this.http.delete<Product[]>('https://localhost:44382/api/Product/DeleteProduct/' + idProduct);
   }
+  addProduct(productToAdd: Product): Observable<Product[]> {
+    return this.http.post<Product[]>('https://localhost:44382/api/Product/AddProduct', productToAdd)
+  }
+
+  editProduct(productToEdit : Product) : Observable <Product[]>{
+    return this.http.put <Product[]> ('https://localhost:44382/api/Product/ProductToEdit' , productToEdit )
+  }
+
+
 }

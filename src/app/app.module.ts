@@ -29,6 +29,7 @@ import { HeaderAdminComponent } from './components/header-admin/header-admin.com
 import { TableEmployeesComponent } from './components/table-employees/table-employees.component';
 import { TableProductComponent } from './components/table-product/table-product.component';
 import { SidebarModule } from 'primeng/sidebar';
+import { MessagesModule } from 'primeng/messages';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +64,8 @@ import { SidebarModule } from 'primeng/sidebar';
     TableModule,
     ImageModule,
     GalleriaModule,
-    SidebarModule
+    SidebarModule,
+    MessagesModule
    
   ],
   providers: [],

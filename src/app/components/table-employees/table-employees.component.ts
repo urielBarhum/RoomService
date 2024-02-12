@@ -45,13 +45,13 @@ export class TableEmployeesComponent implements OnInit {
     // Assign values to its properties
 
     newEmployee.idHotel = 1;
-    newEmployee.firstName = "John";
-    newEmployee.lastName = "Doe";
+    newEmployee.firstName = "Uriel";
+    newEmployee.lastName = "Barhum";
     newEmployee.isWorkNow = true;
     newEmployee.isBusy = false;
     newEmployee.tzEmployee = "123456789";
-    newEmployee.passWord = "password123";
-    newEmployee.isManger = false;
+    newEmployee.passWord = "1234";
+    newEmployee.isManger = true;
     newEmployee.fullName = newEmployee.firstName + " " + newEmployee.lastName;
 
     console.log(newEmployee); // Output the newly created

@@ -17,7 +17,7 @@ this.router.navigateByUrl('logInCustumers');
   logInAdmin(){
 
     // this.router.navigateByUrl('logInAdmin')
-     this.router.navigateByUrl('menuAdmin')
+     this.router.navigateByUrl('logInAdmin')
 
   }
 }
