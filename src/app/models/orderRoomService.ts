@@ -6,4 +6,6 @@ export class orderRoomService {
     orderNumber!: number;
     riceForAll !:number 
     qtyProduct !:number
+    statusID !: number
+    orderDate!: Date
 }

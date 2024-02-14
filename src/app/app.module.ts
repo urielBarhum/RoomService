@@ -30,6 +30,7 @@ import { TableEmployeesComponent } from './components/table-employees/table-empl
 import { TableProductComponent } from './components/table-product/table-product.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { MessagesModule } from 'primeng/messages';
+import {PasswordModule} from 'primeng/password';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +66,8 @@ import { MessagesModule } from 'primeng/messages';
     ImageModule,
     GalleriaModule,
     SidebarModule,
-    MessagesModule
+    MessagesModule,
+    PasswordModule
    
   ],
   providers: [],

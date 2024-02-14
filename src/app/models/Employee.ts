@@ -1,8 +1,8 @@
 export class employee{
 
 
-idEmployee!:number
-     idHotel !:number
+      idEmployee!:number
+      idHotel !:number
       firstName !:string 
       lastName!: string 
       isWorkNow !: boolean 
