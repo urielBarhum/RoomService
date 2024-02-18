@@ -20,7 +20,6 @@ export class EmployeeService {
   }
   addEmployee(newEmployee: employee) :Observable<employee[]> {
     console.log(newEmployee);
-
    return this.http.post<employee[]>('https://localhost:44382/api/employee/addNewEmployee', newEmployee)
       
   }

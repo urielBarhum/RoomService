@@ -1,12 +1,20 @@
-<div class="row">
-    <div class="col-10">
-
-        <H1 class="card bg-info text-center">כאן תהיייה הכותרת של המנהל עם כפתור התנתקות והקומפוננטה הזאת תופיע בכל הטבלאות </H1>
+<div class="header row card bg-info">
+    <div class="col-12 ">
+      <div class="row  align-items-center">
+        <div class="col-2">
+            <button (click)="homeAdmin()">
+                <i class="fa-solid fa-house"></i>
+              </button>
+              
+              <button (click)="LogOutAdmin()">
+                <i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i>
+              </button>
+              
+        </div>
+        <div class="col-8 text-center">
+          <h1>כאן תהיייה הכותרת של המנהל עם כפתור התנתקות</h1>
+          <p>הקומפוננטה הזאת תופיע בכל הטבלאות</p>
+        </div>
+      </div>
     </div>
-    <div class="col-1">
-
-        <button  (click)="homeAdmin()">
-            <i class="fa-solid fa-house"></i>
-        </button>
-    </div>
-</div>
+  </div>

@@ -2,6 +2,28 @@
 <h1 class="card text-center text-warning m-2 bg-primary">טבלת ניהול מוצרים</h1>
 <button (click)="openForm()">לחץ כאן להוספת מוצר</button>
 
+
+
+
+
+<div *ngIf="erorAddProduct === true" class="row">
+  <p-messages [(value)]="erorSaveMaseeg" [enableService]="false" [closable]="false"></p-messages>
+
+</div>
+<div *ngIf="successSaveProduct === true" class="row">
+  <p-messages [(value)]="successSaveMaseeg" [enableService]="false" [closable]="false"></p-messages>
+
+</div>
+
+
+<div *ngIf="erorEditProduct === true" class="card">
+  <p-messages [(value)]="erorEditMaseeg" [enableService]="false" [closable]="false"></p-messages>
+</div>
+<div *ngIf="successEditProduct === true" class="card">
+  <p-messages [(value)]="successEditMaseeg" [enableService]="false" [closable]="false"></p-messages>
+</div>
+
+<!-- הוספת מוצר -->
 <p-sidebar [(visible)]="add" position="right">
   <h2>הוספת מוצר</h2>
   <form [formGroup]="productForm" (ngSubmit)="addProduct()">
@@ -31,7 +53,7 @@
     <div class="row">
       <div class="col-6">
         <label for="qty">כמות במלאי: </label>
-        <input class="form-control" id="qty" type="number" formControlName="qty" />
+        <input class="form-control" id="qty" type="number" formControlName="qty" value="1"/>
       </div>
     </div>
 
@@ -55,17 +77,6 @@
   </form>
   <!-- <button (click)="addProduct()">לחץ להוספה</button> -->
 </p-sidebar>
-
-
-
-<div *ngIf="erorAddProduct === true" class="row">
-  <p-messages [(value)]="erorSaveMaseeg" [enableService]="false" [closable]="false"></p-messages>
-
-</div>
-
-<div *ngIf="erorEditProduct === true" class="card">
-  <p-messages [(value)]="erorEditMaseeg" [enableService]="false" [closable]="false"></p-messages>
-</div>
 
 <!-- עריכת המוצר -->
 <p-sidebar [(visible)]="edit" position="left">

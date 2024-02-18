@@ -14,8 +14,8 @@ export class TableEmployeesComponent implements OnInit {
   employees: employee[] = []
   add: boolean = false;
   employee: employee = new employee();
-  pass1: string="";
-  pass2: string=""
+  pass1: string = "";
+  pass2: string = ""
 
 
 
@@ -85,18 +85,18 @@ export class TableEmployeesComponent implements OnInit {
     // newEmployee.fullName = newEmployee.firstName + " " + newEmployee.lastName;
 
     // console.log(newEmployee); // Output the newly created
-    // this.employeeService.addEmployee(newEmployee).subscribe(
-    //   res =>{
+    this.employeeService.addEmployee(newEmployee).subscribe(
+      res => {
 
-    //     let exsistItem = this.employees.find(element => {
-    //       return element.tzEmployee === newEmployee.tzEmployee;
-    //     });
-    //     console.log(exsistItem);
+        let exsistItem = this.employees.find(element => {
+          return element.tzEmployee === newEmployee.tzEmployee;
+        });
+        console.log(exsistItem);
 
-    //     if (exsistItem == undefined || exsistItem == null) {
-    //       this.employees.push(newEmployee);
-    //     }
-    //   }
-    //     )
+        if (exsistItem == undefined || exsistItem == null) {
+          this.employees.push(newEmployee);
+        }
+      }
+    )
   }
 }

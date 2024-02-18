@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import { FormGroup, FormControl, Validators, NumberValueAccessor } from '@angular/forms';
-import { EMPTY, catchError, of } from 'rxjs';
+import { EMPTY, catchError, of, tap } from 'rxjs';
 import { Message } from 'primeng/api';
 @Component({
   selector: 'app-table-product',
@@ -14,29 +14,35 @@ export class TableProductComponent implements OnInit {
   products: Product[] = [];
   erorAddProduct: boolean = false;
   erorEditProduct: boolean = false;
+  successEditProduct: boolean = false;
+  successSaveProduct: boolean = false;
+
   add: boolean = false;
   sidebarVisible: boolean = false;
-  erorEditMaseeg!: Message[] ;
+  erorEditMaseeg!: Message[];
   erorSaveMaseeg !: Message[];
+  successSaveMaseeg !: Message[];
+  successEditMaseeg !: Message[];
+
   productForm = new FormGroup({
-    nameProduct: new FormControl(''),
+    nameProduct: new FormControl('',[Validators.minLength(2)]),
     descriptionProduct: new FormControl(''),
     manufacturer: new FormControl(''),
-    qty: new FormControl(0),
-    priceProduct: new FormControl(0, [Validators.required]),
+    qty: new FormControl(0,[Validators.required , Validators.min(1)]),
+    priceProduct: new FormControl(0),
     productImage: new FormControl(''),
   });
 
   edit: boolean = false;
 
   productFormToEdit = new FormGroup({
-    nameProduct: new FormControl(''),
+    nameProduct: new FormControl('',[Validators.minLength(2)]),
     descriptionProduct: new FormControl(''),
     manufacturer: new FormControl(''),
-    qty: new FormControl(0),
+    qty: new FormControl(0,[Validators.required , Validators.min(1)]),
     priceProduct: new FormControl(0, [Validators.required]),
     productImage: new FormControl(''),
-    idProduct : new FormControl(0),
+    idProduct: new FormControl(0),
   });
 
   constructor(private router: Router, private productService: ProductService) {
@@ -50,7 +56,10 @@ export class TableProductComponent implements OnInit {
   }
   ngOnInit(): void {
     this.erorEditMaseeg = [{ severity: 'error', summary: 'שגיאה בעת עריכת המוצר ' }];
+    this.successEditMaseeg = [{ severity: 'success', summary: 'המוצר נערך מחדש בהצלחה ' }];
     this.erorSaveMaseeg = [{ severity: 'error', summary: 'שגיאה בעת הוספת המוצר לחנות ' }];
+    this.successSaveMaseeg = [{ severity: 'success', summary: 'המוצר נוסף בהצלחה לחנות ' }];
+
 
   }
   openForm() {
@@ -60,6 +69,8 @@ export class TableProductComponent implements OnInit {
     this.productService.deleteProduct(idProduct).subscribe(
       res => {
         this.products = res
+          alert("המוצר נמחק בהצלחה")
+        
       }
     )
   }
@@ -79,13 +90,20 @@ export class TableProductComponent implements OnInit {
       console.log(productToAdd);
       this.productService.addProduct(productToAdd)
         .pipe(
+          tap(() => {
+            this.successSaveProduct = true;
+            setTimeout(() => {
+              this.successSaveProduct = false;
+
+            }, 5000);
+          }),
           catchError(err => {
-            console.error(err)
+            console.error(err);
             this.erorAddProduct = true;
             setTimeout(() => {
               this.erorAddProduct = false;
-          }, 5000);
-            return EMPTY
+            }, 5000);
+            return EMPTY;
           })
         )
         .subscribe(res => {
@@ -93,7 +111,7 @@ export class TableProductComponent implements OnInit {
         })
     }
 
-    // this.productService.addProduct()
+
   }
 
   editProduct(product: Product) {
@@ -118,12 +136,19 @@ export class TableProductComponent implements OnInit {
       productToedit.idProduct = objProduct.idProduct!
       console.log(productToedit);
       this.productService.editProduct(productToedit).pipe(
+        tap(() => {
+          this.successEditProduct = true;
+          setTimeout(() => {
+            this.successEditProduct = false;
+
+          }, 5000);
+        }),
         catchError(err => {
           console.error(err)
           this.erorEditProduct = true;
           setTimeout(() => {
-           this.erorEditProduct = false;
-        }, 5000);
+            this.erorEditProduct = false;
+          }, 5000);
           return EMPTY
         })
       )
