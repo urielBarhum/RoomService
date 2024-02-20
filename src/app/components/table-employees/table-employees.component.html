@@ -1,136 +1,145 @@
 <app-header-admin></app-header-admin>
+<div *ngIf="successSaveEmployee" class="popo">
+
+  <app-messages-component [messages]="successSaveMaseeg"></app-messages-component>
+</div>
 <button (click)="openForm()">לחץ כאן להוספת עובד</button>
 
 <p-sidebar [(visible)]="add" position="right">
-    <h2>הוספת עובד</h2>
-    <form [formGroup]="employeeForm" (ngSubmit)="addEmployee()">
-      <div class="row">
-        <div class="col-6">
-  
-          <label for="tzEmployee">תעודת זהות עובד:                *</label>
-          <input class="form-control" required id="tzEmployee" type="text" formControlName="tzEmployee" />
-        </div>
-  
+  <h2>הוספת עובד</h2>
+  <form [formGroup]="employeeForm" (ngSubmit)="addEmployee()">
+    <div class="row">
+      <div class="col-6">
+
+        <label for="tzEmployee">תעודת זהות עובד: *</label>
+        <input class="form-control" required id="tzEmployee" type="text" formControlName="tzEmployee" />
       </div>
-      <div class="row">
-        <div class="col-6">
-  
-          <label for="idHotel">מספר מלון של העובד:             *</label>
-          <input class="form-control" id="idHotel" type="number" formControlName="idHotel" />
-        </div>
+
+    </div>
+    <div class="row">
+      <div class="col-6">
+
+        <label for="idHotel">מספר מלון של העובד: *</label>
+        <input class="form-control" id="idHotel" type="number" formControlName="idHotel" />
       </div>
-  
-      <div class="row">
-        <div class="col-6">
-          <label for="firstName">שם פרטי:         * </label>
-          <input class="form-control" id="firstName" type="text" formControlName="firstName" />
-        </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <label for="firstName">שם פרטי: * </label>
+        <input class="form-control" id="firstName" type="text" formControlName="firstName" />
       </div>
-  
-      <div class="row">
-        <div class="col-6">
-          <label for="lastName"> שם משפחה: </label>
-          <input class="form-control" id="lastName" type="text" formControlName="lastName" />
-        </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <label for="lastName"> שם משפחה: </label>
+        <input class="form-control" id="lastName" type="text" formControlName="lastName" />
       </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <label class="form-check-label" for="isWorkNow"> האם עובד עכשיו: </label>
+        <input class="form-check-input" id="isWorkNow" type="checkbox" formControlName="isWorkNow"  [(ngModel)]="employeeIsWork"  />
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-6">
+        <label class="form-check-labels" for="isBusy">האם פנוי : </label>
+        <input class="form-check-input" id="isBusy" type="checkbox" formControlName="isBusy"  [(ngModel)]="employeeIsBusy"/>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <label for="isManger"> האם מנהל: </label>
+        <input class="form-check-input" id="isManger" type="checkbox" formControlName="isManger"  (click)="isMangerAdmin()" />
+      </div>
+    </div>
+
+
+    <div *ngIf="employeeIsManger" class="manger">
+
       <div class="row">
         <div class="col-6">
-          <label for="password">סיסמא :        *</label>
+          <label for="password">סיסמא : *</label>
           <!-- <input class="form-control" id="password" type="password" formControlName="password"  /> -->
-          <p-password  [(ngModel)]="pass1" [toggleMask]="true"></p-password>
+          <p-password id="password" formControlName="password" [(ngModel)]="pass1" [toggleMask]="true"></p-password>
         </div>
       </div>
       <div class="row">
         <div class="col-6">
-          <label for="passwordConfirm"> אישור סיסמא:       *</label>
+          <label for="passwordConfirm"> אישור סיסמא: *</label>
           <!-- <input class="form-control" id="passwordConfirm" type="password" formControlName="passwordConfirm" /> -->
-          <p-password [(ngModel)]="pass2" [toggleMask]="true"></p-password>
+          <p-password formControlName="passwordConfirm" id="passwordConfirm" [(ngModel)]="pass2"
+            [toggleMask]="true"></p-password>
 
         </div>
       </div>
-  
-      <div class="row">
-        <div class="col-6">
-          <label class="form-check-label" for="isWorkNow"> האם עובד עכשיו: </label>
-          <input  class="form-check-input" id="isWorkNow" type="checkbox" formControlName="isWorkNow" />
-        </div>
-      </div>
-  
-  
-      <div class="row">
-        <div class="col-6">
-          <label class="form-check-labels" for="isBusy">האם פנוי : </label>
-          <input  class="form-check-input" id="isBusy" type="checkbox" formControlName="isBusy" />
-        </div>
-      </div>
-     
-      <div class="row">
-        <div class="col-6">
-          <label for="isManger"> האם מנהל: </label>
-          <input  class="form-check-input" id="isManger" type="checkbox" formControlName="isManger" />
-        </div>
-      </div>
+    </div>
 
-      <br>
-      <input class="btn btn-success" type="submit" value="לחץ להוספה" [disabled]="!employeeForm.valid">
-  
-    </form>
-   
-  </p-sidebar>
-  
+    <br>
+    <input class="btn btn-success" type="submit" value="לחץ להוספה" [disabled]="!employeeForm.valid">
 
-<p-table  [value]="employees" [tableStyle]="{'min-width': '60rem'}">
-    <ng-template pTemplate="header">
-        <tr>
-            <th class="text-center" pSortableColumn="firstName" style="width:10%"> שם פרטי
-                <p-sortIcon [field]="'firstName'"></p-sortIcon>
-            </th>
-            <th class="text-center" pSortableColumn="lastName" style="width:10%"> שם משפחה
-                <p-sortIcon [field]="'lastName'"></p-sortIcon>
-            </th>
-            <th class="text-center" pSortableColumn="idEmployee" style="width:10%"> מספר עובד
-                <p-sortIcon [field]="'idEmployee'"></p-sortIcon>
-            </th>
-            <th class="text-center" pSortableColumn="isBusy" style="width:10%"> האם פנוי עכשיו
-                <p-sortIcon [field]="'isBusy'"></p-sortIcon>
-            </th>
-            <th class="text-center" pSortableColumn="tzEmployee" style="width:10%"> תעודת זהות עובד
-                <p-sortIcon [field]="'tzEmployee'"></p-sortIcon>
-            </th>
-            <th class="text-center" pSortableColumn="isManger" style="width:10%"> מנהל/עובד
-                <p-sortIcon [field]="'isManger'"></p-sortIcon>
-            </th>
-            <th class="text-center" pSortableColumn="edit" style="width:5%">עריכה
-                <p-sortIcon [field]="'edit'"></p-sortIcon>
-            </th>
-            <th class="text-center" pSortableColumn="delete" style="width:5%">מחיקה
-                <p-sortIcon [field]="'delet'"></p-sortIcon>
-            </th>
-        </tr>
-    </ng-template>
+  </form>
 
-    <ng-template pTemplate="body" let-employee>
-        <tr class="deteles">
-            <td class="text-center">{{ employee.firstName}}</td>
-            <td class="text-center">{{ employee.lastName}}</td>
-            <td class="text-center">{{ employee.idEmployee}}</td>
-            <td *ngIf="!employee.isBusy" class="text-center bg-info">
-                <i class="fa-solid fa-check bg-info"></i>
-            </td>
-            <td class="bg-warning text-center" *ngIf="employee.isBusy">  
-                <i class="fa-solid fa-x bg-warning"></i>  
-            </td>
-            <td class="text-center">{{ employee.tzEmployee}}</td>
-            <td class="text-center">{{ employee.isManger}}</td>
-            <td class="text-center">
-                <button (click)="editEmployee()">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                </button>
-            </td>
-            <td class="text-center">
-                <button (click)="deleteEmployee(employee.idEmployee)">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-            </td>
-    </ng-template>
+</p-sidebar>
+
+
+<p-table [value]="employees" [tableStyle]="{'min-width': '60rem'}">
+  <ng-template pTemplate="header">
+    <tr>
+      <th class="text-center" pSortableColumn="firstName" style="width:10%"> שם פרטי
+        <p-sortIcon [field]="'firstName'"></p-sortIcon>
+      </th>
+      <th class="text-center" pSortableColumn="lastName" style="width:10%"> שם משפחה
+        <p-sortIcon [field]="'lastName'"></p-sortIcon>
+      </th>
+      <th class="text-center" pSortableColumn="idEmployee" style="width:10%"> מספר עובד
+        <p-sortIcon [field]="'idEmployee'"></p-sortIcon>
+      </th>
+      <th class="text-center" pSortableColumn="isBusy" style="width:10%"> האם פנוי עכשיו
+        <p-sortIcon [field]="'isBusy'"></p-sortIcon>
+      </th>
+      <th class="text-center" pSortableColumn="tzEmployee" style="width:10%"> תעודת זהות עובד
+        <p-sortIcon [field]="'tzEmployee'"></p-sortIcon>
+      </th>
+      <th class="text-center" pSortableColumn="isManger" style="width:10%"> מנהל/עובד
+        <p-sortIcon [field]="'isManger'"></p-sortIcon>
+      </th>
+      <th class="text-center" pSortableColumn="edit" style="width:5%">עריכה
+        <p-sortIcon [field]="'edit'"></p-sortIcon>
+      </th>
+      <th class="text-center" pSortableColumn="delete" style="width:5%">מחיקה
+        <p-sortIcon [field]="'delet'"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-employee>
+    <tr class="deteles">
+      <td class="text-center">{{ employee.firstName}}</td>
+      <td class="text-center">{{ employee.lastName}}</td>
+      <td class="text-center">{{ employee.idEmployee}}</td>
+      <td *ngIf="!employee.isBusy" class="text-center bg-info">
+        <i class="fa-solid fa-check bg-info"></i>
+      </td>
+      <td class="bg-warning text-center" *ngIf="employee.isBusy">
+        <i class="fa-solid fa-x bg-warning"></i>
+      </td>
+      <td class="text-center">{{ employee.tzEmployee}}</td>
+      <td class="text-center">{{ employee.isManger}}</td>
+      <td class="text-center">
+        <button (click)="editEmployee()">
+          <i class="fa-solid fa-pen-to-square"></i>
+        </button>
+      </td>
+      <td class="text-center">
+        <button (click)="deleteEmployee(employee.idEmployee)">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </td>
+  </ng-template>
 </p-table>

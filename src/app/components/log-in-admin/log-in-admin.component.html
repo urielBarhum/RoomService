@@ -17,3 +17,35 @@
         {{wrngMesseg}}
     <p>
 </div>
+
+
+<!-- 
+<div class="container center-container">
+
+    <div class="login-container">
+        <h2>התחברות</h2>
+        <form [formGroup]="loginForm" (keyup.enter)="tryLogin()">
+          
+            <br />
+
+            <label for="tzId">תעודת זהות (9 ספרות)</label>
+            <input class="form-control  " formControlName="tz" type="number" id="tz" name="tz"
+                [class.is-invalid]="submit && loginForm.get('tz')?.invalid">
+            <div class="invalid-feedback" id="errTz" *ngIf="submit && loginForm.get('tz')?.invalid">
+                <div *ngIf="loginForm.get('tz')?.errors?.['required']"> יש למלא תעודת זהות</div>
+            </div>
+
+            <br />
+
+            <label for="password">סיסמה</label>
+            <input class="form-control" formControlName="password" type="password" id="password" name="password"
+                [class.is-invalid]="submit && loginForm.get('password')?.invalid">
+            <div class="invalid-feedback" id="errPassword" *ngIf="submit && loginForm.get('password')?.invalid">
+                <div *ngIf="loginForm.get('password')?.errors?.['required']"> יש למלא סיסמה</div>
+            </div>
+            <br />
+
+            <button (click)="tryLogin()">התחבר</button>
+        </form>
+    </div>
+</div> -->

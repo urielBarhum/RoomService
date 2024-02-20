@@ -24,7 +24,7 @@
 </div>
 
 <!-- הוספת מוצר -->
-<p-sidebar [(visible)]="add" position="right">
+<p-sidebar [(visible)]="add" position="left">
   <h2>הוספת מוצר</h2>
   <form [formGroup]="productForm" (ngSubmit)="addProduct()">
     <div class="row">
@@ -53,7 +53,7 @@
     <div class="row">
       <div class="col-6">
         <label for="qty">כמות במלאי: </label>
-        <input class="form-control" id="qty" type="number" formControlName="qty" value="1"/>
+        <input class="form-control" id="qty" type="number" formControlName="qty"/>
       </div>
     </div>
 

@@ -31,6 +31,8 @@ import { TableProductComponent } from './components/table-product/table-product.
 import { SidebarModule } from 'primeng/sidebar';
 import { MessagesModule } from 'primeng/messages';
 import {PasswordModule} from 'primeng/password';
+import { MessagesComponentComponent } from './components/messages-component/messages-component.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +52,8 @@ import {PasswordModule} from 'primeng/password';
     MenuAdminComponent,
     HeaderAdminComponent,
     TableEmployeesComponent,
-    TableProductComponent
+    TableProductComponent,
+    MessagesComponentComponent
   ],
   imports: [
     BrowserModule,

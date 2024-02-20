@@ -16,7 +16,6 @@ export class TableProductComponent implements OnInit {
   erorEditProduct: boolean = false;
   successEditProduct: boolean = false;
   successSaveProduct: boolean = false;
-
   add: boolean = false;
   sidebarVisible: boolean = false;
   erorEditMaseeg!: Message[];
@@ -25,10 +24,10 @@ export class TableProductComponent implements OnInit {
   successEditMaseeg !: Message[];
 
   productForm = new FormGroup({
-    nameProduct: new FormControl('',[Validators.minLength(2)]),
+    nameProduct: new FormControl('', [Validators.minLength(2)]),
     descriptionProduct: new FormControl(''),
     manufacturer: new FormControl(''),
-    qty: new FormControl(0,[Validators.required , Validators.min(1)]),
+    qty: new FormControl(0, [Validators.required, Validators.min(1)]),
     priceProduct: new FormControl(0),
     productImage: new FormControl(''),
   });
@@ -36,10 +35,10 @@ export class TableProductComponent implements OnInit {
   edit: boolean = false;
 
   productFormToEdit = new FormGroup({
-    nameProduct: new FormControl('',[Validators.minLength(2)]),
+    nameProduct: new FormControl('', [Validators.minLength(2)]),
     descriptionProduct: new FormControl(''),
     manufacturer: new FormControl(''),
-    qty: new FormControl(0,[Validators.required , Validators.min(1)]),
+    qty: new FormControl(0, [Validators.required, Validators.min(1)]),
     priceProduct: new FormControl(0, [Validators.required]),
     productImage: new FormControl(''),
     idProduct: new FormControl(0),
@@ -69,11 +68,12 @@ export class TableProductComponent implements OnInit {
     this.productService.deleteProduct(idProduct).subscribe(
       res => {
         this.products = res
-          alert("המוצר נמחק בהצלחה")
-        
+        alert("המוצר נמחק בהצלחה")
+
       }
     )
   }
+
   addProduct() {
 
     this.erorAddProduct = false;
