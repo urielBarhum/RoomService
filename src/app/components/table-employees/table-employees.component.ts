@@ -16,14 +16,15 @@ export class TableEmployeesComponent implements OnInit {
   successSaveMaseeg: Message[] = [{ severity: 'success', summary: 'העובד נוסף בהצלחה לרשימת העובדים ' }];
   erorEditMaseeg: Message[] = [{ severity: 'error', summary: 'שגיאה בעת עריכת המוצר ' }];
   successEditMaseeg: Message[] = [{ severity: 'success', summary: 'המוצר נערך מחדש בהצלחה ' }];
-  
+
   erorAddEmployee: boolean = false;
   erorEditEmployee: boolean = false;
   successEditEmployee: boolean = false;
   successSaveEmployee: boolean = false;
-
+  edit: boolean = false;
   employees: employee[] = []
   add: boolean = false;
+  IsMangerToEdit: boolean = false
   employee: employee = new employee();
   pass1: string = "";
   pass2: string = ""
@@ -44,6 +45,21 @@ export class TableEmployeesComponent implements OnInit {
     isManger: new FormControl(false)
   });
 
+
+  employeeFormToEdit = new FormGroup({
+
+    tzEmployee: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    idHotel: new FormControl(0, [Validators.required, Validators.min(1)]),
+    firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    isWorkNow: new FormControl(false),
+    isBusy: new FormControl(false),
+    password: new FormControl('', [Validators.minLength(4)]),
+    passwordConfirm: new FormControl('', [Validators.minLength(4)]),
+    isManger: new FormControl(false)
+  });
+
+
   constructor(private employeeService: EmployeeService, private router: Router) { }
   ngOnInit(): void {
     this.employeeService.getEmployees().subscribe(res => {
@@ -59,8 +75,44 @@ export class TableEmployeesComponent implements OnInit {
   }
 
 
-  editEmployee() {
+  editEmployee(employee: employee) {
+    this.employeeFormToEdit.patchValue(employee)
+    this.edit = true;
+    if (employee.isManger) {
 
+      this.IsMangerToEdit = true;
+    }
+  }
+  saveChanges() {
+
+    this.IsMangerToEdit = false;
+    if (this.employeeFormToEdit.valid) {
+      const objEmployee = this.employeeFormToEdit.getRawValue()
+      const employeeToSave = new employee();
+      
+      employeeToSave.idHotel = objEmployee.idHotel!
+      employeeToSave.firstName = objEmployee.firstName!
+      employeeToSave.lastName = objEmployee.lastName!
+      employeeToSave.isWorkNow = objEmployee.isWorkNow!
+      employeeToSave.isBusy = objEmployee.isBusy!
+      employeeToSave.tzEmployee = objEmployee.tzEmployee!
+      employeeToSave.isManger = objEmployee.isManger!
+      if(employeeToSave.isManger == true){
+        if(  objEmployee.password != null &&   objEmployee.passwordConfirm != null &&  objEmployee.passwordConfirm==objEmployee.password ){
+
+          employeeToSave.passWord = objEmployee.password!
+          
+        }
+      }
+      this.employeeService.editEmployee(employeeToSave).subscribe( res =>{
+        this.employees = res;
+        
+      })
+    }
+
+
+
+    this.edit = false;
   }
   deleteEmployee(employeeID: number) {
     this.employeeService.deleteEmployee(employeeID).subscribe(
@@ -72,14 +124,17 @@ export class TableEmployeesComponent implements OnInit {
   openForm() {
     this.add = true;
   }
+  openFormToEdit() {
+    this.edit = true;
+  }
   addOne() {
     this.add != this.add;
   }
 
   addEmployee() {
     debugger;
-    console.log( this.employeeIsManger);
-    
+    console.log(this.employeeIsManger);
+
     this.add = false;
     console.log(this.employeeForm);
     if (this.employeeForm.valid) {
@@ -101,7 +156,7 @@ export class TableEmployeesComponent implements OnInit {
         }
         EmployeeToAdd.passWord = objemployee.password!;
       }
-      else{
+      else {
         EmployeeToAdd.isManger = false
       }
       console.log(EmployeeToAdd); // Output the newly created
@@ -109,26 +164,26 @@ export class TableEmployeesComponent implements OnInit {
       this.employeeService.addEmployee(EmployeeToAdd).subscribe(
         res => {
           this.employees = res
-         this.successSaveEmployee = true;
+          this.successSaveEmployee = true;
 
-         this.employeeIsManger = false;
-         this.employeeForm = new FormGroup({
-          tzEmployee: new FormControl('', [Validators.required, Validators.minLength(2)]),
-          idHotel: new FormControl(0, [Validators.required, Validators.min(1)]),
-          firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-          lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-          isWorkNow: new FormControl(false),
-          isBusy: new FormControl(false),
-          password: new FormControl('', [Validators.minLength(4)]),
-          passwordConfirm: new FormControl('', [Validators.minLength(4)]),
-          isManger: new FormControl(false)
-        });
+          this.employeeIsManger = false;
+          this.employeeForm = new FormGroup({
+            tzEmployee: new FormControl('', [Validators.required, Validators.minLength(2)]),
+            idHotel: new FormControl(0, [Validators.required, Validators.min(1)]),
+            firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+            lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+            isWorkNow: new FormControl(false),
+            isBusy: new FormControl(false),
+            password: new FormControl('', [Validators.minLength(4)]),
+            passwordConfirm: new FormControl('', [Validators.minLength(4)]),
+            isManger: new FormControl(false)
+          });
 
 
-         setTimeout(() => {
-         this.successSaveEmployee = false;
-          
-         }, 5000);
+          setTimeout(() => {
+            this.successSaveEmployee = false;
+
+          }, 5000);
         }
       )
     }

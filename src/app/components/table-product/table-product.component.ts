@@ -43,6 +43,7 @@ export class TableProductComponent implements OnInit {
     productImage: new FormControl(''),
     idProduct: new FormControl(0),
   });
+  
 
   constructor(private router: Router, private productService: ProductService) {
     this.productService.getProduct().subscribe(
@@ -124,7 +125,7 @@ export class TableProductComponent implements OnInit {
   saveChanges() {
     this.edit = false;
     if (this.productFormToEdit.valid) {
-      this.add = false;
+      // this.add = false;
       const objProduct = this.productFormToEdit.getRawValue()
       const productToedit = new Product();
       productToedit.nameProduct = objProduct.nameProduct!;

@@ -23,4 +23,12 @@ export class EmployeeService {
    return this.http.post<employee[]>('https://localhost:44382/api/employee/addNewEmployee', newEmployee)
       
   }
+  editEmployee(employeeToEdit : employee) :Observable <employee[]>{
+    return this.http.put<employee[]> ('https://localhost:44382/api/employee/EditEmloyee',employeeToEdit);
+  }
+
+
+
+
+
 }

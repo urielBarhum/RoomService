@@ -5,6 +5,8 @@
 </div>
 <button (click)="openForm()">לחץ כאן להוספת עובד</button>
 
+
+<!-- הוספת עובד -->
 <p-sidebar [(visible)]="add" position="right">
   <h2>הוספת עובד</h2>
   <form [formGroup]="employeeForm" (ngSubmit)="addEmployee()">
@@ -40,7 +42,8 @@
     <div class="row">
       <div class="col-6">
         <label class="form-check-label" for="isWorkNow"> האם עובד עכשיו: </label>
-        <input class="form-check-input" id="isWorkNow" type="checkbox" formControlName="isWorkNow"  [(ngModel)]="employeeIsWork"  />
+        <input class="form-check-input" id="isWorkNow" type="checkbox" formControlName="isWorkNow"
+          [(ngModel)]="employeeIsWork" />
       </div>
     </div>
 
@@ -48,14 +51,16 @@
     <div class="row">
       <div class="col-6">
         <label class="form-check-labels" for="isBusy">האם פנוי : </label>
-        <input class="form-check-input" id="isBusy" type="checkbox" formControlName="isBusy"  [(ngModel)]="employeeIsBusy"/>
+        <input class="form-check-input" id="isBusy" type="checkbox" formControlName="isBusy"
+          [(ngModel)]="employeeIsBusy" />
       </div>
     </div>
 
     <div class="row">
       <div class="col-6">
         <label for="isManger"> האם מנהל: </label>
-        <input class="form-check-input" id="isManger" type="checkbox" formControlName="isManger"  (click)="isMangerAdmin()" />
+        <input class="form-check-input" id="isManger" type="checkbox" formControlName="isManger"
+          (click)="isMangerAdmin()" />
       </div>
     </div>
 
@@ -87,6 +92,82 @@
 
 </p-sidebar>
 
+<!-- עריכת עובד -->
+<p-sidebar [(visible)]="edit" position="left">
+  <h2>עריכת מוצר</h2>
+  <form [formGroup]="employeeFormToEdit" (ngSubmit)="saveChanges()">
+    <div class="row">
+      <div class="col-6">
+
+        <label for="tzEmployee">תעודת זהות עובד: </label>
+        <input class="form-control" required id="tzEmployee" type="text" formControlName="tzEmployee" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+
+        <label for="firstName">שם פרטי: </label>
+        <input class="form-control" id="firstName" type="text" formControlName="firstName" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <label for="lastName">שם משפחה: </label>
+        <input class="form-control" id="lastName" type="text" formControlName="lastName" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <label for="isWorkNow">האם עובד עכשיו </label>
+        <input class="form-check-input" id="isWorkNow" type="checkbox" formControlName="isWorkNow" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <label for="isBusy">האם עסוק: </label>
+        <input class="form-check-input" id="isBusy" type="checkbox" formControlName="isBusy" />
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-6">
+        <label for="isManger">האם מנהל: </label>
+        <input class="form-check-input" id="isManger" type="checkbox" formControlName="isManger" />
+      </div>
+    </div>
+
+    <div *ngIf="IsMangerToEdit" class="manger">
+
+      <div class="row">
+        <div class="col-6">
+          <label for="password">סיסמא : *</label>
+          <!-- <input class="form-control" id="password" type="password" formControlName="password"  /> -->
+          <p-password id="password" formControlName="password" [(ngModel)]="pass1" [toggleMask]="true"></p-password>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <label for="passwordConfirm"> אישור סיסמא: *</label>
+          <!-- <input class="form-control" id="passwordConfirm" type="password" formControlName="passwordConfirm" /> -->
+          <p-password formControlName="passwordConfirm" id="passwordConfirm" [(ngModel)]="pass2"
+            [toggleMask]="true"></p-password>
+
+        </div>
+      </div>
+    </div>
+ 
+
+    <input class="btn btn-primary" type="submit" value="לחץ לעריכה" [disabled]="!employeeFormToEdit.valid">
+  </form>
+
+</p-sidebar>
+
+
+
 
 <p-table [value]="employees" [tableStyle]="{'min-width': '60rem'}">
   <ng-template pTemplate="header">
@@ -106,7 +187,7 @@
       <th class="text-center" pSortableColumn="tzEmployee" style="width:10%"> תעודת זהות עובד
         <p-sortIcon [field]="'tzEmployee'"></p-sortIcon>
       </th>
-      <th class="text-center" pSortableColumn="isManger" style="width:10%"> מנהל/עובד
+      <th class="text-center" pSortableColumn="isManger" style="width:10%"> האם מנהל
         <p-sortIcon [field]="'isManger'"></p-sortIcon>
       </th>
       <th class="text-center" pSortableColumn="edit" style="width:5%">עריכה
@@ -130,9 +211,15 @@
         <i class="fa-solid fa-x bg-warning"></i>
       </td>
       <td class="text-center">{{ employee.tzEmployee}}</td>
-      <td class="text-center">{{ employee.isManger}}</td>
+      <td *ngIf="employee.isManger" class="text-center bg-info">
+        <i class="fa-solid fa-check"></i>
+      </td>
+      <td class="bg-danger text-center" *ngIf="!employee.isManger">
+        <i class="fa-solid fa-x "></i>
+      </td>
+      <!-- <td class="text-center">{{ employee.isManger}}</td> -->
       <td class="text-center">
-        <button (click)="editEmployee()">
+        <button (click)="editEmployee(employee)">
           <i class="fa-solid fa-pen-to-square"></i>
         </button>
       </td>

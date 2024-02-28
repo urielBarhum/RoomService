@@ -120,7 +120,7 @@ export class ProductService {
   }
 
   editProduct(productToEdit : Product) : Observable <Product[]>{
-    return this.http.put <Product[]> ('https://localhost:44382/api/Product/ProductToEdit' , productToEdit )
+    return this.http.put <Product[]> ('https://localhost:44382/api/Product/EditProduct' , productToEdit )
   }
 
 
