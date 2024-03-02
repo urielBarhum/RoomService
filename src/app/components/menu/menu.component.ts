@@ -5,57 +5,60 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit{
-  images:any[]=[]
+export class MenuComponent implements OnInit {
+  images: any[] | undefined;
 
-    
+
   responsiveOptions!: any[];
 
-  constructor(){}
+  constructor() { }
 
   ngOnInit(): void {
     // const thumbnail = pGalleria.generateThumbnail('image.jpg', 200, 200);
-    this.images=[
-      
+    this.images = [
+
       {
-        itemImageSrc: '../../../assets/hotelImg/dan1.jpeg',
-        thumbnailImageSrc : '../../../assets/hotelImg/dan1s.jpg'
+        itemImageSrc: '../../../assets/hotelImg/Hotel1.jpg',
+        // thumbnailImageSrc : '../../../assets/hotelImg/Hotel1.jpg'
       },
       {
-
-        itemImageSrc: '../../../assets/hotelImg/dan2.jpeg',
-        thumbnailImageSrc : '../../../assets/hotelImg/dan2s.jpg'
+        itemImageSrc: '../../../assets/hotelImg/Hotel2.jpg',
+        // thumbnailImageSrc : '../../../assets/hotelImg/Hotel2.jpg'
       },
       {
-
-        itemImageSrc: '../../../assets/hotelImg/dan3.jpeg',
-        thumbnailImageSrc : '../../../assets/hotelImg/dan3s.jpg'
+        itemImageSrc: '../../../assets/hotelImg/Hotel4.jpg'
       },
       {
-
-        itemImageSrc: '../../../assets/hotelImg/dan4.jpeg',
-        thumbnailImageSrc : '../../../assets/hotelImg/dan4s.jpg'
+        itemImageSrc: '../../../assets/hotelImg/Hotel5.jpg'
       },
       {
-
-        itemImageSrc: '../../../assets/hotelImg/dan5.jpeg',
-        thumbnailImageSrc : '../../../assets/hotelImg/dan5s.jpg'
+        itemImageSrc: '../../../assets/hotelImg/Hotel6.jpg'
+      },
+      {
+        itemImageSrc: '../../../assets/hotelImg/Hotel7.jpg'
+      },
+      {
+        itemImageSrc: '../../../assets/hotelImg/Hotel8.jpg'
+      },
+      {
+        itemImageSrc: '../../../assets/hotelImg/Hotel9.jpg'
       }
+
     ];
     this.responsiveOptions = [
       {
-          breakpoint: '1024px',
-          numVisible: 5
+        breakpoint: '1024px',
+        numVisible: 5
       },
       {
-          breakpoint: '768px',
-          numVisible: 3
+        breakpoint: '768px',
+        numVisible: 3
       },
       {
-          breakpoint: '560px',
-          numVisible: 1
+        breakpoint: '560px',
+        numVisible: 1
       }
-  ];
-  
+    ];
+
   }
 }

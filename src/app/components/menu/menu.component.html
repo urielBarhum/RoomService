@@ -1,31 +1,23 @@
 <div class="card text-center menu">
     <div class="row">
-        <div class="card">
-
-            <h2 class="col-12 text-info">
-                ברוכים הבאים למלון דן מקווים שאתם נהנים בחופשה שלכם
-            </h2>
-        </div>
-        <div class="card ">
-
-            <p-galleria [value]="images" [responsiveOptions]="responsiveOptions"  [numVisible]="5">
-                <ng-template pTemplate="item" let-item>
-                    <img class="imagecard" [src]="item.itemImageSrc" style="width: 100%;" />
-                </ng-template>
-                <ng-template pTemplate="thumbnail" let-item>
-                    <div class="grid grid-nogutter justify-content-center hotelImg">
-                        <img [src]="item.thumbnailImageSrc" />
-                    </div>
-                </ng-template>
-            </p-galleria>
-            <!-- <p-image src="https://primefaces.org/cdn/primeng/images/galleria/galleria1.jpg" [preview]="true" alt="Image" width="250">
-                <ng-template pTemplate="indicator">
-                    <i class="pi pi-check"></i>
-                </ng-template>
-            </p-image> -->
-        </div>
+    
+        <h2 class="col-12 text-info">
+          ברוכים הבאים למלון דן מקווים שאתם נהנים בחופשה שלכם
+        </h2>
+      
     </div>
-</div>
-
-
-<img src="../../../assets/hotelImg/dan1s_100x100.jpg" alt="">
+    <div class="row">
+      <div class="col-12">
+        <div class="card text-center ">
+         
+            <p-galleria [value]="images" [autoPlay]="true" [showIndicators]="true" [showThumbnails]="false"
+              [responsiveOptions]="responsiveOptions" class="p-galleria">
+              <ng-template pTemplate="item" let-item>
+                <img [src]="item.itemImageSrc" class="gallery-image" />
+              </ng-template>
+            </p-galleria>
+        </div>
+      </div>
+    </div>
+  </div>
+  
