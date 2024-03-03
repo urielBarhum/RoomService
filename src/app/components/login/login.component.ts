@@ -30,9 +30,10 @@ export class LoginComponent {
     this.aute.logIN(this.authRequest).subscribe(
       data => {
 
-        sessionStorage.setItem("token", data);
+        sessionStorage.setItem("token", data.token);
         this.wrngMesseg = ""
         console.log(data);
+        // לשלוח כאן את כל האובייקט
         this.router.navigateByUrl("orderRoomServiceByCustumer")
       },
       err => {

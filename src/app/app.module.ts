@@ -14,7 +14,6 @@ import { ButtonModule } from 'primeng/button';
 import { MenuComponent } from './components/menu/menu.component';
 import { LoginComponent } from './components/login/login.component';
 import { OrderRoomServiceByCustumerComponent } from './components/order-room-service-by-custumer/order-room-service-by-custumer.component';
-import { HeaderRoomServiceClientComponent } from './components/header-room-service-client/header-room-service-client.component';
 import { MainRoomServiceClientComponent } from './components/main-room-service-client/main-room-service-client.component';
 import { ProductComponent } from './components/product/product.component';
 import { ProductsComponent } from './components/products/products.component';
@@ -42,7 +41,6 @@ import { MessagesComponentComponent } from './components/messages-component/mess
     MenuComponent,
     LoginComponent,
     OrderRoomServiceByCustumerComponent,
-    HeaderRoomServiceClientComponent,
     MainRoomServiceClientComponent,
     ProductComponent,
     ProductsComponent,

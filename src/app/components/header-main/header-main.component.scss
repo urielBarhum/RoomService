@@ -1,13 +1,42 @@
-.dHeader{
-   
-        font-size: 24px; /* גודל הגופן */
-        font-weight: bold; /* עובי הגופן */
-        color: #333; /* צבע הטקסט */
-        text-align: center; /* מיקום הטקסט - במרכז */
-        padding: 10px; /* מרווח בין התוכן למסגרת */
-        background-color: #d54d4d; /* צבע הרקע */
-        border: 1px solid #ccc; /* מסגרת סביב ל-DIV */
-        border-radius: 5px; /* פינות מעוגלות */
-    
 
-}
+body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        border-radius: 10px;
+    }
+
+    .dHeader {
+        background-color: #007bff;
+        color: white;
+        padding: 20px;
+    }
+
+    .dHeader .row {
+        display: flex;
+        align-items: center;
+    }
+
+    .dHeader h1 {
+        margin: 0;
+        padding: 0;
+        font-size: 24px;
+        text-align: center;
+        flex: 1;
+       
+        padding: 10px;
+    }
+
+    .dHeader button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        color: white;
+        font-size: 20px;
+        padding: 5px;
+    }
+
+    .dHeader button:focus {
+        outline: none;
+    }

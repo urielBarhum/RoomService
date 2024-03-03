@@ -1,22 +1,30 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthRequest } from '../models/authRequest';
+import { AuthRequest, UserToknOrder } from '../models/authRequest';
 import { Router } from '@angular/router';
 import { authRequestAdmin } from '../models/authRequestAdmin';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private APILoginCustumer: string = "https://localhost:44382/api/OrderesHotels/login";
+  private APILoginCustumer: string = "https://localhost:44382/api/OrderesHotels/loginCustumer";
   private APILoginAdmin: string = "https://localhost:44382/api/Employee/LogInAdmin"
 
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  logIN(auth: AuthRequest) {
+  // logIN(auth: AuthRequest)  {
 
-    return this.http.post(this.APILoginCustumer, auth, { responseType: "text" });
+  //   return this.http.post(this.APILoginCustumer, auth, { responseType: "text" });
+
+  // }
+
+  
+  logIN(auth: AuthRequest) : Observable<UserToknOrder>  {
+
+    return this.http.post<UserToknOrder>(this.APILoginCustumer, auth, );
 
   }
   logInAdmin(authRequestAdmin : authRequestAdmin){
