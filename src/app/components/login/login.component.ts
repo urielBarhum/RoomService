@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  constructor(private http: HttpClient, private router: Router, private aute: AuthService) {
+  constructor(private http: HttpClient, private router: Router, private auteService: AuthService) {
 
   }
   a = ""
@@ -27,12 +27,13 @@ export class LoginComponent {
     this.authRequest.roomNumber = this.roomNumber
 
 
-    this.aute.logIN(this.authRequest).subscribe(
+    this.auteService.logIn(this.authRequest).subscribe(
       data => {
-
+        this.auteService.userTokenOrder= data
+        this.auteService.UserInside = true;
         sessionStorage.setItem("token", data.token);
         this.wrngMesseg = ""
-        console.log(data);
+        console.log( this.auteService.userTokenOrder);
         // לשלוח כאן את כל האובייקט
         this.router.navigateByUrl("orderRoomServiceByCustumer")
       },

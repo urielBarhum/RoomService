@@ -10,19 +10,21 @@ import { LogInAdminComponent } from './components/log-in-admin/log-in-admin.comp
 import { MenuAdminComponent } from './components/menu-admin/menu-admin.component';
 import { TableEmployeesComponent } from './components/table-employees/table-employees.component';
 import { TableProductComponent } from './components/table-product/table-product.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 
 
 const routes: Routes = [
-  {path: "" ,component:MainComponent},
-  {path : "orderRoomServiceByCustumer", component:OrderRoomServiceByCustumerComponent},
-  {path : "tableCustumers" , component:TableCustumersComponent},
-  {path : "tableEmployees" , component:TableEmployeesComponent},
-  {path : "tableProducts" , component:TableProductComponent},
-  {path:"market",component:ProductsComponent},
-  {path:"logInCustumers" , component:LoginComponent},
-  {path:"logInAdmin" , component:LogInAdminComponent},
-  {path: "menuAdmin" , component : MenuAdminComponent}
+  { path: "", component: MainComponent },
+  { path: "mainForAll", component: MainComponent },
+  { path: "orderRoomServiceByCustumer", component: OrderRoomServiceByCustumerComponent },
+  { path: "tableCustumers", component: TableCustumersComponent },
+  { path: "tableEmployees", component: TableEmployeesComponent },
+  { path: "tableProducts", component: TableProductComponent },
+  { path: "market", component: ProductsComponent },
+  { path: "logInCustumers", component: LoginComponent },
+  { path: "logInAdmin", component: LogInAdminComponent },
+  { path: "menuAdmin", component: MenuAdminComponent }
 
 ];
 

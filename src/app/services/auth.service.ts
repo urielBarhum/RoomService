@@ -12,7 +12,8 @@ export class AuthService {
   private APILoginCustumer: string = "https://localhost:44382/api/OrderesHotels/loginCustumer";
   private APILoginAdmin: string = "https://localhost:44382/api/Employee/LogInAdmin"
 
-
+  public userTokenOrder :UserToknOrder = new UserToknOrder();
+  public UserInside : boolean = false;
   constructor(private http: HttpClient, private router: Router) { }
 
   // logIN(auth: AuthRequest)  {
@@ -22,7 +23,7 @@ export class AuthService {
   // }
 
   
-  logIN(auth: AuthRequest) : Observable<UserToknOrder>  {
+  logIn(auth: AuthRequest) : Observable<UserToknOrder>  {
 
     return this.http.post<UserToknOrder>(this.APILoginCustumer, auth, );
 

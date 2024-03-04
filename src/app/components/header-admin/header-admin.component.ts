@@ -14,6 +14,6 @@ export class HeaderAdminComponent {
   }
   LogOutAdmin(){
     
-    this.router.navigateByUrl('logInAdmin')
+    this.router.navigateByUrl('mainForAll')
   }
 }

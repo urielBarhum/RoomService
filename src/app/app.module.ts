@@ -31,6 +31,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { MessagesModule } from 'primeng/messages';
 import {PasswordModule} from 'primeng/password';
 import { MessagesComponentComponent } from './components/messages-component/messages-component.component';
+import { HeaderUserComponent } from './components/header-user/header-user.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { MessagesComponentComponent } from './components/messages-component/mess
     HeaderAdminComponent,
     TableEmployeesComponent,
     TableProductComponent,
-    MessagesComponentComponent
+    MessagesComponentComponent,
+    HeaderUserComponent
   ],
   imports: [
     BrowserModule,
