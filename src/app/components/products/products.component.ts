@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { cart } from 'src/app/models/cart';
 import { Product } from 'src/app/models/product';
+import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -19,7 +21,10 @@ export class ProductsComponent implements OnChanges {
    
   ngOnChanges(changes: SimpleChanges): void {
   }
-  constructor(private productService: ProductService, http: HttpClient , private cart:CartService) {
+  constructor(private productService: ProductService, private autoService:AuthService, private cart:CartService ,private router:Router) {
+    // if(this.autoService.UserInside == false){
+    //   this.router.navigateByUrl('mainForAll')
+    // } 
     productService.getProduct().subscribe(res => {
       this.products = res;
     });

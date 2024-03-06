@@ -13,18 +13,25 @@ export class HeaderUserComponent implements OnInit {
 
   public userToknOrder: UserToknOrder = new UserToknOrder();
 
-  constructor(private authService: AuthService , private router : Router) { }
-  ngOnInit(): void {
+  constructor(private authService: AuthService, private router: Router) {
+
     this.userToknOrder = this.authService.userTokenOrder
   }
-homeUser(){
-this.router.navigateByUrl('orderRoomServiceByCustumer')
-}
-LogOutUser(){
-this.authService.UserInside = false;
-this.authService.userTokenOrder = Object.create(null);
+  ngOnInit(): void {
+  }
+  homeUser() {
+    this.router.navigateByUrl('orderRoomServiceByCustumer')
+  }
+  LogOutUser() {
+    this.authService.UserInside = false;
+    this.authService.userTokenOrder = Object.create(null);
+    this.authService.custumerIdForGetOrder.CustumerId = ""
+    console.log(this.authService.userTokenOrder);
+    // /לשנות כאן 
+    // this.router.navigateByUrl('mainForAll')
+    this.router.navigateByUrl('logInCustumers')
 
 
-}
+  }
 
 }

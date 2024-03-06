@@ -4,6 +4,7 @@ import { AuthRequest, UserToknOrder } from '../models/authRequest';
 import { Router } from '@angular/router';
 import { authRequestAdmin } from '../models/authRequestAdmin';
 import { Observable } from 'rxjs';
+import { custumerIdForOrder } from '../models/CustumerIdForOrder';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class AuthService {
 
   public userTokenOrder :UserToknOrder = new UserToknOrder();
   public UserInside : boolean = false;
+  public custumerIdForGetOrder:custumerIdForOrder= new custumerIdForOrder();
   constructor(private http: HttpClient, private router: Router) { }
 
   // logIN(auth: AuthRequest)  {

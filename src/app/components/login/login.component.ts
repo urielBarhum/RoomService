@@ -31,6 +31,8 @@ export class LoginComponent {
       data => {
         this.auteService.userTokenOrder= data
         this.auteService.UserInside = true;
+        this.auteService.custumerIdForGetOrder.CustumerId = data.idCustomer
+        
         sessionStorage.setItem("token", data.token);
         this.wrngMesseg = ""
         console.log( this.auteService.userTokenOrder);

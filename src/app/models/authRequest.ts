@@ -5,7 +5,7 @@ export class AuthRequest {
 export class UserToknOrder {
     iDOrderHotel!: number;
     iDHotel!: number;
-    iDCustomer!: string;
+    idCustomer!: string;
     firstName!: string;
     lastName!: string;
     dateFrom!: Date;
