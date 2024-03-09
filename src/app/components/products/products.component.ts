@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { Message } from 'primeng/api';
 import { Observable } from 'rxjs';
 import { cart } from 'src/app/models/cart';
 import { Product } from 'src/app/models/product';
@@ -18,7 +19,8 @@ export class ProductsComponent implements OnChanges {
   products: Product[] = []
   productFromChild!:Product 
   priceForAll: number =0;
-   
+  public suucses: boolean = false;
+  messages: Message[] = [{ severity: 'success', summary: 'ההזמנה נשלחה בהצלחה  ' }];
   ngOnChanges(changes: SimpleChanges): void {
   }
   constructor(private productService: ProductService, private autoService:AuthService, private cart:CartService ,private router:Router) {
@@ -35,6 +37,11 @@ export class ProductsComponent implements OnChanges {
   }
   sendToCart(){
     this.cart.sendToServer();
+    this.suucses = true;
+    setTimeout(() => {
+      this.suucses = false;
+
+    }, 5000);
     // console.log(this.productsToSentToCart);
  
     // debugger;

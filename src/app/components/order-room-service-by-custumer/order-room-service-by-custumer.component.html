@@ -1,63 +1,66 @@
 <app-header-user></app-header-user>
-<button (click)="goToMarket()">להזמנת מוצרים לחץ כאן</button>
+<div *ngIf="ordersForCustumer[0] == null" class="none">
+  <h3>היי עוד לא הזמנת כלום למעבר להזמנות לחץ למטה</h3>
+</div>
+<button class="m-2" (click)="goToMarket()">להזמנת מוצרים לחץ כאן</button>
+<p-table *ngIf="ordersForCustumer[0] != null" [value]="ordersForCustumer" [tableStyle]="{ 'min-width': '60rem' }">
+  <ng-template pTemplate="header">
+    <tr>
+      <th class="text-center" pSortableColumn="nameProduct" style="width: 10%">
+        שם מוצר
+        <p-sortIcon [field]="'nameProduct'"></p-sortIcon>
+      </th>
 
-<p-table [value]="ordersForCustumer" [tableStyle]="{ 'min-width': '60rem' }">
-    <ng-template pTemplate="header">
-      <tr>
-        <th class="text-center" pSortableColumn="nameProduct" style="width: 10%">
-          שם מוצר
-          <p-sortIcon [field]="'nameProduct'"></p-sortIcon>
-        </th>
-  
-        <th class="text-center" pSortableColumn="idProduct" style="width: 10%">
-          ברקוד מוצר
-          <p-sortIcon [field]="'idProduct'"></p-sortIcon>
-        </th>
-        <th class="text-center" pSortableColumn="priceProduct" style="width: 10%">
-          מחיר מוצר <p-sortIcon [field]="'priceProduct'"></p-sortIcon>
-        </th>
-        
-       
-        <th class="text-center" pSortableColumn="qtyProduct" style="width: 10%">
-          כמות בהזמנה
-          <p-sortIcon [field]="'qtyProduct'"></p-sortIcon>
-        </th>
-        <th class="text-center" pSortableColumn="priceForAll" style="width: 10%">
-           מחיר על הכל
-            <p-sortIcon [field]="'priceForAll'"></p-sortIcon>
-          </th>
+      <th class="text-center" pSortableColumn="idProduct" style="width: 10%">
+        ברקוד מוצר
+        <p-sortIcon [field]="'idProduct'"></p-sortIcon>
+      </th>
+      <th class="text-center" pSortableColumn="priceProduct" style="width: 10%">
+        מחיר מוצר <p-sortIcon [field]="'priceProduct'"></p-sortIcon>
+      </th>
 
-        <th class="text-center" pSortableColumn="productImage" style="width: 10%">
-          תמונת מוצר
-          <p-sortIcon [field]="'productImage'"></p-sortIcon>
-        </th>
-        <th class="text-center" pSortableColumn="statusID" style="width: 10%">
-            סטטוס הזמנה
-            <p-sortIcon [field]="'statusID'"></p-sortIcon>
-          </th>
 
-        <th class="text-center" pSortableColumn="ishur" style="width: 5%">
-          אישור הזמנה
-          <p-sortIcon [field]="'ishur'"></p-sortIcon>
-        </th>
-      </tr>
-    </ng-template>
-  
-    <ng-template pTemplate="body" let-order>
-      <tr class="deteles">
-        <td class="text-center">{{ order.nameProduct }}</td>
-        <td class="text-center">{{ order.idProduct }}</td>
-        <td class="text-center">{{ order.priceProduct }}</td>
-        <td class="text-center">{{ order.qtyProduct }}  </td>
-        <td class="text-center">{{ order.priceForAll }} </td>
-        <td class="text-center"> <img class="productImage" src="../../../assets/imagesForStor/{{order.productImage}}" alt="{{order.productImage}}"></td>
-        <td class="text-center">{{ order.statusID }}</td>
-        <td class="text-center">
-          <button (click)="ishurKabala(order)">
-            <i class="fa-solid fa-pen-to-square"></i>
-          </button>
-        </td>
-       
-      </tr>
-    </ng-template>
-  </p-table>
+      <th class="text-center" pSortableColumn="qtyProduct" style="width: 10%">
+        כמות בהזמנה
+        <p-sortIcon [field]="'qtyProduct'"></p-sortIcon>
+      </th>
+      <th class="text-center" pSortableColumn="priceForAll" style="width: 10%">
+        מחיר על הכל
+        <p-sortIcon [field]="'priceForAll'"></p-sortIcon>
+      </th>
+
+      <th class="text-center" pSortableColumn="productImage" style="width: 10%">
+        תמונת מוצר
+        <p-sortIcon [field]="'productImage'"></p-sortIcon>
+      </th>
+      <th class="text-center" pSortableColumn="statusID" style="width: 10%">
+        סטטוס הזמנה
+        <p-sortIcon [field]="'statusID'"></p-sortIcon>
+      </th>
+
+      <th class="text-center" pSortableColumn="ishur" style="width: 5%">
+        אישור הזמנה
+        <p-sortIcon [field]="'ishur'"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-order>
+    <tr class="deteles">
+      <td class="text-center">{{ order.nameProduct }}</td>
+      <td class="text-center">{{ order.idProduct }}</td>
+      <td class="text-center">{{ order.priceProduct }}</td>
+      <td class="text-center">{{ order.qtyProduct }} </td>
+      <td class="text-center">{{ order.priceForAll }} </td>
+      <td class="text-center"> <img class="productImage" src="../../../assets/imagesForStor/{{order.productImage}}"
+          alt="{{order.productImage}}"></td>
+      <td class="text-center">{{ order.statusID }}</td>
+      <td class="text-center">
+        <button (click)="ishurKabala(order)">
+          <i class="fa-solid fa-pen-to-square"></i>
+        </button>
+      </td>
+
+    </tr>
+  </ng-template>
+</p-table>

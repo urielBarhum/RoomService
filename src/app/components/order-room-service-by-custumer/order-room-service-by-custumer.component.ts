@@ -15,28 +15,29 @@ import { OrderRoomServiceService } from 'src/app/services/order-room-service.ser
 export class OrderRoomServiceByCustumerComponent implements OnInit {
 
   public custumer !: Custumer
+
  
-  public ordersForCustumer:OrdersForCustumer[]=[]
+
+  public ordersForCustumer: OrdersForCustumer[] = []
 
   constructor(private http: HttpClient, private router: Router, private autoService: AuthService, private orderRoomService: OrderRoomServiceService) {
     // if (this.autoService.UserInside == false) {
     //   this.router.navigateByUrl('mainForAll')
     // }
-
   }
   ngOnInit(): void {
     this.orderRoomService.getOrderRoomServiceByCustumer().subscribe(res => {
       this.ordersForCustumer = res
-      
+    
     })
- 
+
 
   }
   goToMarket() {
     this.router.navigateByUrl("market")
   }
 
-  ishurKabala(order :OrdersForCustumer){
+  ishurKabala(order: OrdersForCustumer) {
 
   }
 }
