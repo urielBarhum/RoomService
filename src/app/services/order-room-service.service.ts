@@ -26,6 +26,9 @@ export class OrderRoomServiceService {
   getOrderRoomServiceByCustumer() :Observable <OrdersForCustumer[]>{
     return this.http.post<OrdersForCustumer[]>('https://localhost:44382/api/OrderRoomService/getOrderRoomServiceByCustumer',this.authService.custumerIdForGetOrder)
   }
-
+  
+ishurKabala(Orderid :number){
+  return this.http.post<boolean> ('https://localhost:44382/api/OrderRoomService/updateStatusById',Orderid)
+}
  
 }

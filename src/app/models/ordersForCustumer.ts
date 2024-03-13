@@ -1,4 +1,5 @@
 export class OrdersForCustumer {
+    orderId !:number
     nameProduct!: string;
     idProduct!: number;
     priceProduct!: number;

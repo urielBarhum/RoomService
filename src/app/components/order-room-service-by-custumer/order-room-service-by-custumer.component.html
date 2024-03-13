@@ -54,10 +54,21 @@
       <td class="text-center">{{ order.priceForAll }} </td>
       <td class="text-center"> <img class="productImage" src="../../../assets/imagesForStor/{{order.productImage}}"
           alt="{{order.productImage}}"></td>
-      <td class="text-center">{{ order.statusID }}</td>
+      <td *ngIf="order.statusID ==1" class="text-center">
+        <i class="fa-solid fa-fire-burner"></i>
+        בהכנה
+      </td>
+      <td *ngIf="order.statusID ==2" class="text-center">
+        <i class="fa-solid fa-person-walking"></i>
+       בדרך
+      </td>
+      <td *ngIf="order.statusID ==3" class="text-center">
+        <i class="fa-solid fa-check-double"></i>
+       ההזמנה סופקה
+      </td>
       <td class="text-center">
-        <button (click)="ishurKabala(order)">
-          <i class="fa-solid fa-pen-to-square"></i>
+        <button [disabled]="order.statusID==3" (click)="ishurKabala(order)">
+          <i class="fa-solid fa-circle-check"></i>
         </button>
       </td>
 
