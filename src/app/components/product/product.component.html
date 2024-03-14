@@ -1,44 +1,26 @@
-<div class="productCss text-center">
-    <div class="name">
-
-        <h3>{{product.nameProduct}}</h3>
+<div class="product-container text-center">
+    <div class="product-name">
+        <h5>{{ product.nameProduct }}</h5>
     </div>
     <div class="manufacturer">
-
-        <h3>{{product.manufacturer}}</h3>
+        <h6>{{ product.manufacturer }}</h6>
     </div>
-    <div class="productImage">
-
-        <img src="{{product.productImage}}" alt="">
+    <div class="product-image">
+        <img src="../../../assets/imagesForStor/{{ product.productImage }}" alt="{{ product.nameProduct }}">
     </div>
     <div class="price">
-
-        <p>{{product.priceProduct}}</p>
+        <p>{{ product.priceProduct }}</p>
     </div>
-    <div>
-
-        <img class="imageP" src="../../../assets/imagesForStor/{{product.productImage}}" alt="{{product.productImage}}">
-    </div>
-    <div class="optinon">
-
-        <button  (click)="addOne()">
-            <i class="fa-solid fa-plus"></i>
-
+    <div class="options">
+        <button class="btn btn-success" (click)="addOne()">
+            <i class="fa-solid fa-plus"></i> Add
         </button>
-        <button [disabled]="add === 0" (click)="subOne()">
-            <i class="fa-solid fa-minus"></i>
+        <button class="btn btn-danger" [disabled]="add === 0" (click)="subOne()">
+            <i class="fa-solid fa-minus"></i> Remove
         </button>
-        <!-- <button>
-            <i class="fa-solid fa-star"></i>
-
-        </button> -->
-        <!-- <button (click)="removAll()"> המחיקה לא מעדכן את הרשומות צריך תיקון
-            <i class="fa-solid fa-trash"></i>
-        </button> -->
-        <button>
-            <i class="fa" style="font-size:13px">&#xf07a;</i>
-            <span class='badge badge-warning' id='lblCartCount'> {{add}} </span>
+        <button class="btn btn-warning">
+            <i class="fa-solid fa-shopping-cart"></i> 
+            <span class="badge badge-pill badge-light">{{ add }}</span>
         </button>
     </div>
-
 </div>
