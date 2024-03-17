@@ -1,5 +1,138 @@
 <app-header-admin class="mb-2"></app-header-admin>
 <h1 class="card text-center text-warning m-2 bg-primary">טבלת ניהול הזמנות אורחים </h1>
+<button class="m-2 col-1" (click)="addNewCustumer()">לחץ כאן להוספת אורח חדש</button>
+<button class="m-2 col-1" (click)="addNewOrder()">לחץ כאן להוספת הזמנה חדשה ללקוח קיים</button>
+
+<p-sidebar [(visible)]="addOrderForCustumer" position="left">
+    <h3>הוספת אורח חדש:</h3>
+    <form [formGroup]="custumerForm" (ngSubmit)="saveCustumerChanges()">
+
+        <div class="row">
+            <div class="col-6">
+
+                <label for="idCustomer">מזהה לקוח: </label>
+                <input class="form-control" required id="idCustomer" type="text" formControlName="idCustomer" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+
+                <label for="firstName">שם אורח:</label>
+                <input class="form-control" id="firstName" type="text" formControlName="firstName" />
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-6">
+                <label for="lastName">שם משפחה:</label>
+                <input class="form-control" id="lastName" type="text" formControlName="lastName" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <label for="city">עיר:</label>
+                <input class="form-control" id="city" type="text" formControlName="city" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label for="address">רחוב:</label>
+                <input class="form-control" id="address" type="text" formControlName="address" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label for="numHoues">מספר בית:</label>
+                <input class="form-control" id="numHoues" type="text" formControlName="numHoues" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label for="tzCustomer">תעודת זהות אורח:</label>
+                <input class="form-control" id="tzCustomer" type="text" formControlName="tzCustomer" />
+            </div>
+        </div>
+
+        <!-- <div class="row">
+            <div class="col-6">
+                <label for="sumPrice">מחיר ביניים: </label>
+                <input class="form-control" id="sumPrice" type="number" formControlName="sumPrice" />
+            </div>
+        </div> -->
+       
+        <input class="btn btn-primary m-5" type="submit" value="לחץ להוספת לקוח" [disabled]="!custumerForm.valid">
+    </form>
+
+
+
+
+
+
+</p-sidebar>
+
+
+<p-sidebar [(visible)]="addCustumer" position="left">
+
+
+    <h3>הוספת הזמנה ללקוח קיים</h3>
+    <form [formGroup]="orderForm" (ngSubmit)="saveOrderChanges()">
+
+        <div class="row">
+            <div class="col-6">
+
+                <label for="idHotel">מספר מלון: </label>
+                <input class="form-control" id="idHotel" type="text" formControlName="idHotel" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+
+                <label for="idCustomer">ת.ז לקוח: </label>
+                <input class="form-control" required id="idCustomer" type="text" formControlName="idCustomer" />
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-6">
+                <label for="dateFrom">מתאריך:</label>
+                <input class="form-control" id="dateFrom" type="date" formControlName="dateFrom" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <label for="dateTo">עד תאריך: </label>
+                <input class="form-control" id="dateTo" type="date" formControlName="dateTo" />
+            </div>
+        </div>
+
+        <!-- <div class="row">
+            <div class="col-6">
+                <label for="sumPrice">מחיר ביניים: </label>
+                <input class="form-control" id="sumPrice" type="number" formControlName="sumPrice" />
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="col-6">
+                <label for="roomNumber">מספר חדר: </label>
+                <input class="form-control" id="roomNumber" type="text" formControlName="roomNumber" />
+            </div>
+        </div>
+
+
+
+
+        <input class="btn btn-primary" type="submit" value="לחץ לעריכה" [disabled]="!orderForm.valid">
+    </form>
+
+
+
+</p-sidebar>
 
 
 <p-table [value]="custumersAndOrdersHotels" [tableStyle]="{'min-width': '60rem'}">
@@ -12,13 +145,16 @@
             <th class="text-center" pSortableColumn="tzCustomer" style="width:10%">תעודת זהות אורח
                 <p-sortIcon [field]="'tzCustomer'"></p-sortIcon>
             </th>
-            <th class="text-center" pSortableColumn="idOrderHotel" style="width:10%">מספר הזמנה
+            <th class="text-center" pSortableColumn="roomNumber" style="width:5%">מספר חדר
+                <p-sortIcon [field]="'roomNumber'"></p-sortIcon>
+            </th>
+            <th class="text-center" pSortableColumn="idOrderHotel" style="width:5%">מספר הזמנה
                 <p-sortIcon [field]="'idOrderHotel'"></p-sortIcon>
             </th>
-            <th class="text-center" pSortableColumn="dateFrom" style="width:10%">מתאריך
+            <th class="text-center" pSortableColumn="dateFrom" style="width:5%">מתאריך
                 <p-sortIcon [field]="'dateFrom'"></p-sortIcon>
             </th>
-            <th class="text-center" pSortableColumn="dateTo" style="width:10%">עד תאריך
+            <th class="text-center" pSortableColumn="dateTo" style="width:5%">עד תאריך
                 <p-sortIcon [field]="'dateTo'"></p-sortIcon>
             </th>
             <th class="text-center" pSortableColumn="sumPrice" style="width:10%">סך תשלום מלון
@@ -43,6 +179,8 @@
         <tr class="deteles">
             <td class="text-center">{{ custumersAndOrdersHotels.fullName}}</td>
             <td class="text-center">{{ custumersAndOrdersHotels.tzCustomer }}</td>
+            <td class="text-center">{{ custumersAndOrdersHotels.roomNumber}}</td>
+
             <td class="text-center">{{ custumersAndOrdersHotels.idOrderHotel }}</td>
             <td class="text-center">{{ custumersAndOrdersHotels.dateFrom | date: 'dd/MM/yy'}}</td>
             <td class="text-center">{{ custumersAndOrdersHotels.dateTo | date: 'dd/MM/yy'}}</td>
@@ -60,7 +198,7 @@
             </td>
             <td class="text-center">
                 <button>
-                    <i class="fa-solid fa-circle-check"></i> 
+                    <i class="fa-solid fa-circle-check"></i>
                 </button>
             </td>
 

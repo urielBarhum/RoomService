@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Route } from '@angular/router';
 import { Custumer } from 'src/app/models/custumer';
 import { CustumersAndOrdersHotels } from 'src/app/models/custumersAndOrdersHotels';
@@ -14,14 +15,75 @@ import { OrderHotelService } from 'src/app/services/order-hotel.service';
 export class TableCustumersComponent implements OnInit {
   custumeres: Custumer[] = [];
   ordersHotel: orderHotel[] = [];
-  custumersAndOrdersHotels :CustumersAndOrdersHotels[]=[];
-  constructor(private custumerService: CustumerService, private ordersHotelService: OrderHotelService) {}
-  ngOnInit(): void {    
+  swNewOrder: boolean = false;
+  addOrderForCustumer: boolean = false;
+  addCustumer: boolean = false;
+
+  custumerToAdd: Custumer = new Custumer();
+  orderToAdd: orderHotel = new orderHotel();
+
+
+  custumersAndOrdersHotels: CustumersAndOrdersHotels[] = [];
+
+  custumerForm = new FormGroup({
+    idCustomer: new FormControl('', [Validators.minLength(2)]),
+    firstName: new FormControl('', [Validators.minLength(2)]),
+    lastName: new FormControl('', [Validators.minLength(2)]),
+    city: new FormControl(''),
+    address: new FormControl(''),
+    numHoues: new FormControl(''),
+    tzCustomer: new FormControl('', [Validators.minLength(2)]),
+  });
+  orderForm = new FormGroup({
+    // idOrderHotel: new FormControl('', [Validators.minLength(2)]), מספר רץ
+    idHotel: new FormControl(''),
+    idCustomer: new FormControl(''),
+    dateFrom: new FormControl(''),
+    dateTo: new FormControl(''),
+    // sumPrice: new FormControl(''),
+    roomNumber: new FormControl(''),
+
+  })
+  submitted = false;
+
+  constructor(private custumerService: CustumerService, private ordersHotelService: OrderHotelService, private formBuilder: FormBuilder) { }
+  ngOnInit(): void {
     this.custumerService.getCustumersAndOrdersHotels().subscribe(res => {
       this.custumersAndOrdersHotels = res;
       console.log(this.custumersAndOrdersHotels);
-      
+
     })
+
   }
- 
+  addNewCustumer() {
+    this.swNewOrder = true;
+    this.addOrderForCustumer = true;
+  }
+  addNewOrder() {
+    this.addCustumer = true;
+  }
+  saveCustumerChanges() {
+    this.addOrderForCustumer = false;
+    if (this.custumerForm.valid) {
+      const obgcustumer = this.custumerForm.getRawValue()
+      this.custumerToAdd.idCustomer = obgcustumer.idCustomer!;
+      this.custumerToAdd.firstName = obgcustumer.firstName!;
+      this.custumerToAdd.lastName = obgcustumer.lastName!;
+      this.custumerToAdd.city = obgcustumer.city!;
+      this.custumerToAdd.address = obgcustumer.address!;
+      this.custumerToAdd.tzCustomer = obgcustumer.tzCustomer!;
+      console.log(this.custumerToAdd);
+      this.custumerService.addCustumer(this.custumerToAdd).subscribe(res => {
+        this.custumersAndOrdersHotels = res
+      })
+
+
+
+    }
+  }
+
+  saveOrderChanges() {
+    this.addCustumer = false;
+
+  }
 }
