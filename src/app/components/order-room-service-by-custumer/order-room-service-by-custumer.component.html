@@ -2,7 +2,18 @@
 <div *ngIf="ordersForCustumer[0] == null" class="none">
   <h3>היי עוד לא הזמנת כלום למעבר להזמנות לחץ למטה</h3>
 </div>
-<button class="m-2" (click)="goToMarket()">להזמנת מוצרים לחץ כאן</button>
+<div class="row">
+
+  <button class="m-2 col-1" (click)="goToMarket()">להזמנת מוצרים לחץ כאן</button>
+  <div *ngIf="ordersForCustumer[0] != null" class="row">
+    <div class="col-10">
+
+    </div>
+    <div class="col-2">
+      <h5>סך הכול: {{priceForAll| currency: 'ILS'}}</h5>
+    </div>
+  </div>
+</div>
 <p-table *ngIf="ordersForCustumer[0] != null" [value]="ordersForCustumer" [tableStyle]="{ 'min-width': '60rem' }">
   <ng-template pTemplate="header">
     <tr>

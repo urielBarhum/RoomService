@@ -14,8 +14,8 @@ import { OrderRoomServiceService } from 'src/app/services/order-room-service.ser
 })
 export class OrderRoomServiceByCustumerComponent implements OnInit {
 
-  public custumer !: Custumer  
-
+  public custumer !: Custumer
+  public priceForAll: number = 0;
 
   public ordersForCustumer: OrdersForCustumer[] = []
 
@@ -26,8 +26,11 @@ export class OrderRoomServiceByCustumerComponent implements OnInit {
   }
   ngOnInit(): void {
     this.orderRoomService.getOrderRoomServiceByCustumer().subscribe(res => {
-      this.ordersForCustumer = res
-
+      this.ordersForCustumer = res;
+     for (let index = 0; index < this.ordersForCustumer.length; index++) {
+      this.priceForAll += this.ordersForCustumer[index].priceForAll;
+     
+     }
     })
 
 
@@ -37,14 +40,14 @@ export class OrderRoomServiceByCustumerComponent implements OnInit {
   }
 
   ishurKabala(order: OrdersForCustumer) {
-    
+
     this.orderRoomService.ishurKabala(order.orderId).subscribe({
       next: res => {
         const Orderp = this.ordersForCustumer.find(o => o.orderId == order.orderId)
         if (Orderp === undefined) return
         Orderp.statusID = 3
-      }, 
-      error: err => console.log(err)      
+      },
+      error: err => console.log(err)
     })
-  } 
+  }
 }
