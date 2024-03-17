@@ -31,7 +31,7 @@ export class TableCustumersComponent implements OnInit {
     lastName: new FormControl('', [Validators.minLength(2)]),
     city: new FormControl(''),
     address: new FormControl(''),
-    numHoues: new FormControl(''),
+    numHoues: new FormControl(0),
     tzCustomer: new FormControl('', [Validators.minLength(2)]),
   });
   orderForm = new FormGroup({
@@ -71,8 +71,11 @@ export class TableCustumersComponent implements OnInit {
       this.custumerToAdd.lastName = obgcustumer.lastName!;
       this.custumerToAdd.city = obgcustumer.city!;
       this.custumerToAdd.address = obgcustumer.address!;
+      this.custumerToAdd.numHoues = obgcustumer.numHoues!;
+
       this.custumerToAdd.tzCustomer = obgcustumer.tzCustomer!;
       console.log(this.custumerToAdd);
+      //אולי לעשות מעבר ניווט לטבלה של האורחים
       this.custumerService.addCustumer(this.custumerToAdd).subscribe(res => {
         this.custumersAndOrdersHotels = res
       })
