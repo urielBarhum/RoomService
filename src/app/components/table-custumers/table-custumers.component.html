@@ -1,8 +1,9 @@
 <app-header-admin class="mb-2"></app-header-admin>
 <h1 class="card text-center text-warning m-2 bg-primary">טבלת ניהול הזמנות אורחים </h1>
-<button class="m-2 col-1" (click)="addNewCustumer()">לחץ כאן להוספת אורח חדש</button>
-<button class="m-2 col-1" (click)="addNewOrder()">לחץ כאן להוספת הזמנה חדשה ללקוח קיים</button>
+<button class="m-2 col-1" (click)="addNewCustumer()">לחץ כאן להוספת הזמנה חדשה ללקוח קיים</button>
+<button class="m-2 col-1" (click)="addNewOrder()">לחץ כאן להוספת אורח חדש </button>
 
+<!-- הוספת אורח -->
 <p-sidebar [(visible)]="addOrderForCustumer" position="left">
     <h3>הוספת אורח חדש:</h3>
     <form [formGroup]="custumerForm" (ngSubmit)="saveCustumerChanges()">
@@ -73,8 +74,8 @@
 
 </p-sidebar>
 
-
-<p-sidebar [(visible)]="addCustumer" position="left">
+<!-- הוספת הזמנה -->
+<p-sidebar [(visible)]="addCustumerForOrder" position="left">
 
 
     <h3>הוספת הזמנה ללקוח קיים</h3>
@@ -84,7 +85,7 @@
             <div class="col-6">
 
                 <label for="idHotel">מספר מלון: </label>
-                <input class="form-control" id="idHotel" type="text" formControlName="idHotel" />
+                <input class="form-control" id="idHotel" type="number" formControlName="idHotel" />
             </div>
         </div>
 
@@ -92,7 +93,7 @@
             <div class="col-6">
 
                 <label for="idCustomer">ת.ז לקוח: </label>
-                <input class="form-control" required id="idCustomer" type="text" formControlName="idCustomer" />
+                <input class="form-control" required id="idCustomer" #valueInput (ngModelChange)="chackCustumer(valueInput.value)" type="text" formControlName="idCustomer" />
             </div>
         </div>
 
@@ -163,12 +164,12 @@
             <th class="text-center" pSortableColumn="priceForAll" style="width:10%">סך תשלום כולל שירות חדרים
                 <p-sortIcon [field]="'priceForAll'"></p-sortIcon>
             </th>
-            <th class="text-center" pSortableColumn="edit" style="width:5%">עריכה
+            <!-- <th class="text-center" pSortableColumn="edit" style="width:5%">עריכה
                 <p-sortIcon [field]="'edit'"></p-sortIcon>
             </th>
             <th class="text-center" pSortableColumn="delete" style="width:5%">מחיקה
                 <p-sortIcon [field]="'delet'"></p-sortIcon>
-            </th>
+            </th> -->
             <th class="text-center" pSortableColumn="ishur" style="width:5%">אישור הזמנה
                 <p-sortIcon [field]="'ishur'"></p-sortIcon>
             </th>
@@ -186,7 +187,7 @@
             <td class="text-center">{{ custumersAndOrdersHotels.dateTo | date: 'dd/MM/yy'}}</td>
             <td class="text-center">{{ custumersAndOrdersHotels.sumPrice }}</td>
             <td class="text-center">{{ custumersAndOrdersHotels.priceForAll }}</td>
-            <td class="text-center">
+            <!-- <td class="text-center">
                 <button>
                     <i class="fa-solid fa-pen-to-square"></i>
                 </button>
@@ -195,7 +196,7 @@
                 <button>
                     <i class="fa-solid fa-trash"></i>
                 </button>
-            </td>
+            </td> -->
             <td class="text-center">
                 <button>
                     <i class="fa-solid fa-circle-check"></i>

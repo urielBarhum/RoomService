@@ -22,4 +22,9 @@ export class CustumerService {
   addCustumer(custumer:Custumer) :Observable<CustumersAndOrdersHotels[]>{
     return this.http.post<CustumersAndOrdersHotels[]> ('https://localhost:44382/api/Custumer/AddCustumer' ,custumer)
   }
+// // משהו כאן לא עובד
+//   getCustumerById(tz: string) :Observable <boolean>{
+   
+//     return this.http.get <boolean> ('https://localhost:44382/api/Custumer/GetCustumerByID/${tz}')
+//   }
 }

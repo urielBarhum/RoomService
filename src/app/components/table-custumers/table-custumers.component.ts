@@ -16,8 +16,8 @@ export class TableCustumersComponent implements OnInit {
   custumeres: Custumer[] = [];
   ordersHotel: orderHotel[] = [];
   swNewOrder: boolean = false;
+  addCustumerForOrder: boolean = false;
   addOrderForCustumer: boolean = false;
-  addCustumer: boolean = false;
 
   custumerToAdd: Custumer = new Custumer();
   orderToAdd: orderHotel = new orderHotel();
@@ -36,7 +36,7 @@ export class TableCustumersComponent implements OnInit {
   });
   orderForm = new FormGroup({
     // idOrderHotel: new FormControl('', [Validators.minLength(2)]), מספר רץ
-    idHotel: new FormControl(''),
+    idHotel: new FormControl(1),
     idCustomer: new FormControl(''),
     dateFrom: new FormControl(''),
     dateTo: new FormControl(''),
@@ -57,11 +57,40 @@ export class TableCustumersComponent implements OnInit {
   }
   addNewCustumer() {
     this.swNewOrder = true;
-    this.addOrderForCustumer = true;
+    this.addCustumerForOrder = true;
   }
   addNewOrder() {
-    this.addCustumer = true;
+    this.addOrderForCustumer = true;
   }
+  chackCustumer(tzCustomer: any) {
+
+    this.custumerService.getCusrumers().subscribe(res => {
+      this.custumeres = res
+      console.log(this.custumeres);
+      
+      const exsit = this.custumeres.find(p => p.tzCustomer == tzCustomer)
+      if(exsit){
+        console.log("תז קיים");
+        
+      }
+      else{
+        console.log("תז לא קיים");
+        
+      }
+    }
+    )
+    // let exsit = this.custumerService.getCustumerById(tzCustomer).subscribe(
+    //   (isValid => {
+    //     if (isValid) {
+    //       console.log('ת.ז קיים');
+    //     } else {
+    //       console.log('ת.ז לא קיים');
+    //     }
+    //   })
+    // )
+  }
+
+
   saveCustumerChanges() {
     this.addOrderForCustumer = false;
     if (this.custumerForm.valid) {
@@ -86,7 +115,7 @@ export class TableCustumersComponent implements OnInit {
   }
 
   saveOrderChanges() {
-    this.addCustumer = false;
+    this.addCustumerForOrder = false;
 
   }
 }
