@@ -13,9 +13,16 @@ export class MenuAdminComponent implements OnInit {
     this.router.navigateByUrl('tableEmployees');
   }
   goToOreders() {
-    this.router.navigateByUrl('tableCustumers');
+    this.router.navigateByUrl('tableOrdersCustumers');
   }
   goToProducts() {
     this.router.navigateByUrl('tableProducts');
   }
+  goToCustumers(){
+    this.router.navigateByUrl('tableCustumers')
+  }
+goToOrderRoomService(){
+this.router.navigateByUrl('tableOrderRoomService')
+}
+
 }

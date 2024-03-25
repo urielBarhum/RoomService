@@ -1,0 +1,34 @@
+
+.fa-trash{
+    color: red;
+}
+.fa-pen-to-square{
+    color: yellowgreen;
+}
+.deteles{
+    border-radius: 1;
+    border: 1px solid black;
+   
+}
+tr{
+    :hover{
+        background-color: aquamarine;
+    }
+}
+.fa-check{
+    color: green;
+}
+.search-input {
+  width: 200px;
+  height: 40px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.search-input:focus {
+  border-color: dodgerblue;
+}

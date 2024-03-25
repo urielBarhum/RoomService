@@ -19,7 +19,7 @@ import { ProductComponent } from './components/product/product.component';
 import { ProductsComponent } from './components/products/products.component';
 import { TableModule } from 'primeng/table';
 import { AdminComponent } from './admin/admin.component';
-import { TableCustumersComponent } from './components/table-order-custumers/table-order-custumers.component';
+import { TableOrderCustumersComponent } from './components/table-order-custumers/table-order-custumers.component';
 import { LogInAdminComponent } from './components/log-in-admin/log-in-admin.component';
 import { MenuAdminComponent } from './components/menu-admin/menu-admin.component';
 import { ImageModule } from 'primeng/image';
@@ -32,6 +32,8 @@ import { MessagesModule } from 'primeng/messages';
 import {PasswordModule} from 'primeng/password';
 import { MessagesComponentComponent } from './components/messages-component/messages-component.component';
 import { HeaderUserComponent } from './components/header-user/header-user.component';
+import { TableOrderRoomServiceComponent } from './components/table-order-room-service/table-order-room-service.component';
+import { TablecustumersOnlyComponent } from './components/tablecustumers-only/tablecustumers-only.component';
 
 @NgModule({
   declarations: [
@@ -46,14 +48,17 @@ import { HeaderUserComponent } from './components/header-user/header-user.compon
     ProductComponent,
     ProductsComponent,
     AdminComponent,
-    TableCustumersComponent,
+    TableOrderCustumersComponent,
     LogInAdminComponent,
     MenuAdminComponent,
     HeaderAdminComponent,
     TableEmployeesComponent,
     TableProductComponent,
     MessagesComponentComponent,
-    HeaderUserComponent
+    HeaderUserComponent,
+    TableOrderRoomServiceComponent,
+    TablecustumersOnlyComponent,
+ 
   ],
   imports: [
     BrowserModule,
