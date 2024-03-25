@@ -19,7 +19,7 @@ import { ProductComponent } from './components/product/product.component';
 import { ProductsComponent } from './components/products/products.component';
 import { TableModule } from 'primeng/table';
 import { AdminComponent } from './admin/admin.component';
-import { TableCustumersComponent } from './components/table-custumers/table-custumers.component';
+import { TableCustumersComponent } from './components/table-order-custumers/table-order-custumers.component';
 import { LogInAdminComponent } from './components/log-in-admin/log-in-admin.component';
 import { MenuAdminComponent } from './components/menu-admin/menu-admin.component';
 import { ImageModule } from 'primeng/image';

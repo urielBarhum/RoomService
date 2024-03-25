@@ -9,8 +9,8 @@ import { OrderHotelService } from 'src/app/services/order-hotel.service';
 
 @Component({
   selector: 'app-table-custumers',
-  templateUrl: './table-custumers.component.html',
-  styleUrls: ['./table-custumers.component.scss']
+  templateUrl: './table-order-custumers.component.html',
+  styleUrls: ['./table-order-custumers.component.scss']
 })
 export class TableCustumersComponent implements OnInit {
   custumeres: Custumer[] = [];

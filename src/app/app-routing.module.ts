@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { MainComponent } from './components/main/main.component';
 import { OrderRoomServiceByCustumerComponent } from './components/order-room-service-by-custumer/order-room-service-by-custumer.component';
-import { TableCustumersComponent } from './components/table-custumers/table-custumers.component';
+import { TableCustumersComponent } from './components/table-order-custumers/table-order-custumers.component';
 import { ProductsComponent } from './components/products/products.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogInAdminComponent } from './components/log-in-admin/log-in-admin.component';
