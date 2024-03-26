@@ -37,7 +37,7 @@ export class TableOrderCustumersComponent implements OnInit {
   orderForm = new FormGroup({
     // idOrderHotel: new FormControl('', [Validators.minLength(2)]), מספר רץ
     idHotel: new FormControl(1),
-    idCustomer: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    idCustomer: new FormControl('', [Validators.required, Validators.minLength(1)]),
     dateFrom: new FormControl('', [Validators.required]),
     dateTo: new FormControl('' , [Validators.required]),
     // sumPrice: new FormControl(''),
@@ -61,17 +61,17 @@ export class TableOrderCustumersComponent implements OnInit {
   addNewOrder() {
     this.addOrderForCustumer = true;
   }
-  chackCustumer(tzCustomer: any) {
+  chackCustumer(idCustomer: any) {
     this.custumerService.getCusrumers().subscribe(res => {
       this.custumeres = res
       console.log(this.custumeres);      
-      const exsit = this.custumeres.find(p => p.tzCustomer == tzCustomer)
+      const exsit = this.custumeres.find(p => p.idCustomer == idCustomer)
       if(exsit){
-        console.log("תז קיים");
+        console.log("מזהה קיים");
         this.isValid = true;
       }
       else{
-        console.log("תז לא קיים");    
+        console.log("מזהה לא קיים");    
         this.isValid = false;
       
       }
@@ -121,6 +121,10 @@ export class TableOrderCustumersComponent implements OnInit {
       this.orderToAdd.roomNumber = obgOrder.roomNumber!
       console.log(this.orderToAdd);
       // מכאן להוסיף בקשת שרת
+      this.ordersHotelService.addOrderHotel(this.orderToAdd).subscribe(res =>{
+        this.custumersAndOrdersHotels = res;
+      })
+    
     }
   }
 }

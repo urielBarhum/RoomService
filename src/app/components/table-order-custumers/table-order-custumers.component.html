@@ -87,7 +87,7 @@
         <div class="row">
             <div class="col-6">
 
-                <label for="idCustomer">ת.ז לקוח: </label>
+                <label for="idCustomer">מזהה לקוח: </label>
                 <input class="form-control" required id="idCustomer" #valueInput (ngModelChange)="chackCustumer(valueInput.value)"  [ngClass]="{'valid-input': isValid, 'invalid-input': !isValid}" type="text" formControlName="idCustomer" />
             </div>
         </div>
