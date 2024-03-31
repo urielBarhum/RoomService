@@ -73,20 +73,66 @@ export class TableEmployeesComponent implements OnInit {
   isMangerAdmin() {
     this.employeeIsManger = !this.employeeIsManger
   }
+  changeEmployeeToManger(isManger: boolean, employee:employee){
+    debugger
+    if(isManger){
+      this.IsMangerToEdit = true;
+
+      // this.pass1 = employee.passWord;
+      // this.pass2 = employee.passWord;
+     
+    }
+    else{
+      this.IsMangerToEdit = false;
+      // this.pass1 ="";
+      // this.pass2 ="";
+
+      // this.employeeFormToEdit.patchValue({
+      //   password: "",
+      //   passwordConfirm:""
+      // });
+    }
+
+  }
 
 
   editEmployee(employee: employee) {
+    debugger
+    this.employeeFormToEdit.reset();
     this.employeeFormToEdit.patchValue(employee)
     this.edit = true;
     if (employee.isManger) {
 
       this.IsMangerToEdit = true;
+      this.pass1 = employee.passWord;
+      this.pass2 = employee.passWord;
+      // this.employeeFormToEdit.get('password')?.setValue('employee.passWord');
+
+
+
     }
   }
-  saveChanges() {
+  isButtonDisabled(): boolean {
+    if(this.IsMangerToEdit){
 
+      if(this.pass1.length >3 &&this.pass1===this.pass2 && this.employeeFormToEdit.valid){
+        return false;
+      }
+    }
+    else {
+      if(this.employeeFormToEdit.valid){
+        return false;
+      }
+    }
+    return true;
+  }
+
+
+
+  saveChanges() {
+    debugger
     this.IsMangerToEdit = false;
-    if (this.employeeFormToEdit.valid) {
+    if (this.employeeFormToEdit.valid ) {
       const objEmployee = this.employeeFormToEdit.getRawValue()
       const employeeToSave = new employee();
       
@@ -104,9 +150,14 @@ export class TableEmployeesComponent implements OnInit {
           
         }
       }
+      else{
+        employeeToSave.passWord = "";
+      }
       this.employeeService.editEmployee(employeeToSave).subscribe( res =>{
         this.employees = res;
-        
+        this.pass1 ="";
+        this.pass2 ="";
+
       })
     }
 

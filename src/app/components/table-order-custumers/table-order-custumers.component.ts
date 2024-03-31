@@ -61,6 +61,9 @@ export class TableOrderCustumersComponent implements OnInit {
   addNewOrder() {
     this.addOrderForCustumer = true;
   }
+  resetForm() {
+    this.orderForm.reset();
+  }
   chackCustumer(idCustomer: any) {
     this.custumerService.getCusrumers().subscribe(res => {
       this.custumeres = res
@@ -123,6 +126,8 @@ export class TableOrderCustumersComponent implements OnInit {
       // מכאן להוסיף בקשת שרת
       this.ordersHotelService.addOrderHotel(this.orderToAdd).subscribe(res =>{
         this.custumersAndOrdersHotels = res;
+        this.resetForm();
+        this.orderToAdd.idHotel = 1
       })
     
     }

@@ -94,7 +94,7 @@
 
 <!-- עריכת עובד -->
 <p-sidebar [(visible)]="edit" position="left">
-  <h2>עריכת מוצר</h2>
+  <h2>עריכת עובד</h2>
   <form [formGroup]="employeeFormToEdit" (ngSubmit)="saveChanges()">
     <div class="row">
       <div class="col-6">
@@ -136,7 +136,7 @@
     <div class="row">
       <div class="col-6">
         <label for="isManger">האם מנהל: </label>
-        <input class="form-check-input" id="isManger" type="checkbox" formControlName="isManger" />
+        <input class="form-check-input" #manger id="isManger" type="checkbox" formControlName="isManger" (click)="changeEmployeeToManger(manger.checked,employee)" />
       </div>
     </div>
 
@@ -161,7 +161,7 @@
     </div>
  
 
-    <input class="btn btn-primary" type="submit" value="לחץ לעריכה" [disabled]="!employeeFormToEdit.valid">
+    <input class="btn btn-primary" type="submit" value="לחץ לעריכה" [disabled]="!employeeFormToEdit.valid ||pass1 != pass2|| (IsMangerToEdit && pass1.length < 2)  ">
   </form>
 
 </p-sidebar>
