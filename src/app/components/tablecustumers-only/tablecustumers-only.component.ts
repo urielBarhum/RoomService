@@ -16,7 +16,7 @@ export class TablecustumersOnlyComponent {
 
   custumerToAdd: Custumer = new Custumer();
   addOrderForCustumer: boolean = false;
-
+  edit: boolean = false;
 
 
   suucses: boolean = false;
@@ -24,7 +24,11 @@ export class TablecustumersOnlyComponent {
   messagesSuccess: Message[] = [{ severity: 'success', summary: 'הלקוח נוסף בהצלחה ' }]
   messagesEror: Message[] = [{ severity: 'error', summary: 'שגיאה בעת הוספת לקוח ' }];
 
-
+  
+  suucsesEdit: boolean = false;
+  erorEdit: boolean = false;
+  messagesSuccessEdit: Message[] = [{ severity: 'success', summary: 'הלקוח נערך בהצלחה ' }]
+  messagesErorEdit: Message[] = [{ severity: 'error', summary: 'שגיאה בעת עריכת לקוח ' }];
 
   custumerForm = new FormGroup({
     idCustomer: new FormControl('', [Validators.required, Validators.minLength(1)]),
@@ -36,6 +40,17 @@ export class TablecustumersOnlyComponent {
     tzCustomer: new FormControl('', [Validators.required, Validators.minLength(2)]),
   });
 
+  custumerFormToEdit = new FormGroup({
+    idCustomer: new FormControl('', [Validators.required, Validators.minLength(1)]),
+    firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    city: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    address: new FormControl(''),
+    numHoues: new FormControl(0),
+    tzCustomer: new FormControl('', [Validators.required, Validators.minLength(2)]),
+  });
+
+
   constructor(private custumerService: CustumerService) {
     this.custumerService.getCusrumers().subscribe(res => {
       this.tableCustumers = res
@@ -43,7 +58,10 @@ export class TablecustumersOnlyComponent {
 
     })
   }
-
+  editCustumer(custumer: Custumer) {
+    this.edit = true;
+    this.custumerFormToEdit.patchValue(custumer);
+  }
   applyFilter(): void {
     this.custumerService.getCusrumers().subscribe(res => {
       this.tableCustumers = res.filter(custumer =>
@@ -97,5 +115,39 @@ export class TablecustumersOnlyComponent {
 
     }
   }
+  saveChanges() {
+    this.edit = false;
+    if (this.custumerFormToEdit.valid) {
+      const objCustumer = this.custumerFormToEdit.getRawValue();
+      const custumerToEdit = new Custumer();
+      custumerToEdit.idCustomer = objCustumer.idCustomer!
+      custumerToEdit.tzCustomer = objCustumer.tzCustomer!
+      custumerToEdit.firstName = objCustumer.firstName!
+      custumerToEdit.lastName = objCustumer.lastName!
+      custumerToEdit.city = objCustumer.city!
+      custumerToEdit.address = objCustumer.address!
+      custumerToEdit.numHoues = objCustumer.numHoues!
+      console.log(custumerToEdit);
+      this.custumerService.editCustumer(custumerToEdit).subscribe({
+        next: (res) => {
+          this.tableCustumers = res;
+          this.custumerFormToEdit.reset();
+          this.suucsesEdit = true;
+          setTimeout(() => {
+            this.suucsesEdit = false;
+          }, 5000);
 
+        },
+        error: (err) => {
+          this.erorEdit = true;
+          setTimeout(() => {
+            this.erorEdit = false;
+          }, 5000);
+        }
+      })
+
+
+    }
+
+  }
 }

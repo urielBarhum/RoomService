@@ -113,6 +113,10 @@
             <th class="text-center" pSortableColumn="delete" style="width:5%">מחיקה
                 <p-sortIcon [field]="'delet'"></p-sortIcon>
             </th> -->
+            <th class="text-center" pSortableColumn="edit" style="width: 5%">
+                עריכה
+                <p-sortIcon [field]="'edit'"></p-sortIcon>
+              </th>
             <th class="text-center" pSortableColumn="ishur" style="width:5%">אישור הזמנה
                 <p-sortIcon [field]="'ishur'"></p-sortIcon>
             </th>
@@ -140,6 +144,11 @@
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </td> -->
+            <td class="text-center">
+                <button (click)="editOrderForCustumer(custumersAndOrdersHotels)">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+              </td>
             <td class="text-center">
                 <button>
                     <i class="fa-solid fa-circle-check"></i>

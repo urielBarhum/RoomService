@@ -9,12 +9,22 @@
     <input class="search-input" type="text" [(ngModel)]="searchText" (keyup)="applyFilter()">
 </div>
 
+<!-- הודעת שגיאה עבור הוספת לקוח -->
 <div *ngIf="suucses">
     <p-messages [value]="messagesSuccess" [enableService]="false" [closable]="false"></p-messages>
 </div>
 
 <div *ngIf="eror">
     <p-messages [value]="messagesEror" [enableService]="false" [closable]="false"></p-messages>
+</div>
+
+<!-- הודעת שגיאה עבור עריכת לקוח -->
+<div *ngIf="suucsesEdit">
+    <p-messages [value]="messagesSuccessEdit" [enableService]="false" [closable]="false"></p-messages>
+</div>
+
+<div *ngIf="erorEdit">
+    <p-messages [value]="messagesErorEdit" [enableService]="false" [closable]="false"></p-messages>
 </div>
 
 
@@ -84,11 +94,59 @@
 
 </p-sidebar>
 
+<!-- ערכית לקוח קיים -->
+
+<p-sidebar [(visible)]="edit" position="left">
+    <h2>עריכת לקוח</h2>
+    <form [formGroup]="custumerFormToEdit" (ngSubmit)="saveChanges()">
+      <div class="row">
+        <div class="col-6">
+  
+          <label for="firstName">שם לקוח: </label>
+          <input class="form-control" required id="firstName" type="text" formControlName="firstName" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+  
+          <label for="lastName">שם משפחה: </label>
+          <input class="form-control" id="lastName" type="text" formControlName="lastName" />
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-6">
+          <label for="city">עיר: </label>
+          <input class="form-control" id="city" type="text" formControlName="city" />
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-6">
+          <label for="address">כתובת: </label>
+          <input class="form-control" id="address" type="text" formControlName="address" />
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-6">
+          <label for="numHoues">מספר בית: </label>
+          <input class="form-control" id="numHoues" type="number" formControlName="numHoues" />
+        </div>
+      </div>
+  
+      <input class="btn btn-primary" type="submit" value="לחץ לעריכה" [disabled]="!custumerFormToEdit.valid">
+    </form>
+    <!-- <button (click)="addProduct()">לחץ להוספה</button> -->
+  </p-sidebar>
+
+
+
+
+
 <p-table [value]="tableCustumers" [tableStyle]="{ 'min-width': '60rem' }">
     <ng-template pTemplate="header">
         <tr>
-
-
             <th class="text-center" pSortableColumn="tzCustomer" style="width: 10%">
                 תעודת זהות
                 <p-sortIcon [field]="'tzCustomer'"></p-sortIcon>
@@ -114,6 +172,10 @@
                 מספר לקוח
                 <p-sortIcon [field]="'idCustomer'"></p-sortIcon>
             </th>
+            <th class="text-center" pSortableColumn="edit" style="width: 5%">
+                עריכה
+                <p-sortIcon [field]="'edit'"></p-sortIcon>
+              </th>
         </tr>
     </ng-template>
 
@@ -129,7 +191,11 @@
                 {{ custumer.numHoues }}
             </td>
             <td class="text-center">{{ custumer.idCustomer }}</td>
-
+            <td class="text-center">
+                <button (click)="editCustumer(custumer)">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+              </td>
 
         </tr>
     </ng-template>

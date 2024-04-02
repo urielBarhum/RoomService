@@ -5,6 +5,7 @@ import { Message } from 'primeng/api';
 import { Custumer } from 'src/app/models/custumer';
 import { CustumersAndOrdersHotels } from 'src/app/models/custumersAndOrdersHotels';
 import { orderHotel } from 'src/app/models/orderHotel';
+import { OrdersForCustumer } from 'src/app/models/ordersForCustumer';
 import { CustumerService } from 'src/app/services/custumer.service';
 import { OrderHotelService } from 'src/app/services/order-hotel.service';
 
@@ -125,4 +126,11 @@ export class TableOrderCustumersComponent implements OnInit {
 
     }
   }
+
+  editOrderForCustumer(orderForUstumer: OrdersForCustumer){
+    
+  }
+
+
+
 }
