@@ -1,3 +1,45 @@
+<app-header-main></app-header-main>
+
+
+
+
+<div *ngIf="eror">
+    <p-messages [value]="messagesEror" [enableService]="false" [closable]="false"></p-messages>
+</div>
+
+<div id="card">
+    <div id="card-content">
+      <div id="card-title">
+        <h2>כניסת אורחים</h2>
+        <!-- <div class="underline-title"></div> -->
+      </div>
+      <form method="post" class="form" (ngSubmit)="logIN()">
+        <label for="idEmployee" style="padding-top:13px">
+         מספר זהות
+          </label>
+        <input [(ngModel)]="tzuser"  id="idEmployee" class="form-content" type="text" name="text" autocomplete="on" required />
+        <div class="form-border"></div>
+        <label for="roomNumber" style="padding-top:22px">מספר חדר
+          </label>
+        <input [(ngModel)]="roomNumber" id="roomNumber" class="form-content" type="number" name="roomNumber" required />
+        <div class="form-border"></div>
+       
+       
+        <input id="submit-btn" type="submit" name="submit" value="היכנס" />
+        <!-- <button class="btnIn" (click)="logINAdmin()">היכנס</button> -->
+    
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+<!-- 
 <div class="headerLogin text-center m-5">
     <h2>כניסת אורחים</h2>
     <div class="inputUser m-2">
@@ -16,4 +58,4 @@
     <p>
         {{wrngMesseg}}
     <p>
-</div>
+</div> -->

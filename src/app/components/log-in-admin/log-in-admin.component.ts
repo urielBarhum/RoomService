@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Message } from 'primeng/api';
 import { authRequestAdmin } from 'src/app/models/authRequestAdmin';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -16,6 +17,10 @@ export class LogInAdminComponent {
   passWord !: string
   wrngMesseg: string = ""
   succsesMesseg: string = "הנך מועבר לאתר"
+
+  eror : boolean = false;
+  messagesEror :Message[]=[{ severity: 'error', summary: 'ת.ז או סיסמא לא נכונים '}];
+
 
   submit = false;
   public loginForm!: FormGroup;
@@ -47,7 +52,12 @@ export class LogInAdminComponent {
         this.router.navigateByUrl("menuAdmin")
       },
       err => {
-        this.wrngMesseg = "לא הכנסת נתונים נכונים אנא נסה שוב"
+       this.eror = true;
+       setTimeout(() => {
+        this.eror = false;
+       }, 5000);
+        
+
       }
     )
 
