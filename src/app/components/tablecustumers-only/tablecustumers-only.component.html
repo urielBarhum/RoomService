@@ -1,6 +1,88 @@
 <app-header-admin></app-header-admin>
-<label for="search-input">חיפוש לפי תעודת זהות</label>
-<input class="search-input" type="text" [(ngModel)]="searchText" (keyup)="applyFilter()">
+<div class="row">
+
+    <button class="m-2 col-1" (click)="addNewOrder()">להוספת אורח חדש </button>
+</div>
+<div class="row">
+
+    <label for="search-input">חיפוש לפי תעודת זהות</label>
+    <input class="search-input" type="text" [(ngModel)]="searchText" (keyup)="applyFilter()">
+</div>
+
+<div *ngIf="suucses">
+    <p-messages [value]="messagesSuccess" [enableService]="false" [closable]="false"></p-messages>
+</div>
+
+<div *ngIf="eror">
+    <p-messages [value]="messagesEror" [enableService]="false" [closable]="false"></p-messages>
+</div>
+
+
+<!-- הוספת אורח -->
+<p-sidebar [(visible)]="addOrderForCustumer" position="left">
+    <h3>הוספת אורח חדש:</h3>
+    <form [formGroup]="custumerForm" (ngSubmit)="saveCustumerChanges()">
+
+        <div class="row">
+            <div class="col-6">
+
+                <label for="idCustomer">מזהה לקוח: </label>
+                <input class="form-control" required id="idCustomer" type="text" formControlName="idCustomer" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+
+                <label for="firstName">שם אורח:</label>
+                <input class="form-control" id="firstName" type="text" formControlName="firstName" />
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-6">
+                <label for="lastName">שם משפחה:</label>
+                <input class="form-control" id="lastName" type="text" formControlName="lastName" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <label for="city">עיר:</label>
+                <input class="form-control" id="city" type="text" formControlName="city" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label for="address">רחוב:</label>
+                <input class="form-control" id="address" type="text" formControlName="address" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label for="numHoues">מספר בית:</label>
+                <input class="form-control" id="numHoues" type="text" formControlName="numHoues" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label for="tzCustomer">תעודת זהות אורח:</label>
+                <input class="form-control" id="tzCustomer" type="text" formControlName="tzCustomer" />
+            </div>
+        </div>
+
+        <!-- <div class="row">
+            <div class="col-6">
+                <label for="sumPrice">מחיר ביניים: </label>
+                <input class="form-control" id="sumPrice" type="number" formControlName="sumPrice" />
+            </div>
+        </div> -->
+
+        <input class="btn btn-primary m-5" type="submit" value="לחץ להוספת לקוח" [disabled]="!custumerForm.valid">
+    </form>
+
+</p-sidebar>
 
 <p-table [value]="tableCustumers" [tableStyle]="{ 'min-width': '60rem' }">
     <ng-template pTemplate="header">

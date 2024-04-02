@@ -19,8 +19,8 @@ export class CustumerService {
    getCustumersAndOrdersHotels(): Observable<CustumersAndOrdersHotels[]>{
     return this.http.get<CustumersAndOrdersHotels[]>('https://localhost:44382/api/Custumer/GetCustomerWithOrders')
   }
-  addCustumer(custumer:Custumer) :Observable<CustumersAndOrdersHotels[]>{
-    return this.http.post<CustumersAndOrdersHotels[]> ('https://localhost:44382/api/Custumer/AddCustumer' ,custumer)
+  addCustumer(custumer:Custumer) :Observable<Custumer[]>{
+    return this.http.post<Custumer[]> ('https://localhost:44382/api/Custumer/AddCustumer' ,custumer)
   }
 // // משהו כאן לא עובד
 //   getCustumerById(tz: string) :Observable <boolean>{

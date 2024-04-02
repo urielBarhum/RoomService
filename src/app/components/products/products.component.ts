@@ -19,7 +19,7 @@ export class ProductsComponent implements OnChanges {
   products: Product[] = []
   productFromChild!:Product 
   priceForAll: number =0;
-  public suucses: boolean = false;
+   suucses: boolean = false;
   messages: Message[] = [{ severity: 'success', summary: 'ההזמנה נשלחה בהצלחה  ' }];
   ngOnChanges(changes: SimpleChanges): void {
   }

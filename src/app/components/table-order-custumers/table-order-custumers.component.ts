@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Route } from '@angular/router';
+import { Route, Router } from '@angular/router';
+import { Message } from 'primeng/api';
 import { Custumer } from 'src/app/models/custumer';
 import { CustumersAndOrdersHotels } from 'src/app/models/custumersAndOrdersHotels';
 import { orderHotel } from 'src/app/models/orderHotel';
@@ -13,40 +14,32 @@ import { OrderHotelService } from 'src/app/services/order-hotel.service';
   styleUrls: ['./table-order-custumers.component.scss']
 })
 export class TableOrderCustumersComponent implements OnInit {
-  custumeres: Custumer[] = [];
   ordersHotel: orderHotel[] = [];
   swNewOrder: boolean = false;
+  custumeres: Custumer[] = [];
+
   addCustumerForOrder: boolean = false;
-  addOrderForCustumer: boolean = false;
-
-  custumerToAdd: Custumer = new Custumer();
   orderToAdd: orderHotel = new orderHotel();
-
-
   custumersAndOrdersHotels: CustumersAndOrdersHotels[] = [];
+  
+  suucses: boolean = false;
+  eror : boolean = false;
+  messagesSuccess: Message[] = [{ severity: 'success', summary: 'ההזמנה נוספה בהצלחה ' }]
+  messagesEror :Message[]=[{ severity: 'error', summary: 'שגיאה בעת הוספת הזמנה '}];
 
-  custumerForm = new FormGroup({
-    idCustomer: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    firstName: new FormControl('', [Validators.required ,Validators.minLength(2)]),
-    lastName: new FormControl('', [Validators.required,Validators.minLength(2)]),
-    city: new FormControl('', [Validators.required,Validators.minLength(2)]),
-    address: new FormControl(''),
-    numHoues: new FormControl(0),
-    tzCustomer: new FormControl('', [Validators.required , Validators.minLength(2)]),
-  });
   orderForm = new FormGroup({
     // idOrderHotel: new FormControl('', [Validators.minLength(2)]), מספר רץ
     idHotel: new FormControl(1),
     idCustomer: new FormControl('', [Validators.required, Validators.minLength(1)]),
     dateFrom: new FormControl('', [Validators.required]),
-    dateTo: new FormControl('' , [Validators.required]),
+    dateTo: new FormControl('', [Validators.required]),
     // sumPrice: new FormControl(''),
-    roomNumber: new FormControl<number>(0 ,[Validators.required, Validators.minLength(3)]),
+    roomNumber: new FormControl<number>(0, [Validators.required, Validators.minLength(3)]),
 
   })
   submitted = false;
   isValid: boolean = false;
-  constructor(private custumerService: CustumerService, private ordersHotelService: OrderHotelService, private formBuilder: FormBuilder) { }
+  constructor(private router :Router,private custumerService: CustumerService, private ordersHotelService: OrderHotelService, private formBuilder: FormBuilder) { }
   ngOnInit(): void {
     this.custumerService.getCustumersAndOrdersHotels().subscribe(res => {
       this.custumersAndOrdersHotels = res;
@@ -58,25 +51,23 @@ export class TableOrderCustumersComponent implements OnInit {
     this.swNewOrder = true;
     this.addCustumerForOrder = true;
   }
-  addNewOrder() {
-    this.addOrderForCustumer = true;
-  }
+
   resetForm() {
     this.orderForm.reset();
   }
   chackCustumer(idCustomer: any) {
     this.custumerService.getCusrumers().subscribe(res => {
       this.custumeres = res
-      console.log(this.custumeres);      
+      console.log(this.custumeres);
       const exsit = this.custumeres.find(p => p.idCustomer == idCustomer)
-      if(exsit){
+      if (exsit) {
         console.log("מזהה קיים");
         this.isValid = true;
       }
-      else{
-        console.log("מזהה לא קיים");    
+      else {
+        console.log("מזהה לא קיים");
         this.isValid = false;
-      
+
       }
     }
     )
@@ -90,32 +81,13 @@ export class TableOrderCustumersComponent implements OnInit {
     //   })
     // )
   }
-  saveCustumerChanges() {
-    this.addOrderForCustumer = false;
-    if (this.custumerForm.valid) {
-      const obgcustumer = this.custumerForm.getRawValue()
-      this.custumerToAdd.idCustomer = obgcustumer.idCustomer!;
-      this.custumerToAdd.firstName = obgcustumer.firstName!;
-      this.custumerToAdd.lastName = obgcustumer.lastName!;
-      this.custumerToAdd.city = obgcustumer.city!;
-      this.custumerToAdd.address = obgcustumer.address!;
-      this.custumerToAdd.numHoues = obgcustumer.numHoues!;
-
-      this.custumerToAdd.tzCustomer = obgcustumer.tzCustomer!;
-      console.log(this.custumerToAdd);
-      //אולי לעשות מעבר ניווט לטבלה של האורחים
-      this.custumerService.addCustumer(this.custumerToAdd).subscribe(res => {
-        this.custumersAndOrdersHotels = res
-      })
-
-
-
-    }
+  goToCustumersTable(){
+    this.router.navigateByUrl('tableCustumers')
   }
 
   saveOrderChanges() {
     this.addCustumerForOrder = false;
-    if(this.orderForm.valid){
+    if (this.orderForm.valid) {
       const obgOrder = this.orderForm.getRawValue();
       this.orderToAdd.idCustomer = obgOrder.idCustomer!
       this.orderToAdd.dateFrom = new Date(Date.parse(obgOrder.dateFrom!));
@@ -124,12 +96,33 @@ export class TableOrderCustumersComponent implements OnInit {
       this.orderToAdd.roomNumber = obgOrder.roomNumber!
       console.log(this.orderToAdd);
       // מכאן להוסיף בקשת שרת
-      this.ordersHotelService.addOrderHotel(this.orderToAdd).subscribe(res =>{
-        this.custumersAndOrdersHotels = res;
-        this.resetForm();
-        this.orderToAdd.idHotel = 1
-      })
-    
+      this.ordersHotelService.addOrderHotel(this.orderToAdd).subscribe(
+        {
+          next: (res) => {
+            this.suucses = true;
+
+            setTimeout(() => {
+              this.suucses = false;
+            }, 5000);
+            this.custumersAndOrdersHotels = res;
+            this.resetForm();
+            this.orderToAdd.idHotel = 1
+          },
+          error: (err) => {
+            this.eror = true;
+
+            setTimeout(() => {
+              this.eror = false;
+            }, 5000);
+        }
+
+
+        }
+
+
+
+      )
+
     }
   }
 }
