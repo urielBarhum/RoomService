@@ -13,21 +13,25 @@ export class CustumerService {
 
   }
   custumeres!: Custumer[]
-  getCusrumers() : Observable<Custumer[]>{
+  getCusrumers(): Observable<Custumer[]> {
     return this.http.get<Custumer[]>('https://localhost:44382/api/Custumer/GetCustumers')
-   }
-   getCustumersAndOrdersHotels(): Observable<CustumersAndOrdersHotels[]>{
+  }
+  getCustumersAndOrdersHotels(): Observable<CustumersAndOrdersHotels[]> {
     return this.http.get<CustumersAndOrdersHotels[]>('https://localhost:44382/api/Custumer/GetCustomerWithOrders')
   }
-  addCustumer(custumer:Custumer) :Observable<Custumer[]>{
-    return this.http.post<Custumer[]> ('https://localhost:44382/api/Custumer/AddCustumer' ,custumer)
+  addCustumer(custumer: Custumer): Observable<Custumer[]> {
+    return this.http.post<Custumer[]>('https://localhost:44382/api/Custumer/AddCustumer', custumer)
   }
-  editCustumer(custumer:Custumer):Observable<Custumer[]>{
-    return this.http.post<Custumer[]> ('https://localhost:44382/api/Custumer/EditCustumer',custumer)
+  editCustumer(custumer: Custumer): Observable<Custumer[]> {
+    return this.http.post<Custumer[]>('https://localhost:44382/api/Custumer/EditCustumer', custumer)
   }
-// // משהו כאן לא עובד
-//   getCustumerById(tz: string) :Observable <boolean>{
-   
-//     return this.http.get <boolean> ('https://localhost:44382/api/Custumer/GetCustumerByID/${tz}')
-//   }
+
+  UpdateStatus(custumersAndOrdersHotels: CustumersAndOrdersHotels): Observable<CustumersAndOrdersHotels[]> {
+    return this.http.post<CustumersAndOrdersHotels[]>('https://localhost:44382/api/Custumer/UpdateStatus', custumersAndOrdersHotels)
+  }
+  // // משהו כאן לא עובד
+  //   getCustumerById(tz: string) :Observable <boolean>{
+
+  //     return this.http.get <boolean> ('https://localhost:44382/api/Custumer/GetCustumerByID/${tz}')
+  //   }
 }

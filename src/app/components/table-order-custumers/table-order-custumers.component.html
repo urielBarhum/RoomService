@@ -1,6 +1,8 @@
 <app-header-admin class="mb-2"></app-header-admin>
 <h1 class="card text-center text-warning m-2 bg-primary">טבלת ניהול הזמנות אורחים </h1>
-<button class="m-2 col-1" (click)="addNewCustumer()">לחץ כאן להוספת הזמנה חדשה ללקוח קיים</button>
+<!-- <button class="m-2 col-1" (click)="addNewCustumer()">לחץ כאן להוספת הזמנה חדשה ללקוח קיים</button> -->
+<button class="beautiful-button" (click)="addNewCustumer()"> להוספת הזמנה חדשה </button>
+
 <div *ngIf="suucses">
     <p-messages [value]="messagesSuccess" [enableService]="false" [closable]="false"></p-messages>
 </div>
@@ -89,10 +91,10 @@
             <th class="text-center" pSortableColumn="tzCustomer" style="width:10%">תעודת זהות אורח
                 <p-sortIcon [field]="'tzCustomer'"></p-sortIcon>
             </th>
-            <th class="text-center" pSortableColumn="roomNumber" style="width:5%">מספר חדר
+            <th class="text-center" pSortableColumn="roomNumber" style="width:8%">מספר חדר
                 <p-sortIcon [field]="'roomNumber'"></p-sortIcon>
             </th>
-            <th class="text-center" pSortableColumn="idOrderHotel" style="width:5%">מספר הזמנה
+            <th class="text-center" pSortableColumn="idOrderHotel" style="width:8%">מספר הזמנה
                 <p-sortIcon [field]="'idOrderHotel'"></p-sortIcon>
             </th>
             <th class="text-center" pSortableColumn="dateFrom" style="width:5%">מתאריך
@@ -104,7 +106,7 @@
             <th class="text-center" pSortableColumn="sumPrice" style="width:10%">סך תשלום מלון
                 <p-sortIcon [field]="'sumPrice'"></p-sortIcon>
             </th>
-            <th class="text-center" pSortableColumn="priceForAll" style="width:10%">סך תשלום כולל שירות חדרים
+            <th class="text-center" pSortableColumn="priceForAll" style="width:10%">סך הכול
                 <p-sortIcon [field]="'priceForAll'"></p-sortIcon>
             </th>
             <!-- <th class="text-center" pSortableColumn="edit" style="width:5%">עריכה
@@ -117,7 +119,7 @@
                 עריכה
                 <p-sortIcon [field]="'edit'"></p-sortIcon>
               </th>
-            <th class="text-center" pSortableColumn="ishur" style="width:5%">אישור הזמנה
+            <th class="text-center" pSortableColumn="ishur" style="width:8%">אישור הזמנה
                 <p-sortIcon [field]="'ishur'"></p-sortIcon>
             </th>
         </tr>
@@ -149,11 +151,15 @@
                   <i class="fa-solid fa-pen-to-square"></i>
                 </button>
               </td>
-            <td class="text-center">
-                <button>
+            <td *ngIf="custumersAndOrdersHotels.active == true" class="text-center">
+                <button (click)="finishOrder(custumersAndOrdersHotels)">
                     <i class="fa-solid fa-circle-check"></i>
                 </button>
             </td>
+            <td *ngIf="custumersAndOrdersHotels.active == false" class="text-center">
+                <i class="fa-solid fa-check-double"></i>
+               ההזמנה סופקה
+              </td>
 
         </tr>
     </ng-template>

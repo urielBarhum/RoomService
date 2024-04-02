@@ -22,11 +22,11 @@ export class TableOrderCustumersComponent implements OnInit {
   addCustumerForOrder: boolean = false;
   orderToAdd: orderHotel = new orderHotel();
   custumersAndOrdersHotels: CustumersAndOrdersHotels[] = [];
-  
+
   suucses: boolean = false;
-  eror : boolean = false;
+  eror: boolean = false;
   messagesSuccess: Message[] = [{ severity: 'success', summary: 'ההזמנה נוספה בהצלחה ' }]
-  messagesEror :Message[]=[{ severity: 'error', summary: 'שגיאה בעת הוספת הזמנה '}];
+  messagesEror: Message[] = [{ severity: 'error', summary: 'שגיאה בעת הוספת הזמנה ' }];
 
   orderForm = new FormGroup({
     // idOrderHotel: new FormControl('', [Validators.minLength(2)]), מספר רץ
@@ -40,7 +40,7 @@ export class TableOrderCustumersComponent implements OnInit {
   })
   submitted = false;
   isValid: boolean = false;
-  constructor(private router :Router,private custumerService: CustumerService, private ordersHotelService: OrderHotelService, private formBuilder: FormBuilder) { }
+  constructor(private router: Router, private custumerService: CustumerService, private ordersHotelService: OrderHotelService, private formBuilder: FormBuilder) { }
   ngOnInit(): void {
     this.custumerService.getCustumersAndOrdersHotels().subscribe(res => {
       this.custumersAndOrdersHotels = res;
@@ -82,7 +82,7 @@ export class TableOrderCustumersComponent implements OnInit {
     //   })
     // )
   }
-  goToCustumersTable(){
+  goToCustumersTable() {
     this.router.navigateByUrl('tableCustumers')
   }
 
@@ -115,7 +115,7 @@ export class TableOrderCustumersComponent implements OnInit {
             setTimeout(() => {
               this.eror = false;
             }, 5000);
-        }
+          }
 
 
         }
@@ -127,10 +127,20 @@ export class TableOrderCustumersComponent implements OnInit {
     }
   }
 
-  editOrderForCustumer(orderForUstumer: OrdersForCustumer){
-    
-  }
+  editOrderForCustumer(orderForUstumer: OrdersForCustumer) {
 
+  }
+  finishOrder(custumersAndOrdersHotels: CustumersAndOrdersHotels) {
+    console.log(custumersAndOrdersHotels);
+    this.custumerService.UpdateStatus(custumersAndOrdersHotels).subscribe({
+      next: (res) => {
+        this.custumersAndOrdersHotels = res;
+      },
+      error: (err) => {
+
+      }
+    })
+  }
 
 
 }

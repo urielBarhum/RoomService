@@ -1,5 +1,5 @@
 export class CustumersAndOrdersHotels {
-     idCustomer!: string;
+    idCustomer!: string;
     firstName!: string;
     lastName!: string;
     city!: string | null;
@@ -13,5 +13,7 @@ export class CustumersAndOrdersHotels {
     sumPrice!: number | null;
     priceForAll!: number | null;
     roomNumber!: number;
-    fullName !:string ;
+    fullName !: string;
+    active !: boolean
+
 } 
