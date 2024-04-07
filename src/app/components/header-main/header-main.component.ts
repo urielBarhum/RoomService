@@ -7,17 +7,18 @@ import { Router } from '@angular/router';
   templateUrl: './header-main.component.html',
   styleUrls: ['./header-main.component.scss']
 })
-export class HeaderMainComponent  {
- constructor(private router:Router){
-
- }
- logInCustumers(){
-this.router.navigateByUrl('logInCustumers');
+export class HeaderMainComponent {
+  constructor(private router: Router) { }
+  goToMain(){
+    this.router.navigateByUrl('mainForAll')
   }
-  logInAdmin(){
-
+  logInCustumers() {
+    this.router.navigateByUrl('logInCustumers');
+  }
+  logInAdmin() {
     // this.router.navigateByUrl('logInAdmin')
-     this.router.navigateByUrl('logInAdmin')
+    this.router.navigateByUrl('logInAdmin')
 
   }
+
 }

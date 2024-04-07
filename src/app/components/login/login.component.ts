@@ -20,7 +20,7 @@ export class LoginComponent {
 
   a = ""
   authRequest!: AuthRequest
-  tzuser!: string
+  tzuser!: number
   roomNumber !: number
   wrngMesseg: string = ""
   succsesMesseg: string = "הנך מועבר לאתר"
@@ -33,8 +33,8 @@ export class LoginComponent {
 
   logIN() {
     this.authRequest = new AuthRequest();
-    console.log(this.tzuser, this.roomNumber);
-    this.authRequest.misparZehut = this.tzuser
+    console.log(this.tzuser.toString(), this.roomNumber);
+    this.authRequest.misparZehut = this.tzuser.toString();
     this.authRequest.roomNumber = this.roomNumber
 
 

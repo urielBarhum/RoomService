@@ -1,15 +1,20 @@
-<div class="dHeader">
+<div class="dHeader"> 
     <div class="row">
         <div class="col-1">
             <i class="bi bi-arrow-right-short"></i>
             <button  (click)="logInCustumers()">
-                <i class="fa-solid fa-user"></i>
+                <i class="fa-solid fa-user">כניסת אורחים</i>
             </button>
         </div>
-        <h1 class="col-9">ברוכים הבאים למלון דן</h1>
+        <h1 (click)="goToMain()" class="col-9">
+            <i>
+            ברוכים הבאים למלון דן
+
+        </i>
+        </h1>
         <div class="col-1">
             <button (click)="logInAdmin()">
-                <i class="fa-solid fa-lock"></i>
+                <i class="fa-solid fa-lock">כניסת מנהלים</i>
             </button>
         </div>
     </div>
