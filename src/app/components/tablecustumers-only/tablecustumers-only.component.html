@@ -37,8 +37,12 @@
             <div class="col-6">
 
                 <label for="idCustomer">מזהה לקוח: </label>
-                <input class="form-control" required id="idCustomer" type="text" formControlName="idCustomer" />
-            </div>
+                <input class="form-control" required id="idCustomer" #valueInput
+                    (ngModelChange)="chackId    (valueInput.value)"
+                    [ngClass]="{'valid-input': isValid, 'invalid-input': !isValid}" 
+                    type="text"
+                    formControlName="idCustomer" />
+            </div> 
         </div>
         <div class="row">
             <div class="col-6">
@@ -89,7 +93,7 @@
             </div>
         </div> -->
 
-        <input class="btn btn-primary m-5" type="submit" value="לחץ להוספת לקוח" [disabled]="!custumerForm.valid">
+        <input class="btn btn-primary m-5" type="submit" value="לחץ להוספת לקוח" [disabled]="!custumerForm.valid || !isValid">
     </form>
 
 </p-sidebar>

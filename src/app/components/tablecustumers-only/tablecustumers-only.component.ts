@@ -4,6 +4,7 @@ import { Message } from 'primeng/api';
 import { Custumer } from 'src/app/models/custumer';
 import { CustumerService } from 'src/app/services/custumer.service';
 
+
 @Component({
   selector: 'app-tablecustumers-only',
   templateUrl: './tablecustumers-only.component.html',
@@ -17,13 +18,14 @@ export class TablecustumersOnlyComponent {
   custumerToAdd: Custumer = new Custumer();
   addOrderForCustumer: boolean = false;
   edit: boolean = false;
-
+  custumeresForChack : Custumer[]=[]
 
   suucses: boolean = false;
   eror: boolean = false;
   messagesSuccess: Message[] = [{ severity: 'success', summary: 'הלקוח נוסף בהצלחה ' }]
   messagesEror: Message[] = [{ severity: 'error', summary: 'שגיאה בעת הוספת לקוח ' }];
 
+  isValid: boolean = false;
   
   suucsesEdit: boolean = false;
   erorEdit: boolean = false;
@@ -31,7 +33,7 @@ export class TablecustumersOnlyComponent {
   messagesErorEdit: Message[] = [{ severity: 'error', summary: 'שגיאה בעת עריכת לקוח ' }];
 
   custumerForm = new FormGroup({
-    idCustomer: new FormControl('', [Validators.required, Validators.minLength(1)]),
+    idCustomer: new FormControl('', [Validators.required, Validators.minLength(4)]),
     firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
     lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
     city: new FormControl('', [Validators.required, Validators.minLength(2)]),
@@ -41,7 +43,7 @@ export class TablecustumersOnlyComponent {
   });
 
   custumerFormToEdit = new FormGroup({
-    idCustomer: new FormControl('', [Validators.required, Validators.minLength(1)]),
+    idCustomer: new FormControl('', [Validators.required, Validators.minLength(4)]),
     firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
     lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
     city: new FormControl('', [Validators.required, Validators.minLength(2)]),
@@ -72,6 +74,30 @@ export class TablecustumersOnlyComponent {
   addNewOrder() {
     this.addOrderForCustumer = true;
   }
+  chackId(idCustomer: any) {
+    debugger
+    this.custumerService.getCusrumers().subscribe(res => {
+      this.custumeresForChack = res
+      console.log(this.custumeresForChack);
+      const exsit = this.custumeresForChack.find(p => p.idCustomer == idCustomer)
+      if (exsit) {
+        console.log("מזהה קיים");
+        this.isValid = false;
+      }
+      else {
+        console.log("מזהה לא קיים");
+        this.isValid = true;
+
+      }
+    }
+    )
+
+  }
+
+
+
+
+
   saveCustumerChanges() {
     debugger
     this.addOrderForCustumer = false;

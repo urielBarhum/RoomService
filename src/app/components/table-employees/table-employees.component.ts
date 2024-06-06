@@ -31,7 +31,7 @@ export class TableEmployeesComponent implements OnInit {
   employeeIsManger: boolean = false;
   employeeIsWork: boolean = false;
   employeeIsBusy: boolean = false;
-
+  checkIsMangerAndPassword :boolean = false;
 
   employeeForm = new FormGroup({
     tzEmployee: new FormControl('', [Validators.required, Validators.minLength(2)]),
@@ -69,6 +69,21 @@ export class TableEmployeesComponent implements OnInit {
     }
 
     )
+  }
+  check():boolean{
+    
+      if(this.employeeForm.valid && this.employeeIsManger== false){
+        return true;
+      }
+        
+      if(this.employeeForm.valid && this.employeeIsManger== true &&this.pass1=="" && this.pass2==""){
+        return false;
+      }
+      else if(this.employeeForm.valid && this.employeeIsManger== true &&this.pass1!="" && this.pass2!=""){
+        return true
+      }
+        
+      return false;
   }
   isMangerAdmin() {
     this.employeeIsManger = !this.employeeIsManger
