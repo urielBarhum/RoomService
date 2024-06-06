@@ -14,7 +14,7 @@
       <div class="col-6">
 
         <label for="tzEmployee">תעודת זהות עובד: *</label>
-        <input class="form-control" required id="tzEmployee" type="text" formControlName="tzEmployee" />
+        <input class="form-control" required id="tzEmployee" type="number" formControlName="tzEmployee" />
       </div>
 
     </div>
@@ -100,7 +100,7 @@
       <div class="col-6">
 
         <label for="tzEmployee">תעודת זהות עובד: </label>
-        <input class="form-control" required id="tzEmployee" type="text" formControlName="tzEmployee" />
+        <input class="form-control" required id="tzEmployee" type="number" formControlName="tzEmployee" />
       </div>
     </div>
     <div class="row">
@@ -146,14 +146,14 @@
         <div class="col-6">
           <label for="password">סיסמא : *</label>
           <!-- <input class="form-control" id="password" type="password" formControlName="password"  /> -->
-          <p-password id="password" formControlName="password" [(ngModel)]="pass1" [toggleMask]="true"></p-password>
+          <p-password id="password" formControlName="password" [(ngModel)]="pass1ForEdit" [toggleMask]="true"></p-password>
         </div>
       </div>
       <div class="row">
         <div class="col-6">
           <label for="passwordConfirm"> אישור סיסמא: *</label>
           <!-- <input class="form-control" id="passwordConfirm" type="password" formControlName="passwordConfirm" /> -->
-          <p-password formControlName="passwordConfirm" id="passwordConfirm" [(ngModel)]="pass2"
+          <p-password formControlName="passwordConfirm" id="passwordConfirm" [(ngModel)]="pass2ForEdit"
             [toggleMask]="true"></p-password>
 
         </div>
@@ -161,7 +161,7 @@
     </div>
  
 
-    <input class="btn btn-primary" type="submit" value="לחץ לעריכה" [disabled]="!employeeFormToEdit.valid ||pass1 != pass2|| (IsMangerToEdit && pass1.length < 2)  ">
+    <input class="btn btn-primary" type="submit" value="לחץ לעריכה" [disabled]="!employeeFormToEdit.valid ||pass1ForEdit != pass2ForEdit|| (IsMangerToEdit && pass1ForEdit.length < 2)  ">
   </form>
 
 </p-sidebar>

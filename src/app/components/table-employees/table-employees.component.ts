@@ -27,7 +27,10 @@ export class TableEmployeesComponent implements OnInit {
   IsMangerToEdit: boolean = false
   employee: employee = new employee();
   pass1: string = "";
-  pass2: string = ""
+  pass2: string = "";
+  pass1ForEdit: string="";
+  pass2ForEdit: string ="";
+
   employeeIsManger: boolean = false;
   employeeIsWork: boolean = false;
   employeeIsBusy: boolean = false;
@@ -99,8 +102,8 @@ export class TableEmployeesComponent implements OnInit {
     }
     else{
       this.IsMangerToEdit = false;
-      // this.pass1 ="";
-      // this.pass2 ="";
+      this.pass1ForEdit ="";
+      this.pass2ForEdit ="";
 
       // this.employeeFormToEdit.patchValue({
       //   password: "",
@@ -119,28 +122,28 @@ export class TableEmployeesComponent implements OnInit {
     if (employee.isManger) {
 
       this.IsMangerToEdit = true;
-      this.pass1 = employee.passWord;
-      this.pass2 = employee.passWord;
+      this.pass1ForEdit = employee.passWord;
+      this.pass2ForEdit = employee.passWord;
       // this.employeeFormToEdit.get('password')?.setValue('employee.passWord');
 
 
 
     }
   }
-  isButtonDisabled(): boolean {
-    if(this.IsMangerToEdit){
+  // isButtonDisabled(): boolean {
+  //   if(this.IsMangerToEdit){
 
-      if(this.pass1.length >3 &&this.pass1===this.pass2 && this.employeeFormToEdit.valid){
-        return false;
-      }
-    }
-    else {
-      if(this.employeeFormToEdit.valid){
-        return false;
-      }
-    }
-    return true;
-  }
+  //     if(this.pass1.length >3 &&this.pass1===this.pass2 && this.employeeFormToEdit.valid){
+  //       return false;
+  //     }
+  //   }
+  //   else {
+  //     if(this.employeeFormToEdit.valid){
+  //       return false;
+  //     }
+  //   }
+  //   return true;
+  // }
 
 
 
@@ -170,8 +173,8 @@ export class TableEmployeesComponent implements OnInit {
       }
       this.employeeService.editEmployee(employeeToSave).subscribe( res =>{
         this.employees = res;
-        this.pass1 ="";
-        this.pass2 ="";
+        this.pass1ForEdit ="";
+        this.pass2ForEdit ="";
 
       })
     }
