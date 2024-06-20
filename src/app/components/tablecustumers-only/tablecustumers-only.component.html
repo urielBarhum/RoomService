@@ -1,4 +1,6 @@
 <app-header-admin></app-header-admin>
+<h2 class="text-center text-success bg-warning">טבלת אורחים</h2>
+
 <div class="row">
 
     <button class="m-2 col-1" (click)="addNewOrder()">להוספת אורח חדש </button>
@@ -35,15 +37,15 @@
 
         <div class="row">
             <div class="col-6">
-
-                <label for="idCustomer">מזהה לקוח: </label>
-                <input class="form-control" required id="idCustomer" #valueInput
-                    (ngModelChange)="chackId    (valueInput.value)"
-                    [ngClass]="{'valid-input': isValid, 'invalid-input': !isValid}" 
-                    type="text"
-                    formControlName="idCustomer" />
-            </div> 
+                <label for="tzCustomer">תעודת זהות אורח:</label>
+                <input class="form-control" id="tzCustomer" type="text" formControlName="tzCustomer"
+                #valueInputTz
+                    (ngModelChange)="chacktz    (valueInputTz.value)"
+                    [ngClass]="{'valid-input': isValidtz, 'invalid-input': !isValidtz}" 
+                />
+            </div>
         </div>
+
         <div class="row">
             <div class="col-6">
 
@@ -81,11 +83,20 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <label for="tzCustomer">תעודת זהות אורח:</label>
-                <input class="form-control" id="tzCustomer" type="number" formControlName="tzCustomer" />
-            </div>
+
+                <label for="idCustomer">מזהה לקוח: </label>
+                <input class="form-control" required id="idCustomer" #valueInput
+                    (ngModelChange)="chackId    (valueInput.value)"
+                    [ngClass]="{'valid-input': isValid, 'invalid-input': !isValid}" 
+                    type="text"
+                    formControlName="idCustomer" />
+            </div> 
         </div>
 
+
+
+
+        
         <!-- <div class="row">
             <div class="col-6">
                 <label for="sumPrice">מחיר ביניים: </label>

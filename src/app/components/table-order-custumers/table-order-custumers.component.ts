@@ -23,10 +23,22 @@ export class TableOrderCustumersComponent implements OnInit {
   orderToAdd: orderHotel = new orderHotel();
   custumersAndOrdersHotels: CustumersAndOrdersHotels[] = [];
 
+
   suucses: boolean = false;
   eror: boolean = false;
   messagesSuccess: Message[] = [{ severity: 'success', summary: 'ההזמנה נוספה בהצלחה ' }]
   messagesEror: Message[] = [{ severity: 'error', summary: 'שגיאה בעת הוספת הזמנה ' }];
+
+  datesInvalid: boolean = false;
+
+  editCstumer: boolean = false;
+
+  editCustumerForOrder = new FormGroup({
+    dateFrom: new FormControl(new Date(), [Validators.required]),
+    dateTo: new FormControl(new Date(), [Validators.required]),
+    sumPrice: new FormControl(0, Validators.required),
+    roomNumber: new FormControl<number>(0, [Validators.required, Validators.minLength(3)])
+  })
 
   orderForm = new FormGroup({
     // idOrderHotel: new FormControl('', [Validators.minLength(2)]), מספר רץ
@@ -47,6 +59,34 @@ export class TableOrderCustumersComponent implements OnInit {
       console.log(this.custumersAndOrdersHotels);
 
     })
+  }
+  editOrderForCustumer(orderAndCustumer: CustumersAndOrdersHotels) {
+    console.log(orderAndCustumer);
+    this.editCstumer = true;
+
+    this.editCustumerForOrder.patchValue({
+      dateFrom: orderAndCustumer.dateFrom,
+      dateTo: orderAndCustumer.dateTo,
+      sumPrice: orderAndCustumer.sumPrice,
+      roomNumber: orderAndCustumer.roomNumber
+    });
+    console.log(this.editCustumerForOrder);
+
+  }
+  formatDate(date: Date): string {
+    return date.toISOString().substring(0, 10);
+  }
+  saveOrderToEdit() {
+    this.editCstumer = false;
+  }
+  validateDates() {
+    const obgOrder = this.orderForm.getRawValue();
+    const dateFrom = new Date(obgOrder.dateFrom!);
+    const dateTo = new Date(obgOrder.dateTo!);
+
+    if (dateFrom && dateTo) {
+      this.datesInvalid = dateFrom > dateTo;
+    }
   }
   addNewCustumer() {
     this.swNewOrder = true;
@@ -127,9 +167,7 @@ export class TableOrderCustumersComponent implements OnInit {
     }
   }
 
-  editOrderForCustumer(orderForUstumer: OrdersForCustumer) {
 
-  }
   finishOrder(custumersAndOrdersHotels: CustumersAndOrdersHotels) {
     console.log(custumersAndOrdersHotels);
     this.custumerService.UpdateStatus(custumersAndOrdersHotels).subscribe({

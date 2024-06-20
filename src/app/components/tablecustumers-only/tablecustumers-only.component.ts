@@ -18,7 +18,7 @@ export class TablecustumersOnlyComponent {
   custumerToAdd: Custumer = new Custumer();
   addOrderForCustumer: boolean = false;
   edit: boolean = false;
-  custumeresForChack : Custumer[]=[]
+  custumeresForChack: Custumer[] = []
 
   suucses: boolean = false;
   eror: boolean = false;
@@ -26,14 +26,14 @@ export class TablecustumersOnlyComponent {
   messagesEror: Message[] = [{ severity: 'error', summary: 'שגיאה בעת הוספת לקוח ' }];
 
   isValid: boolean = false;
-  
+  isValidtz: boolean = false;
   suucsesEdit: boolean = false;
   erorEdit: boolean = false;
   messagesSuccessEdit: Message[] = [{ severity: 'success', summary: 'הלקוח נערך בהצלחה ' }]
   messagesErorEdit: Message[] = [{ severity: 'error', summary: 'שגיאה בעת עריכת לקוח ' }];
 
   custumerForm = new FormGroup({
-    idCustomer: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    idCustomer: new FormControl('', [Validators.required, Validators.minLength(2)]),
     firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
     lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
     city: new FormControl('', [Validators.required, Validators.minLength(2)]),
@@ -43,7 +43,7 @@ export class TablecustumersOnlyComponent {
   });
 
   custumerFormToEdit = new FormGroup({
-    idCustomer: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    // idCustomer: new FormControl('', [Validators.required, Validators.minLength(4)]),
     firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
     lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
     city: new FormControl('', [Validators.required, Validators.minLength(2)]),
@@ -93,7 +93,30 @@ export class TablecustumersOnlyComponent {
     )
 
   }
+  chacktz(tzCustomer: any) {
+    if (tzCustomer == "" || tzCustomer == null) {
+      this.isValidtz = false;
 
+    }
+    else {
+
+      this.custumerService.getCusrumers().subscribe(res => {
+        this.custumeresForChack = res
+        console.log(this.custumeresForChack);
+        const exsit = this.custumeresForChack.find(p => p.tzCustomer == tzCustomer)
+        if (exsit) {
+          console.log("מזהה קיים");
+          this.isValidtz = false;
+        }
+        else {
+          console.log("מזהה לא קיים");
+          this.isValidtz = true;
+
+        }
+      }
+      )
+    }
+  }
 
 
 
@@ -146,7 +169,7 @@ export class TablecustumersOnlyComponent {
     if (this.custumerFormToEdit.valid) {
       const objCustumer = this.custumerFormToEdit.getRawValue();
       const custumerToEdit = new Custumer();
-      custumerToEdit.idCustomer = objCustumer.idCustomer!
+      // custumerToEdit.idCustomer = objCustumer.idCustomer!
       custumerToEdit.tzCustomer = objCustumer.tzCustomer!
       custumerToEdit.firstName = objCustumer.firstName!
       custumerToEdit.lastName = objCustumer.lastName!

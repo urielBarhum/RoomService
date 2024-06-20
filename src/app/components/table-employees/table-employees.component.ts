@@ -38,7 +38,7 @@ export class TableEmployeesComponent implements OnInit {
 
   employeeForm = new FormGroup({
     tzEmployee: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    idHotel: new FormControl(0, [Validators.required, Validators.min(1)]),
+    idHotel: new FormControl(0),
     firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
     lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
     isWorkNow: new FormControl(false),
@@ -52,7 +52,7 @@ export class TableEmployeesComponent implements OnInit {
   employeeFormToEdit = new FormGroup({
 
     tzEmployee: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    idHotel: new FormControl(0, [Validators.required, Validators.min(1)]),
+    idHotel: new FormControl(0),
     firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
     lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
     isWorkNow: new FormControl(false),
@@ -126,25 +126,9 @@ export class TableEmployeesComponent implements OnInit {
       this.pass2ForEdit = employee.passWord;
       // this.employeeFormToEdit.get('password')?.setValue('employee.passWord');
 
-
-
     }
   }
-  // isButtonDisabled(): boolean {
-  //   if(this.IsMangerToEdit){
-
-  //     if(this.pass1.length >3 &&this.pass1===this.pass2 && this.employeeFormToEdit.valid){
-  //       return false;
-  //     }
-  //   }
-  //   else {
-  //     if(this.employeeFormToEdit.valid){
-  //       return false;
-  //     }
-  //   }
-  //   return true;
-  // }
-
+ 
 
 
   saveChanges() {
@@ -154,7 +138,9 @@ export class TableEmployeesComponent implements OnInit {
       const objEmployee = this.employeeFormToEdit.getRawValue()
       const employeeToSave = new employee();
       
-      employeeToSave.idHotel = objEmployee.idHotel!
+      // employeeToSave.idHotel = objEmployee.idHotel!
+      employeeToSave.idHotel = 1
+
       employeeToSave.firstName = objEmployee.firstName!
       employeeToSave.lastName = objEmployee.lastName!
       employeeToSave.isWorkNow = objEmployee.isWorkNow!
@@ -211,7 +197,8 @@ export class TableEmployeesComponent implements OnInit {
       const objemployee = this.employeeForm.getRawValue()
       const EmployeeToAdd = new employee();
 
-      EmployeeToAdd.idHotel = objemployee.idHotel!;
+      // EmployeeToAdd.idHotel = objemployee.idHotel!;
+      EmployeeToAdd.idHotel = 1
       EmployeeToAdd.firstName = objemployee.firstName!;
       EmployeeToAdd.lastName = objemployee.lastName!;
       EmployeeToAdd.fullName = EmployeeToAdd.firstName + " " + EmployeeToAdd.lastName;
@@ -253,8 +240,12 @@ export class TableEmployeesComponent implements OnInit {
             this.successSaveEmployee = false;
 
           }, 5000);
+        },
+        error => {
+          console.error('Error saving employee:');
+        
         }
-      )
+      );
     }
   }
 }

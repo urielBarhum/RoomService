@@ -12,6 +12,64 @@
 </div>
 
 
+
+
+
+<!-- עריכת הזמנה -->
+<p-sidebar [(visible)]="editCstumer" position="left">
+
+
+    <h3>עריכת הזמנה ללקוח קיים</h3>
+    <form [formGroup]="editCustumerForOrder" (ngSubmit)="saveOrderToEdit()">
+
+        <div class="row">
+            <div class="col-6">
+                <label for="dateFrom">מתאריך:</label>
+                <input class="form-control" id="dateFrom" type="date" formControlName="dateFrom"  (change)="validateDates()" />
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-6">
+                <label for="dateTo">עד תאריך:</label>
+                <input class="form-control" id="dateTo" type="date" formControlName="dateTo" (change)="validateDates()" />
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-6">
+                <label for="roomNumber">מספר חדר: </label>
+                <input class="form-control" id="roomNumber" type="number" formControlName="roomNumber" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label for="sumPrice">מחיר: </label>
+                <input class="form-control" id="sumPrice" type="number" formControlName="sumPrice" />
+            </div>
+        </div>
+
+
+
+
+        <input class="btn btn-primary" type="submit" value="לחץ להוספת הזמנה" [disabled]="!editCustumerForOrder.valid">
+    </form>
+
+
+
+</p-sidebar>
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- הוספת הזמנה -->
 <p-sidebar [(visible)]="addCustumerForOrder" position="left">
 
@@ -19,13 +77,13 @@
     <h3>הוספת הזמנה ללקוח קיים</h3>
     <form [formGroup]="orderForm" (ngSubmit)="saveOrderChanges()">
 
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-6">
 
                 <label for="idHotel">מספר מלון: </label>
                 <input class="form-control" id="idHotel" type="number" formControlName="idHotel" />
             </div>
-        </div>
+        </div> -->
 
         <div class="row">
             <div class="col-6">
@@ -46,16 +104,21 @@
         <div class="row">
             <div class="col-6">
                 <label for="dateFrom">מתאריך:</label>
-                <input class="form-control" id="dateFrom" type="date" formControlName="dateFrom" />
+                <input class="form-control" id="dateFrom" type="date" formControlName="dateFrom" (change)="validateDates()" />
             </div>
         </div>
-
+        
         <div class="row">
             <div class="col-6">
-                <label for="dateTo">עד תאריך: </label>
-                <input class="form-control" id="dateTo" type="date" formControlName="dateTo" />
+                <label for="dateTo">עד תאריך:</label>
+                <input class="form-control" id="dateTo" type="date" formControlName="dateTo" (change)="validateDates()" />
             </div>
         </div>
+        
+        <div *ngIf="datesInvalid" class="text-danger">
+            תאריך התחלה לא יכול להיות קטן מתאריך סיום
+        </div>
+        
 
         <!-- <div class="row">
             <div class="col-6">
@@ -66,7 +129,7 @@
         <div class="row">
             <div class="col-6">
                 <label for="roomNumber">מספר חדר: </label>
-                <input class="form-control" id="roomNumber" type="text" formControlName="roomNumber" />
+                <input class="form-control" id="roomNumber" type="number" formControlName="roomNumber" />
             </div>
         </div>
 
