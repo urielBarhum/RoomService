@@ -12,13 +12,13 @@ import { EmployeeService } from 'src/app/services/employee.service';
   styleUrls: ['./table-employees.component.scss']
 })
 export class TableEmployeesComponent implements OnInit {
-  erorSaveMaseeg: Message[] = [{ severity: 'error', summary: 'שגיאה בעת הוספת המוצר לחנות ' }];
+  successeditMaseeg: Message[] = [{ severity: 'success', summary: 'העובד נערך בהצלחה ' }];
   successSaveMaseeg: Message[] = [{ severity: 'success', summary: 'העובד נוסף בהצלחה לרשימת העובדים ' }];
   erorEditMaseeg: Message[] = [{ severity: 'error', summary: 'שגיאה בעת עריכת המוצר ' }];
-  successEditMaseeg: Message[] = [{ severity: 'success', summary: 'המוצר נערך מחדש בהצלחה ' }];
+  successDeletEmployee: Message[] = [{ severity: 'success', summary: 'העובד נמחק בהצלחה ' }];
 
-  erorAddEmployee: boolean = false;
-  erorEditEmployee: boolean = false;
+  successDelete: boolean = false;
+  successedit: boolean = false;
   successEditEmployee: boolean = false;
   successSaveEmployee: boolean = false;
   edit: boolean = false;
@@ -37,7 +37,7 @@ export class TableEmployeesComponent implements OnInit {
   checkIsMangerAndPassword :boolean = false;
 
   employeeForm = new FormGroup({
-    tzEmployee: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    tzEmployee: new FormControl('', [Validators.required, Validators.minLength(1)]),
     idHotel: new FormControl(0),
     firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
     lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
@@ -51,7 +51,7 @@ export class TableEmployeesComponent implements OnInit {
 
   employeeFormToEdit = new FormGroup({
 
-    tzEmployee: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    tzEmployee: new FormControl('', [Validators.required, Validators.minLength(1)]),
     idHotel: new FormControl(0),
     firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
     lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
@@ -161,7 +161,10 @@ export class TableEmployeesComponent implements OnInit {
         this.employees = res;
         this.pass1ForEdit ="";
         this.pass2ForEdit ="";
-
+        this.successEditEmployee = true;
+        setTimeout(() => {
+          this.successEditEmployee = false;
+        }, 5000);
       })
     }
 
@@ -173,6 +176,11 @@ export class TableEmployeesComponent implements OnInit {
     this.employeeService.deleteEmployee(employeeID).subscribe(
       res => {
         this.employees = res
+        this.successDelete =true;
+        setTimeout(() => {
+          this.successDelete = false;
+
+        }, 5000);
       }
     )
   }

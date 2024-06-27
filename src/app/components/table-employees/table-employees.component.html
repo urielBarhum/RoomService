@@ -3,6 +3,14 @@
 
   <app-messages-component [messages]="successSaveMaseeg"></app-messages-component>
 </div>
+<div *ngIf="successDelete" class="popo">
+
+  <app-messages-component [messages]="successDeletEmployee"></app-messages-component>
+</div>
+<div *ngIf="successEditEmployee" class="popo">
+
+  <app-messages-component [messages]="successeditMaseeg"></app-messages-component>
+</div>
 <button (click)="openForm()">לחץ כאן להוספת עובד</button>
 
 

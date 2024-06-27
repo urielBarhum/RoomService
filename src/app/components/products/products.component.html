@@ -1,7 +1,7 @@
 <app-header-user></app-header-user>
 <h2 class="text-center">מה תרצה להזמין לחדר שלך?</h2>
 
-<button [disabled]="priceForAll == 0" (click)="sendToCart()">לחץ לאישור הזמנה</button>
+<button *ngIf="moneProduct > 0" (click)="sendToCart()">לחץ לאישור הזמנה</button>
 <div *ngIf="suucses">
    <p-messages [value]="messages" [enableService]="false" [closable]="false"></p-messages>
 </div>

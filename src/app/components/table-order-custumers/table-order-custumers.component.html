@@ -12,7 +12,11 @@
 </div>
 
 
+<div class="row m-1">
 
+    <label for="search-input">חיפוש לפי תעודת זהות</label>
+    <input class="search-input" type="text" [(ngModel)]="searchText" (keyup)="applyFilter()">
+</div>
 
 
 <!-- עריכת הזמנה -->
@@ -58,17 +62,6 @@
 
 
 </p-sidebar>
-
-
-
-
-
-
-
-
-
-
-
 
 <!-- הוספת הזמנה -->
 <p-sidebar [(visible)]="addCustumerForOrder" position="left">
@@ -151,8 +144,11 @@
                 <p-sortIcon [field]="'fullName'"></p-sortIcon>
             </th>
 
-            <th class="text-center" pSortableColumn="tzCustomer" style="width:10%">מזהה לקוח להזמנות 
+            <th class="text-center" pSortableColumn="tzCustomer" style="width:10%">תעודת זהות 
                 <p-sortIcon [field]="'tzCustomer'"></p-sortIcon>
+            </th>
+            <th class="text-center" pSortableColumn="idCustomer" style="width:10%">מזהה לקוח להזמנות 
+                <p-sortIcon [field]="'idCustomer'"></p-sortIcon>
             </th>
             <th class="text-center" pSortableColumn="roomNumber" style="width:8%">מספר חדר
                 <p-sortIcon [field]="'roomNumber'"></p-sortIcon>
@@ -192,6 +188,8 @@
         <tr class="deteles">
             <td class="text-center">{{ custumersAndOrdersHotels.fullName}}</td>
             <td class="text-center">{{ custumersAndOrdersHotels.tzCustomer }}</td>
+            <td class="text-center">{{ custumersAndOrdersHotels.idCustomer }}</td>
+
             <td class="text-center">{{ custumersAndOrdersHotels.roomNumber}}</td>
 
             <td class="text-center">{{ custumersAndOrdersHotels.idOrderHotel }}</td>
@@ -210,7 +208,8 @@
                 </button>
             </td> -->
             <td class="text-center">
-                <button (click)="editOrderForCustumer(custumersAndOrdersHotels)">
+                <button [disabled]="custumersAndOrdersHotels.active == false" 
+                (click)="editOrderForCustumer(custumersAndOrdersHotels)">
                   <i class="fa-solid fa-pen-to-square"></i>
                 </button>
               </td>

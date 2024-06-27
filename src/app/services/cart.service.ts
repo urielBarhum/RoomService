@@ -3,6 +3,7 @@ import { cart } from '../models/cart';
 import { Product } from '../models/product';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,17 @@ export class CartService {
  public myCart: cart[] = [];
   priceForAll: number = 0;
   idOrderHotel:number =0;
+  private moneSubject = new BehaviorSubject<number>(0);
+  mone$ = this.moneSubject.asObservable();
+
+  get mone(): number {
+    return this.moneSubject.value;
+  }
+
+  set mone(value: number) {
+    this.moneSubject.next(value);
+  }
+
   constructor(private http: HttpClient, private router: Router) { }
   addToCart(product: Product) {
     const exsiteProduct = this.myCart.find(item => item.productID == product.idProduct)
@@ -28,6 +40,7 @@ export class CartService {
       this.myCart.push(comper);
       this.priceForAll += product.priceProduct;
     }
+    this.mone = this.mone + 1;
     console.log(this.myCart);
     console.log(this.priceForAll);
 
@@ -45,6 +58,7 @@ export class CartService {
         this.myCart.splice(index, 1)
       }
     }
+    this.mone = this.mone - 1;
     console.log(this.myCart);
     console.log(this.priceForAll);
 
@@ -52,10 +66,10 @@ export class CartService {
   }
   sendToServer(): void {
     let token = sessionStorage.getItem('token');
-    
     let options = { headers: { "Authorization": token ?? "" } };
     this.http.post('https://localhost:44382/api/OrderRoomService/AddOrderRoomService', this.myCart, options).subscribe(s => {
       console.log(s)
+      this.mone = 0;
 
       this.myCart = []
       this.priceForAll = 0;

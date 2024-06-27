@@ -92,6 +92,14 @@ export class TableProductComponent implements OnInit {
       this.productService.addProduct(productToAdd)
         .pipe(
           tap(() => {
+            this.productForm.reset({
+              nameProduct: '',
+              descriptionProduct: '',
+              manufacturer: '',
+              qty: 0,
+              priceProduct: 0,
+              productImage: '',
+            });
             this.successSaveProduct = true;
             setTimeout(() => {
               this.successSaveProduct = false;

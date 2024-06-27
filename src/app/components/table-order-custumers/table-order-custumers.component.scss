@@ -53,4 +53,17 @@ tr{
   .beautiful-button:hover {
     background-color: #45a049; /* Darker Green */
   }
+  .search-input {
+    width: 200px;
+    height: 40px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+  }
   
+  .search-input:focus {
+    border-color: dodgerblue;
+  }

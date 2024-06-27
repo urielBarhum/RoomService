@@ -32,6 +32,7 @@ export class TableOrderCustumersComponent implements OnInit {
   datesInvalid: boolean = false;
 
   editCstumer: boolean = false;
+  searchText: string = '';
 
   editCustumerForOrder = new FormGroup({
     dateFrom: new FormControl(new Date(), [Validators.required]),
@@ -60,6 +61,14 @@ export class TableOrderCustumersComponent implements OnInit {
 
     })
   }
+    
+    applyFilter(): void {
+      this.custumerService.getCustumersAndOrdersHotels().subscribe(res => {
+        this.custumersAndOrdersHotels = res.filter(custumer =>
+          custumer.tzCustomer.includes(this.searchText)
+        )
+      })
+    }
   editOrderForCustumer(orderAndCustumer: CustumersAndOrdersHotels) {
     console.log(orderAndCustumer);
     this.editCstumer = true;
