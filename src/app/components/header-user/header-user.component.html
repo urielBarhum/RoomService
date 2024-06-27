@@ -1,16 +1,14 @@
-<div class="col-12 text-center user-header dHeader"> 
-    <div class="row">
-        <div class="col-1">
+<div class="col-12 text-center user-header dHeader">
+    <div class="row " style="position: relative; ">
+        <div class="ButtonsNav">
             <button (click)="homeUser()">
                 <i class="fa-solid fa-house"></i>
             </button>
-
             <button (click)="LogOutUser()">
                 <i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i>
             </button>
-
         </div>
-        <h1 >שלום וברכה {{userToknOrder.firstName}} {{userToknOrder.lastName}} מספר החדר שלך הוא: {{userToknOrder.roomNumber}}</h1>
-        
     </div>
+    <h1>שלום וברכה {{userToknOrder.firstName}} {{userToknOrder.lastName}} מספר החדר שלך הוא:
+        {{userToknOrder.roomNumber}}</h1>
 </div>

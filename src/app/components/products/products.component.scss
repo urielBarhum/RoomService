@@ -1,0 +1,9 @@
+.productsWrapper{
+    max-width: 1300px;
+    margin: 0 auto;
+}
+.productsGrid{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}

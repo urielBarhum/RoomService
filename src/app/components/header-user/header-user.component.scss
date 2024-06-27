@@ -8,7 +8,15 @@
 //     font-size: 20px; /* גודל גופן */
 //     font-weight: bold; /* מודגש */
 //   }
-
+.ButtonsNav{
+  width: 100%;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  left: 5px;
+  display: flex;
+  justify-content: start;
+}
 .dHeader {
   background-color: #007bff;
   color: white;
