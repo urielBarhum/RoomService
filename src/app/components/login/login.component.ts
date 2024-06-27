@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Message } from 'primeng/api';
 import { AuthRequest } from 'src/app/models/authRequest';
 import { AuthService } from 'src/app/services/auth.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,7 @@ export class LoginComponent {
   succsesMesseg: string = "הנך מועבר לאתר"
 
 
-  constructor(private http: HttpClient, private router: Router, private auteService: AuthService) {
+  constructor(private http: HttpClient, private router: Router, private auteService: AuthService ,private CartService:CartService) {
 
   }
 
@@ -40,10 +41,12 @@ export class LoginComponent {
 
     this.auteService.logIn(this.authRequest).subscribe(
       data => {
+        debugger
         this.auteService.userTokenOrder = data
         this.auteService.UserInside = true;
-        this.auteService.custumerIdForGetOrder.CustumerId = data.idCustomer
-
+        this.auteService.custumerIdForGetOrder.CustumerId = data.idCustomer;
+        this.auteService.custumerIdForGetOrder.OrderHotelId= data.idOrderHotel
+        this.CartService.idOrderHotel= data.idOrderHotel
         sessionStorage.setItem("token", data.token);
         this.wrngMesseg = ""
         console.log(this.auteService.userTokenOrder);

@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class CartService {
  public myCart: cart[] = [];
   priceForAll: number = 0;
+  idOrderHotel:number =0;
   constructor(private http: HttpClient, private router: Router) { }
   addToCart(product: Product) {
     const exsiteProduct = this.myCart.find(item => item.productID == product.idProduct)
@@ -23,6 +24,7 @@ export class CartService {
       comper.productID = product.idProduct
       comper.qtyProduct = 1
       comper.priceForAll = product.priceProduct
+      comper.idOrderHotel= this.idOrderHotel
       this.myCart.push(comper);
       this.priceForAll += product.priceProduct;
     }
@@ -50,6 +52,7 @@ export class CartService {
   }
   sendToServer(): void {
     let token = sessionStorage.getItem('token');
+    
     let options = { headers: { "Authorization": token ?? "" } };
     this.http.post('https://localhost:44382/api/OrderRoomService/AddOrderRoomService', this.myCart, options).subscribe(s => {
       console.log(s)

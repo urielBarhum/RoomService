@@ -133,8 +133,9 @@ export class TableOrderCustumersComponent implements OnInit {
       this.orderToAdd.idCustomer = obgOrder.idCustomer!
       this.orderToAdd.dateFrom = new Date(Date.parse(obgOrder.dateFrom!));
       this.orderToAdd.dateTo = new Date(Date.parse(obgOrder.dateTo!));
-      this.orderToAdd.idHotel = obgOrder.idHotel!
+      this.orderToAdd.idHotel = 1 //obgOrder.idHotel!
       this.orderToAdd.roomNumber = obgOrder.roomNumber!
+      
       console.log(this.orderToAdd);
       // מכאן להוסיף בקשת שרת
       this.ordersHotelService.addOrderHotel(this.orderToAdd).subscribe(

@@ -26,6 +26,7 @@ export class HeaderUserComponent implements OnInit {
     this.authService.UserInside = false;
     this.authService.userTokenOrder = Object.create(null);
     this.authService.custumerIdForGetOrder.CustumerId = ""
+    this.authService.custumerIdForGetOrder.OrderHotelId =0 
     console.log(this.authService.userTokenOrder);
     // /לשנות כאן 
     // this.router.navigateByUrl('mainForAll')

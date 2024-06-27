@@ -3,7 +3,7 @@ export class AuthRequest {
     roomNumber!: number;
 }
 export class UserToknOrder {
-    iDOrderHotel!: number;
+    idOrderHotel!: number;
     iDHotel!: number;
     idCustomer!: string;
     firstName!: string;

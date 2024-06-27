@@ -1,6 +1,7 @@
 export class cart{
     productID !: number;
     qtyProduct!: number;
-    priceForAll !:number    
+    priceForAll !:number  ;  
+    idOrderHotel!:number;
     
 }
