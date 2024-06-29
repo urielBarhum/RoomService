@@ -1,1 +1,26 @@
 <app-header-admin></app-header-admin>
+<!-- orders/orders.component.html -->
+<div class="container mt-4">
+    <h2>הזמנות אורחים</h2>
+    <div class="row" *ngFor="let order of orders">
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <img [src]="order.ProductImage" class="card-img-top" alt="{{order.NameProduct}}">
+          <div class="card-body">
+            <h5 class="card-title">{{order.NameProduct}}</h5>
+            <p class="card-text">
+              <strong>שם פרטי:</strong> {{order.FirstName}}<br>
+              <strong>שם משפחה:</strong> {{order.LastName}}<br>
+              <strong>תעודת זהות:</strong> {{order.TzCustomer}}<br>
+              <strong>מספר חדר:</strong> {{order.RoomNumber}}<br>
+              <strong>כמות:</strong> {{order.QtyProduct}}<br>
+              <strong>סטטוס:</strong> {{order.StatusID}}<br>
+            </p>
+            <button *ngIf="order.StatusID === 1" class="btn btn-primary" (click)="updateStatus(order, 2)">הזמנה בדרך</button>
+            <button *ngIf="order.StatusID === 2" class="btn btn-success" (click)="updateStatus(order, 3)">הזמנה סופקה</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

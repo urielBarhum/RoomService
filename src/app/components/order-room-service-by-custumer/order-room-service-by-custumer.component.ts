@@ -24,17 +24,53 @@ export class OrderRoomServiceByCustumerComponent implements OnInit {
     //   this.router.navigateByUrl('mainForAll')
     // }
   }
+
   ngOnInit(): void {
-    this.orderRoomService.getOrderRoomServiceByCustumer().subscribe(res => {
-      this.ordersForCustumer = res;
-     for (let index = 0; index < this.ordersForCustumer.length; index++) {
-      this.priceForAll += this.ordersForCustumer[index].priceForAll;
-     
-     }
-    })
+    debugger;
+    // בדוק אם יש טוקן בסשן סטורג'
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      // אם אין טוקן, נווט חזרה לדף ההתחברות
+      this.router.navigateByUrl('login');
+      return;
+    }
 
-
+    this.orderRoomService.getOrderRoomServiceByCustumer().subscribe({
+      next: (res) => {
+        this.ordersForCustumer = res;
+        this.priceForAll = this.ordersForCustumer.reduce((sum, order) => sum + order.priceForAll, 0);
+      },
+      error: (err) => {
+        console.error('Error fetching orders:', err);
+        if (err.status === 401) {
+          // אם יש שגיאת אימות, נווט חזרה לדף ההתחברות
+          this.router.navigateByUrl('login');
+        }
+      }
+    });
   }
+
+  // ngOnInit(): void {
+
+    
+  //   this.orderRoomService.getOrderRoomServiceByCustumer().subscribe(res => {
+  //     this.ordersForCustumer = res;
+  //    for (let index = 0; index < this.ordersForCustumer.length; index++) {
+  //     this.priceForAll += this.ordersForCustumer[index].priceForAll;
+     
+  //    }
+  //   })
+
+
+  // }
+
+
+
+
+
+
+
+
   goToMarket() {
     this.router.navigateByUrl("market")
   }

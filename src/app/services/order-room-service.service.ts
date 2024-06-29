@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { orderRoomService } from '../models/orderRoomService';
@@ -10,25 +10,42 @@ import { OrdersForCustumer } from '../models/ordersForCustumer';
   providedIn: 'root'
 })
 export class OrderRoomServiceService {
+  private baseUrl = 'https://localhost:44382/api/OrderRoomService';
 
-  constructor(private http: HttpClient, private router: Router, private authService: AuthService) {
+  constructor(
+    private http: HttpClient, 
+    private router: Router, 
+    private authService: AuthService
+  ) {}
 
+  private getHeaders(): HttpHeaders {
+    const token = sessionStorage.getItem('token');
+    return new HttpHeaders().set('Authorization', `${token}`);
   }
 
-  token: string = ""
   getOrdersRoomServices(): Observable<orderRoomService[]> {
-    return this.http.get<orderRoomService[]>('https://localhost:44382/api/OrderRoomService/GetOrderRoomService')
-  }
-  addOrderRoomService(productID: number): Observable<string> {
-    return this.http.post                    ('https://localhost:44382/api/OrderRoomService/AddOrderRoomService', productID, { responseType: "text" })
+    return this.http.get<orderRoomService[]>(`${this.baseUrl}/GetOrderRoomService`, { headers: this.getHeaders() });
   }
 
-  getOrderRoomServiceByCustumer() :Observable <OrdersForCustumer[]>{
-    return this.http.post<OrdersForCustumer[]>('https://localhost:44382/api/OrderRoomService/getOrderRoomServiceByCustumer',this.authService.custumerIdForGetOrder)
+  addOrderRoomService(productID: number): Observable<string> {
+    return this.http.post(`${this.baseUrl}/AddOrderRoomService`, productID, { 
+      headers: this.getHeaders(),
+      responseType: "text" 
+    });
+  }
+
+  getOrderRoomServiceByCustumer(): Observable<OrdersForCustumer[]> {
+    return this.http.post<OrdersForCustumer[]>(
+      `${this.baseUrl}/getOrderRoomServiceByCustumer`,this.authService.custumerIdForGetOrder,
+      { headers: this.getHeaders() }
+    );
   }
   
-ishurKabala(Orderid :number){
-  return this.http.post<boolean> ('https://localhost:44382/api/OrderRoomService/updateStatusById',Orderid)
-}
- 
+  ishurKabala(Orderid: number): Observable<boolean> {
+    return this.http.post<boolean>(
+      `${this.baseUrl}/updateStatusById`,
+      Orderid,
+      { headers: this.getHeaders() }
+    );
+  }
 }
