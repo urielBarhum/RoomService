@@ -34,6 +34,7 @@ import { MessagesComponentComponent } from './components/messages-component/mess
 import { HeaderUserComponent } from './components/header-user/header-user.component';
 import { TableOrderRoomServiceComponent } from './components/table-order-room-service/table-order-room-service.component';
 import { TablecustumersOnlyComponent } from './components/tablecustumers-only/tablecustumers-only.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,9 @@ import { TablecustumersOnlyComponent } from './components/tablecustumers-only/ta
     PasswordModule
    
   ],
-  providers: [],
+  providers: [
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

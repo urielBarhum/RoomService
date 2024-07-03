@@ -1,13 +1,16 @@
+import { DatePipe, formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { Message } from 'primeng/api';
 import { Custumer } from 'src/app/models/custumer';
 import { CustumersAndOrdersHotels } from 'src/app/models/custumersAndOrdersHotels';
+import { editOrder } from 'src/app/models/editOrder';
 import { orderHotel } from 'src/app/models/orderHotel';
 import { OrdersForCustumer } from 'src/app/models/ordersForCustumer';
 import { CustumerService } from 'src/app/services/custumer.service';
 import { OrderHotelService } from 'src/app/services/order-hotel.service';
+// import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-table-custumers',
@@ -23,7 +26,7 @@ export class TableOrderCustumersComponent implements OnInit {
   orderToAdd: orderHotel = new orderHotel();
   custumersAndOrdersHotels: CustumersAndOrdersHotels[] = [];
 
-
+  orderToChange:editOrder = new editOrder();
   suucses: boolean = false;
   eror: boolean = false;
   messagesSuccess: Message[] = [{ severity: 'success', summary: 'ההזמנה נוספה בהצלחה ' }]
@@ -35,25 +38,26 @@ export class TableOrderCustumersComponent implements OnInit {
   searchText: string = '';
 
   editCustumerForOrder = new FormGroup({
-    dateFrom: new FormControl(new Date(), [Validators.required]),
-    dateTo: new FormControl(new Date(), [Validators.required]),
+    idOrderHotel: new FormControl<number>(0),
+    dateFrom: new FormControl<string | null>(null, [Validators.required]),
+    dateTo: new FormControl<string | null>(null, [Validators.required]),
     sumPrice: new FormControl(0, Validators.required),
     roomNumber: new FormControl<number>(0, [Validators.required, Validators.minLength(3)])
-  })
+  });
 
   orderForm = new FormGroup({
     // idOrderHotel: new FormControl('', [Validators.minLength(2)]), מספר רץ
     idHotel: new FormControl(1),
     idCustomer: new FormControl('', [Validators.required, Validators.minLength(1)]),
-    dateFrom: new FormControl('', [Validators.required]),
-    dateTo: new FormControl('', [Validators.required]),
+    dateFrom: new FormControl(formatDate(new Date(), "dd-MM-yyyy", "en"),[Validators.required]),
+    dateTo: new FormControl(formatDate(new Date(), "dd-MM-yyyy", "en"),[Validators.required]),
     // sumPrice: new FormControl(''),
     roomNumber: new FormControl<number>(0, [Validators.required, Validators.minLength(3)]),
 
   })
   submitted = false;
   isValid: boolean = false;
-  constructor(private router: Router, private custumerService: CustumerService, private ordersHotelService: OrderHotelService, private formBuilder: FormBuilder) { }
+  constructor(private datePipe: DatePipe,private router: Router, private custumerService: CustumerService, private ordersHotelService: OrderHotelService, private formBuilder: FormBuilder) { }
   ngOnInit(): void {
     this.custumerService.getCustumersAndOrdersHotels().subscribe(res => {
       this.custumersAndOrdersHotels = res;
@@ -69,24 +73,40 @@ export class TableOrderCustumersComponent implements OnInit {
         )
       })
     }
-  editOrderForCustumer(orderAndCustumer: CustumersAndOrdersHotels) {
-    console.log(orderAndCustumer);
-    this.editCstumer = true;
-
-    this.editCustumerForOrder.patchValue({
-      dateFrom: orderAndCustumer.dateFrom,
-      dateTo: orderAndCustumer.dateTo,
-      sumPrice: orderAndCustumer.sumPrice,
-      roomNumber: orderAndCustumer.roomNumber
-    });
-    console.log(this.editCustumerForOrder);
-
-  }
+    editOrderForCustumer(orderAndCustumer: CustumersAndOrdersHotels) {
+      console.log(orderAndCustumer);
+      this.editCstumer = true;
+      const orderAndRoomServiceEdit: CustumersAndOrdersHotels = orderAndCustumer;
+  
+      const dateFromStr = this.datePipe.transform(orderAndRoomServiceEdit.dateFrom, 'yyyy-MM-dd');
+      const dateToStr = this.datePipe.transform(orderAndRoomServiceEdit.dateTo, 'yyyy-MM-dd');
+  
+      this.editCustumerForOrder.patchValue({
+        idOrderHotel: orderAndRoomServiceEdit.idOrderHotel,
+        dateFrom: dateFromStr,
+        dateTo: dateToStr,
+        sumPrice: orderAndRoomServiceEdit.sumPrice,
+        roomNumber: orderAndRoomServiceEdit.roomNumber
+      });
+      console.log(this.editCustumerForOrder);
+    }
+    
   formatDate(date: Date): string {
     return date.toISOString().substring(0, 10);
   }
   saveOrderToEdit() {
+    console.log("צריך לממש");
     this.editCstumer = false;
+    const orderTochange =  this.editCustumerForOrder.getRawValue();
+    console.log(orderTochange);
+    
+    this.orderToChange.dateFrom =new Date(orderTochange.dateFrom!)
+    this.orderToChange.dateTo =new Date(orderTochange.dateTo!)
+    this.orderToChange.idOrderHotel =orderTochange.idOrderHotel!
+    this.orderToChange.roomNumber =orderTochange.roomNumber!
+console.log(this.orderToChange);
+
+    
   }
   validateDates() {
     const obgOrder = this.orderForm.getRawValue();

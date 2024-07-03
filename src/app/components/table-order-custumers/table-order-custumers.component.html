@@ -21,46 +21,34 @@
 
 <!-- עריכת הזמנה -->
 <p-sidebar [(visible)]="editCstumer" position="left">
-
-
     <h3>עריכת הזמנה ללקוח קיים</h3>
     <form [formGroup]="editCustumerForOrder" (ngSubmit)="saveOrderToEdit()">
-
         <div class="row">
             <div class="col-6">
                 <label for="dateFrom">מתאריך:</label>
-                <input class="form-control" id="dateFrom" type="date" formControlName="dateFrom"  (change)="validateDates()" />
+                <input class="form-control" id="dateFrom" type="date" formControlName="dateFrom" />
             </div>
         </div>
-        
         <div class="row">
             <div class="col-6">
                 <label for="dateTo">עד תאריך:</label>
-                <input class="form-control" id="dateTo" type="date" formControlName="dateTo" (change)="validateDates()" />
+                <input class="form-control" id="dateTo" type="date" formControlName="dateTo" />
             </div>
         </div>
-        
         <div class="row">
             <div class="col-6">
-                <label for="roomNumber">מספר חדר: </label>
+                <label for="roomNumber">מספר חדר:</label>
                 <input class="form-control" id="roomNumber" type="number" formControlName="roomNumber" />
             </div>
         </div>
         <div class="row">
             <div class="col-6">
-                <label for="sumPrice">מחיר: </label>
+                <label for="sumPrice">מחיר:</label>
                 <input class="form-control" id="sumPrice" type="number" formControlName="sumPrice" />
             </div>
         </div>
-
-
-
-
         <input class="btn btn-primary" type="submit" value="לחץ להוספת הזמנה" [disabled]="!editCustumerForOrder.valid">
     </form>
-
-
-
 </p-sidebar>
 
 <!-- הוספת הזמנה -->
