@@ -1,5 +1,6 @@
 <app-header-admin class="mb-2"></app-header-admin>
 <h1 class="card text-center text-warning m-2 bg-primary">טבלת ניהול הזמנות אורחים </h1>
+<h4> המחיר ללילה הוא </h4>
 <!-- <button class="m-2 col-1" (click)="addNewCustumer()">לחץ כאן להוספת הזמנה חדשה ללקוח קיים</button> -->
 <button class="beautiful-button" (click)="addNewCustumer()"> להוספת הזמנה חדשה </button>
 
@@ -10,6 +11,19 @@
 <div *ngIf="eror">
     <p-messages [value]="messagesEror" [enableService]="false" [closable]="false"></p-messages>
 </div>
+
+
+
+<div *ngIf="suucsesEdit">
+    <p-messages [value]="messagesSuccessEdit" [enableService]="false" [closable]="false"></p-messages>
+</div>
+
+<div *ngIf="erorEdit">
+    <p-messages [value]="messagesErorEdit" [enableService]="false" [closable]="false"></p-messages>
+</div>
+
+
+
 
 
 <div class="row m-1">

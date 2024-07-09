@@ -26,11 +26,19 @@ export class TableOrderCustumersComponent implements OnInit {
   orderToAdd: orderHotel = new orderHotel();
   custumersAndOrdersHotels: CustumersAndOrdersHotels[] = [];
 
-  orderToChange:editOrder = new editOrder();
+  orderToEdit: editOrder = new editOrder();
+
   suucses: boolean = false;
   eror: boolean = false;
   messagesSuccess: Message[] = [{ severity: 'success', summary: 'ההזמנה נוספה בהצלחה ' }]
-  messagesEror: Message[] = [{ severity: 'error', summary: 'שגיאה בעת הוספת הזמנה ' }];
+  messagesEror: Message[] = []
+
+  meseegeErorFromEdit: string = "";
+
+  suucsesEdit: boolean = false;
+  erorEdit: boolean = false;
+  messagesSuccessEdit: Message[] = [{ severity: 'success', summary: 'ההזמנה נערכה בהצלחה ' }]
+  messagesErorEdit: Message[] = [{ severity: 'error', summary:this.meseegeErorFromEdit }];
 
   datesInvalid: boolean = false;
 
@@ -49,15 +57,17 @@ export class TableOrderCustumersComponent implements OnInit {
     // idOrderHotel: new FormControl('', [Validators.minLength(2)]), מספר רץ
     idHotel: new FormControl(1),
     idCustomer: new FormControl('', [Validators.required, Validators.minLength(1)]),
-    dateFrom: new FormControl(formatDate(new Date(), "dd-MM-yyyy", "en"),[Validators.required]),
-    dateTo: new FormControl(formatDate(new Date(), "dd-MM-yyyy", "en"),[Validators.required]),
+    dateFrom: new FormControl(formatDate(new Date(), "dd-MM-yyyy", "en"), [Validators.required]),
+    dateTo: new FormControl(formatDate(new Date(), "dd-MM-yyyy", "en"), [Validators.required]),
     // sumPrice: new FormControl(''),
     roomNumber: new FormControl<number>(0, [Validators.required, Validators.minLength(3)]),
 
   })
   submitted = false;
   isValid: boolean = false;
-  constructor(private datePipe: DatePipe,private router: Router, private custumerService: CustumerService, private ordersHotelService: OrderHotelService, private formBuilder: FormBuilder) { }
+
+
+  constructor(private datePipe: DatePipe, private router: Router, private custumerService: CustumerService, private ordersHotelService: OrderHotelService, private formBuilder: FormBuilder) { }
   ngOnInit(): void {
     this.custumerService.getCustumersAndOrdersHotels().subscribe(res => {
       this.custumersAndOrdersHotels = res;
@@ -65,48 +75,75 @@ export class TableOrderCustumersComponent implements OnInit {
 
     })
   }
-    
-    applyFilter(): void {
-      this.custumerService.getCustumersAndOrdersHotels().subscribe(res => {
-        this.custumersAndOrdersHotels = res.filter(custumer =>
-          custumer.tzCustomer.includes(this.searchText)
-        )
-      })
-    }
-    editOrderForCustumer(orderAndCustumer: CustumersAndOrdersHotels) {
-      console.log(orderAndCustumer);
-      this.editCstumer = true;
-      const orderAndRoomServiceEdit: CustumersAndOrdersHotels = orderAndCustumer;
-  
-      const dateFromStr = this.datePipe.transform(orderAndRoomServiceEdit.dateFrom, 'yyyy-MM-dd');
-      const dateToStr = this.datePipe.transform(orderAndRoomServiceEdit.dateTo, 'yyyy-MM-dd');
-  
-      this.editCustumerForOrder.patchValue({
-        idOrderHotel: orderAndRoomServiceEdit.idOrderHotel,
-        dateFrom: dateFromStr,
-        dateTo: dateToStr,
-        sumPrice: orderAndRoomServiceEdit.sumPrice,
-        roomNumber: orderAndRoomServiceEdit.roomNumber
-      });
-      console.log(this.editCustumerForOrder);
-    }
-    
+
+  applyFilter(): void {
+    this.custumerService.getCustumersAndOrdersHotels().subscribe(res => {
+      this.custumersAndOrdersHotels = res.filter(custumer =>
+        custumer.tzCustomer.includes(this.searchText)
+      )
+    })
+  }
+  editOrderForCustumer(orderAndCustumer: CustumersAndOrdersHotels) {
+    console.log(orderAndCustumer);
+    this.editCstumer = true;
+    const orderAndRoomServiceEdit: CustumersAndOrdersHotels = orderAndCustumer;
+
+    const dateFromStr = this.datePipe.transform(orderAndRoomServiceEdit.dateFrom, 'yyyy-MM-dd');
+    const dateToStr = this.datePipe.transform(orderAndRoomServiceEdit.dateTo, 'yyyy-MM-dd');
+
+    this.editCustumerForOrder.patchValue({
+      idOrderHotel: orderAndRoomServiceEdit.idOrderHotel,
+      dateFrom: dateFromStr,
+      dateTo: dateToStr,
+      sumPrice: orderAndRoomServiceEdit.sumPrice,
+      roomNumber: orderAndRoomServiceEdit.roomNumber
+    });
+    console.log(this.editCustumerForOrder);
+  }
+
   formatDate(date: Date): string {
     return date.toISOString().substring(0, 10);
   }
   saveOrderToEdit() {
     console.log("צריך לממש");
     this.editCstumer = false;
-    const orderTochange =  this.editCustumerForOrder.getRawValue();
+    const orderTochange = this.editCustumerForOrder.getRawValue();
     console.log(orderTochange);
-    
-    this.orderToChange.dateFrom =new Date(orderTochange.dateFrom!)
-    this.orderToChange.dateTo =new Date(orderTochange.dateTo!)
-    this.orderToChange.idOrderHotel =orderTochange.idOrderHotel!
-    this.orderToChange.roomNumber =orderTochange.roomNumber!
-console.log(this.orderToChange);
 
-    
+    this.orderToEdit.idOrderHotel = orderTochange.idOrderHotel!
+    this.orderToEdit.dateFrom = new Date(orderTochange.dateFrom!)
+    this.orderToEdit.dateTo = new Date(orderTochange.dateTo!)
+    this.orderToEdit.roomNumber = orderTochange.roomNumber!
+    this.orderToEdit.sumPrice = orderTochange.sumPrice!
+    console.log(this.orderToEdit);
+    this.ordersHotelService.editOrderHotel(this.orderToEdit).subscribe(
+      res => {
+        this.custumersAndOrdersHotels = res;
+        this.suucsesEdit = true;
+        setTimeout(() => {
+          this.suucsesEdit = false;
+        }, 5000); // מציג את ההודעה ל-5 שניות
+      },
+      error => {
+        if (error.status === 450) {
+          this.meseegeErorFromEdit = 'ההזמנה לא נמצאה';
+        } else if (error.status === 451) {
+          this.meseegeErorFromEdit = 'החדר תפוס בתאריכים שנבחרו ';
+        } else if (error.status === 452) {
+          this.meseegeErorFromEdit = 'יש בעיה עם התאריכים שנבחרו ';
+        } else if (error.status === 453) {
+          this.meseegeErorFromEdit = 'מספר הימים קטן מ 1 או מלון לא נמצא ';
+        } else {
+          this.meseegeErorFromEdit = 'An unknown error occurred!';
+        }
+        this.erorEdit = true;
+        this.messagesErorEdit = [{ severity: 'error', summary: this.meseegeErorFromEdit }];
+        setTimeout(() => {
+          this.erorEdit = false;
+        }, 5000); // מציג את ההודעה ל-5 שניות
+      }
+    );
+
   }
   validateDates() {
     const obgOrder = this.orderForm.getRawValue();
@@ -164,7 +201,7 @@ console.log(this.orderToChange);
       this.orderToAdd.dateTo = new Date(Date.parse(obgOrder.dateTo!));
       this.orderToAdd.idHotel = 1 //obgOrder.idHotel!
       this.orderToAdd.roomNumber = obgOrder.roomNumber!
-      
+
       console.log(this.orderToAdd);
       // מכאן להוסיף בקשת שרת
       this.ordersHotelService.addOrderHotel(this.orderToAdd).subscribe(

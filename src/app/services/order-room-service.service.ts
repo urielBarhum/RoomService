@@ -24,7 +24,7 @@ export class OrderRoomServiceService {
   }
 
   getOrdersRoomServices(): Observable<orderRoomService[]> {
-    return this.http.get<orderRoomService[]>(`${this.baseUrl}/GetOrderRoomService`, { headers: this.getHeaders() });
+    return this.http.get<orderRoomService[]>(`${this.baseUrl}/GetOrderRoomServiceForManger`, { headers: this.getHeaders() });
   }
 
   addOrderRoomService(productID: number): Observable<string> {

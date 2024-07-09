@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { orderHotel } from '../models/orderHotel';
 import { CustumersAndOrdersHotels } from '../models/custumersAndOrdersHotels';
+import { editOrder } from '../models/editOrder';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,5 +17,8 @@ export class OrderHotelService {
   }
  addOrderHotel(orderHotel:orderHotel) {
   return this.http.post<CustumersAndOrdersHotels[]> ('https://localhost:44382/api/OrderesHotels/AddOrderHotel', orderHotel)
+ }
+ editOrderHotel(orderToEdit:editOrder) :Observable<CustumersAndOrdersHotels[]>{
+  return this.http.put<CustumersAndOrdersHotels[]>('https://localhost:44382/api/OrderesHotels/EditOrder' ,orderToEdit)
  }
 }
