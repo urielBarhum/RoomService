@@ -5,6 +5,7 @@ import { orderRoomService } from '../models/orderRoomService';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { OrdersForCustumer } from '../models/ordersForCustumer';
+import { orderRoomServiceForManger } from '../models/orderRoomServiceForManger';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +24,12 @@ export class OrderRoomServiceService {
     return new HttpHeaders().set('Authorization', `${token}`);
   }
 
-  getOrdersRoomServices(): Observable<orderRoomService[]> {
-    return this.http.get<orderRoomService[]>(`${this.baseUrl}/GetOrderRoomServiceForManger`, { headers: this.getHeaders() });
+  getOrdersRoomServicesForManger(): Observable<orderRoomServiceForManger[]> {
+    return this.http.get<orderRoomServiceForManger[]>(`${this.baseUrl}/GetOrderRoomServiceForManger`, { headers: this.getHeaders() });
+  }
+
+  updateOrderStatus(orderRoomServiceForManger:orderRoomServiceForManger): Observable<orderRoomServiceForManger[]>{
+    return this.http.post<orderRoomServiceForManger[]>(`${this.baseUrl}/UpdateStatusByManger`,orderRoomServiceForManger);
   }
 
   addOrderRoomService(productID: number): Observable<string> {

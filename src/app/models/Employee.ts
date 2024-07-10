@@ -1,6 +1,4 @@
 export class employee{
-
-
       idEmployee!:number
       idHotel !:number
       firstName !:string 
@@ -11,4 +9,5 @@ export class employee{
       passWord !:string
       isManger !:boolean 
       fullName !: string
+      lastTimeSend!: Date 
 }

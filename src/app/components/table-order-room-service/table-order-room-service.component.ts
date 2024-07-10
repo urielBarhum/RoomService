@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from 'src/app/models/order';
+import { orderRoomService } from 'src/app/models/orderRoomService';
+import { orderRoomServiceForManger } from 'src/app/models/orderRoomServiceForManger';
+import { OrderRoomServiceService } from 'src/app/services/order-room-service.service';
 import { OrderServiceService } from 'src/app/services/order-service.service';
 
 @Component({
@@ -10,33 +13,26 @@ import { OrderServiceService } from 'src/app/services/order-service.service';
 export class TableOrderRoomServiceComponent implements OnInit {
 
 
-  orders: Order[] = [];
+  orderRoomServiceForManger: orderRoomServiceForManger[] = [];
 
-  constructor(private orderService: OrderServiceService) { }
+  constructor(private orderRoomServiceService: OrderRoomServiceService) { }
 
   ngOnInit(): void {
-    this.loadOrders();
+    this.orderRoomServiceService.getOrdersRoomServicesForManger().subscribe(
+      res =>{
+        this.orderRoomServiceForManger = res;
+      }
+    )
   }
 
-  loadOrders(): void {
-    this.orderService.getOrders().subscribe(
-      (data: Order[]) => {
-        this.orders = data;
-      },
-      (error) => {
-        console.error('Error fetching orders', error);
-      }
-    );
-  }
 
-  updateStatus(order: Order, statusId: number): void {
-    this.orderService.updateOrderStatus(order.IDOrderRoomService, statusId).subscribe(
-      () => {
-        order.StatusID = statusId;
-      },
-      (error) => {
-        console.error('Error updating order status', error);
-      }
+
+  updateStatus(orderRoomServiceForManger:orderRoomServiceForManger): void {
+    debugger
+    this.orderRoomServiceService.updateOrderStatus(orderRoomServiceForManger).subscribe(
+     res=>{
+      this.orderRoomServiceForManger = res
+     }
     );
   }
 }

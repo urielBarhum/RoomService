@@ -176,7 +176,6 @@
 
 
 
-
 <p-table [value]="employees" [tableStyle]="{'min-width': '60rem'}">
   <ng-template pTemplate="header">
     <tr>
@@ -198,34 +197,37 @@
       <th class="text-center" pSortableColumn="isManger" style="width:10%"> האם מנהל
         <p-sortIcon [field]="'isManger'"></p-sortIcon>
       </th>
+      <th class="text-center" pSortableColumn="lastTimeSend" style="width:10%"> זמן שליחה אחרון
+        <p-sortIcon [field]="'lastTimeSend'"></p-sortIcon>
+      </th>
       <th class="text-center" pSortableColumn="edit" style="width:5%">עריכה
         <p-sortIcon [field]="'edit'"></p-sortIcon>
       </th>
       <th class="text-center" pSortableColumn="delete" style="width:5%">מחיקה
-        <p-sortIcon [field]="'delet'"></p-sortIcon>
+        <p-sortIcon [field]="'delete'"></p-sortIcon>
       </th>
     </tr>
   </ng-template>
 
   <ng-template pTemplate="body" let-employee>
     <tr class="deteles">
-      <td class="text-center">{{ employee.firstName}}</td>
-      <td class="text-center">{{ employee.lastName}}</td>
-      <td class="text-center">{{ employee.idEmployee}}</td>
+      <td class="text-center">{{ employee.firstName }}</td>
+      <td class="text-center">{{ employee.lastName }}</td>
+      <td class="text-center">{{ employee.idEmployee }}</td>
       <td *ngIf="!employee.isBusy" class="text-center bg-info">
         <i class="fa-solid fa-check bg-info"></i>
       </td>
       <td class="bg-warning text-center" *ngIf="employee.isBusy">
         <i class="fa-solid fa-x bg-warning"></i>
       </td>
-      <td class="text-center">{{ employee.tzEmployee}}</td>
+      <td class="text-center">{{ employee.tzEmployee }}</td>
       <td *ngIf="employee.isManger" class="text-center bg-info">
         <i class="fa-solid fa-check"></i>
       </td>
       <td class="bg-danger text-center" *ngIf="!employee.isManger">
-        <i class="fa-solid fa-x "></i>
+        <i class="fa-solid fa-x"></i>
       </td>
-      <!-- <td class="text-center">{{ employee.isManger}}</td> -->
+      <td class="text-center">{{ employee.lastTimeSend | date: 'dd/MM/yyyy HH:mm' }}</td>
       <td class="text-center">
         <button (click)="editEmployee(employee)">
           <i class="fa-solid fa-pen-to-square"></i>
@@ -236,5 +238,6 @@
           <i class="fa-solid fa-trash"></i>
         </button>
       </td>
+    </tr>
   </ng-template>
 </p-table>

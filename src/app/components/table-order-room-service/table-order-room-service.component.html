@@ -1,26 +1,82 @@
 <app-header-admin></app-header-admin>
 <!-- orders/orders.component.html -->
 <div class="container mt-4">
-    <h2>הזמנות אורחים</h2>
-    <div class="row" *ngFor="let order of orders">
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <img [src]="order.ProductImage" class="card-img-top" alt="{{order.NameProduct}}">
-          <div class="card-body">
-            <h5 class="card-title">{{order.NameProduct}}</h5>
-            <p class="card-text">
-              <strong>שם פרטי:</strong> {{order.FirstName}}<br>
-              <strong>שם משפחה:</strong> {{order.LastName}}<br>
-              <strong>תעודת זהות:</strong> {{order.TzCustomer}}<br>
-              <strong>מספר חדר:</strong> {{order.RoomNumber}}<br>
-              <strong>כמות:</strong> {{order.QtyProduct}}<br>
-              <strong>סטטוס:</strong> {{order.StatusID}}<br>
-            </p>
-            <button *ngIf="order.StatusID === 1" class="btn btn-primary" (click)="updateStatus(order, 2)">הזמנה בדרך</button>
-            <button *ngIf="order.StatusID === 2" class="btn btn-success" (click)="updateStatus(order, 3)">הזמנה סופקה</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
+  <h2>הזמנות אורחים</h2>
+  <p-table [value]="orderRoomServiceForManger" [paginator]="true" [rows]="25" [tableStyle]="{'min-width': '60rem'}">
+    <ng-template pTemplate="header">
+        <tr>
+            <th class="text-center" pSortableColumn="nameProduct" style="width:10%">
+                שם מוצר
+                <p-sortIcon [field]="'nameProduct'"></p-sortIcon>
+            </th>
+            <th class="text-center" pSortableColumn="qtyProduct" style="width:10%">
+                כמות מוצר
+                <p-sortIcon [field]="'qtyProduct'"></p-sortIcon>
+            </th>
+            <th class="text-center" pSortableColumn="imgProduct" style="width:10%">
+                תמונת מוצר
+                <p-sortIcon [field]="'imgProduct'"></p-sortIcon>
+            </th>
+            <th class="text-center" pSortableColumn="roomNumber" style="width:10%">
+                מספר חדר
+                <p-sortIcon [field]="'roomNumber'"></p-sortIcon>
+            </th>
+            <th class="text-center" pSortableColumn="idProduct" style="width:10%">
+                מזהה מוצר
+                <p-sortIcon [field]="'idProduct'"></p-sortIcon>
+            </th>
+            <th class="text-center" pSortableColumn="orderDate" style="width:10%">
+                תאריך הזמנה
+                <p-sortIcon [field]="'orderDate'"></p-sortIcon>
+            </th>
+            <th class="text-center" pSortableColumn="nameEmployee" style="width:10%">
+                שם עובד
+                <p-sortIcon [field]="'nameEmployee'"></p-sortIcon>
+            </th>
+            <th class="text-center" pSortableColumn="idEmployee" style="width:10%">
+                מזהה עובד
+                <p-sortIcon [field]="'idEmployee'"></p-sortIcon>
+            </th>
+            <th class="text-center" pSortableColumn="idOrderHotel" style="width:10%">
+                מזהה הזמנה במלון
+                <p-sortIcon [field]="'idOrderHotel'"></p-sortIcon>
+            </th>
+            <th class="text-center" pSortableColumn="idOrderRoomService" style="width:10%">
+                מספר הזמנה
+                <p-sortIcon [field]="'idOrderRoomService'"></p-sortIcon>
+            </th>
+            <th class="text-center" pSortableColumn="statusID" style="width:10%">
+                מזהה סטטוס
+                <p-sortIcon [field]="'statusID'"></p-sortIcon>
+            </th>
+            <th class="text-center" style="width:10%">פעולות</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-order>
+        <tr>
+            <td class="text-center">{{ order.nameProduct }}</td>
+            <td class="text-center">{{ order.qtyProduct }}</td>
+            <td class="text-center">
+                <img src="../../../assets/imagesForStor/{{order.imgProduct}}" alt="Product Image" style="width: 50px; height: 50px;">
+            </td>
+            <td class="text-center">{{ order.roomNumber }}</td>
+            <td class="text-center">{{ order.idProduct }}</td>
+            <td class="text-center">{{ order.orderDate | date: 'dd/MM/yy HH:mm:ss' }}</td>
+            <td class="text-center">{{ order.nameEmployee }}</td>
+            <td class="text-center">{{ order.idEmployee }}</td>
+            <td class="text-center">{{ order.idOrderHotel }}</td>
+            <td class="text-center">{{ order.idOrderRoomService }}</td>
+            <td class="text-center">{{ order.statusID }}</td>
+            <td class="text-center">
+                <button *ngIf="order.statusID === 1" class="btn btn-danger" title="לחץ לעדכון סטטוס" (click)="updateStatus(order)">הזמנה חדשה</button>
+                <button *ngIf="order.statusID === 2" class="btn btn-primary" title="לחץ לעדכון סטטוס" (click)="updateStatus(order)">הזמנה בדרך</button>
+                <button *ngIf="order.statusID === 3" class="btn btn-success" disabled>הזמנה סופקה</button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+
+
+
+</div>
