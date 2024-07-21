@@ -139,7 +139,7 @@
 </p-sidebar>
 
 
-<p-table [value]="custumersAndOrdersHotels" [tableStyle]="{'min-width': '60rem'}">
+<p-table [value]="custumersAndOrdersHotels"  [paginator]="true" [rows]="30" [tableStyle]="{'min-width': '60rem'}">
     <ng-template pTemplate="header">
         <tr>
             <th class="text-center" pSortableColumn="fullName" style="width:10%"> שם מלא

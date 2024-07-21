@@ -176,7 +176,7 @@
 
 
 
-<p-table [value]="employees" [tableStyle]="{'min-width': '60rem'}">
+<p-table [value]="employees" [paginator]="true" [rows]="30" [tableStyle]="{'min-width': '60rem'}">
   <ng-template pTemplate="header">
     <tr>
       <th class="text-center" pSortableColumn="firstName" style="width:10%"> שם פרטי
@@ -188,6 +188,10 @@
       <th class="text-center" pSortableColumn="idEmployee" style="width:10%"> מספר עובד
         <p-sortIcon [field]="'idEmployee'"></p-sortIcon>
       </th>
+      <th class="text-center" pSortableColumn="isWorkNow" style="width:10%"> האם עובד עכשיו
+        <p-sortIcon [field]="'isWorkNow'"></p-sortIcon>
+      </th>
+
       <th class="text-center" pSortableColumn="isBusy" style="width:10%"> האם פנוי עכשיו
         <p-sortIcon [field]="'isBusy'"></p-sortIcon>
       </th>
@@ -214,6 +218,14 @@
       <td class="text-center">{{ employee.firstName }}</td>
       <td class="text-center">{{ employee.lastName }}</td>
       <td class="text-center">{{ employee.idEmployee }}</td>
+      
+      <td *ngIf="employee.isWorkNow" class="text-center bg-info">
+        <i class="fa-solid fa-check bg-info"></i>
+      </td>
+      <td class="bg-warning text-center" *ngIf="!employee.isWorkNow">
+        <i class="fa-solid fa-x bg-warning"></i>
+      </td>
+
       <td *ngIf="!employee.isBusy" class="text-center bg-info">
         <i class="fa-solid fa-check bg-info"></i>
       </td>
