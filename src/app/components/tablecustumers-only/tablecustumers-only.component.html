@@ -1,10 +1,7 @@
 <app-header-admin></app-header-admin>
-<h2 class="text-center text-success bg-warning">טבלת אורחים</h2>
+<h2 class="text-center bg-primary text-light p-3 rounded col-12 h2-header">ניהול אורחים</h2>
 
-<div class="row">
-
-    <button class="m-2 col-1" (click)="addNewOrder()">להוספת אורח חדש </button>
-</div>
+    <button class="beautiful-button" (click)="addNewOrder()">להוספת אורח חדש </button>
 <div class="row m-1">
 
     <label for="search-input">חיפוש לפי תעודת זהות</label>
@@ -104,7 +101,7 @@
             </div>
         </div> -->
 
-        <input class="btn btn-primary m-5" type="submit" value="לחץ להוספת לקוח" [disabled]="!custumerForm.valid || !isValid">
+        <input class="btn btn-primary m-5" type="submit" value="לחץ להוספת אורח" [disabled]="!custumerForm.valid || !isValid">
     </form>
 
 </p-sidebar>

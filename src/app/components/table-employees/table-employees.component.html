@@ -1,4 +1,6 @@
 <app-header-admin></app-header-admin>
+<h2 class="text-center bg-primary text-light p-3 rounded col-12 h2-header">ניהול עובדים</h2>
+
 <div *ngIf="successSaveEmployee" class="popo">
 
   <app-messages-component [messages]="successSaveMaseeg"></app-messages-component>
@@ -11,7 +13,7 @@
 
   <app-messages-component [messages]="successeditMaseeg"></app-messages-component>
 </div>
-<button (click)="openForm()">לחץ כאן להוספת עובד</button>
+<button class="beautiful-button" (click)="openForm()">לחץ כאן להוספת עובד</button>
 
 
 <!-- הוספת עובד -->

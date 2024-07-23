@@ -1,7 +1,8 @@
 <app-header-admin></app-header-admin>
 <!-- orders/orders.component.html -->
 <div class="container mt-4">
-  <h2>הזמנות אורחים</h2>
+    <h2 class="text-center bg-primary text-light p-3 rounded col-12">הזמנות אורחים</h2>
+
   <p-table [value]="orderRoomServiceForManger" [paginator]="true" [rows]="25" [tableStyle]="{'min-width': '60rem'}">
     <ng-template pTemplate="header">
         <tr>
