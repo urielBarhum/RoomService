@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Custumer } from 'src/app/models/custumer';
 import { orderRoomService } from 'src/app/models/orderRoomService';
@@ -12,11 +12,11 @@ import { OrderRoomServiceService } from 'src/app/services/order-room-service.ser
   templateUrl: './order-room-service-by-custumer.component.html',
   styleUrls: ['./order-room-service-by-custumer.component.scss']
 })
-export class OrderRoomServiceByCustumerComponent implements OnInit {
+export class OrderRoomServiceByCustumerComponent implements OnInit, OnDestroy {
 
   public custumer !: Custumer
   public priceForAll: number = 0;
-
+  private intervalId: any;
   public ordersForCustumer: OrdersForCustumer[] = []
 
   constructor(private http: HttpClient, private router: Router, private autoService: AuthService, private orderRoomService: OrderRoomServiceService) {
@@ -48,8 +48,21 @@ export class OrderRoomServiceByCustumerComponent implements OnInit {
         }
       }
     });
+
+    this.intervalId = setInterval(() => {
+      this.reloadPage();
+    }, 20000); // 20000 מילישניות = 20 שניות
+  }
+  ngOnDestroy(): void {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
   }
 
+  reloadPage(): void {
+    // ניתן לרענן את הדף על ידי ניווט לדף הנוכחי
+    window.location.reload();
+  }
   // ngOnInit(): void {
 
     
