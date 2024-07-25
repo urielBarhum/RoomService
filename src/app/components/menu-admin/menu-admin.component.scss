@@ -1,46 +1,83 @@
+.header {
+  padding: 20px;
+  background-color: #17a2b8;
+  border-radius: 8px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
 
+.header h1 {
+  font-size: 2.5rem;
+  color: #ffffff;
+  font-weight: bold;
+  word-wrap: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header button {
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+
+.header button:hover {
+  color: #d4d4d4;
+}
+
+.header .btn-light {
+  background-color: #ffffff;
+  color: #17a2b8;
+  border: none;
+  padding: 10px;
+  font-size: 1.25rem;
+  border-radius: 50%;
+}
+
+.header .btn-light:hover {
+  background-color: #e0e0e0;
+  color: #107a8b;
+}
 
 .container {
     position: relative;
-    width: 30%;
-  }
-  
-  .image {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.image {
     opacity: 1;
     display: block;
     width: 100%;
     height: auto;
     transition: .5s ease;
     backface-visibility: hidden;
-  }
-  
-  .middle {
+}
+
+.middle {
     transition: .5s ease;
     opacity: 0;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%)
-  }
-  
-  .container:hover .image {
+    -ms-transform: translate(-50%, -50%);
+}
+
+.container:hover .image {
     opacity: 0.3;
-  }
-  
-  .container:hover .middle {
+}
+
+.container:hover .middle {
     opacity: 1;
-  }
-  
-  .text {
+}
+
+.text {
     background-color: #4CAF50;
     color: white;
     font-size: 16px;
     padding: 16px 32px;
-  }
-
-// button{
-//     background-color: yellowgreen;
-//     height: 100%;
-//     width: 100%;
-// }
+}

@@ -22,6 +22,7 @@ export class TableProductComponent implements OnInit {
   erorSaveMaseeg !: Message[];
   successSaveMaseeg !: Message[];
   successEditMaseeg !: Message[];
+  searchText: string = '';
 
   productForm = new FormGroup({
     nameProduct: new FormControl('', [Validators.minLength(2)]),
@@ -61,6 +62,13 @@ export class TableProductComponent implements OnInit {
     this.successSaveMaseeg = [{ severity: 'success', summary: 'המוצר נוסף בהצלחה לחנות ' }];
 
 
+  }
+  applyFilter(): void {
+    this.productService.getProduct().subscribe(res => {
+      this.products = res.filter(p =>
+        p.nameProduct.includes(this.searchText)
+      )
+    })
   }
   openForm() {
     this.add = true;

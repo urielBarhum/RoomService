@@ -1,5 +1,29 @@
 <app-header-admin></app-header-admin>
-<h2 class="text-center bg-primary text-light p-3 rounded col-12 h2-header">ניהול עובדים</h2>
+<!-- <h2 class="h2-header">ניהול עובדים</h2> -->
+
+<div class="h2-header-container">
+  <h2 class="h2-header ">ניהול עובדים</h2>
+</div>
+
+<div class="col-12">
+
+  <div class="row m-1">
+      <div class="col-2">
+
+          <button class="beautiful-button" (click)="openForm()">להוספת עובד חדש </button>
+      </div>
+      <div class="col-8">
+
+      </div>
+      <div class="col-2 search-container">
+          <label for="search-input" class="search-label">חיפוש לפי ת.ז / שם</label>
+          <input id="search-input" class="search-input form-control" type="text" [(ngModel)]="searchText"
+              (keyup)="applyFilter()">
+      </div>
+
+
+  </div>
+</div>
 
 <div *ngIf="successSaveEmployee" class="popo">
 
@@ -13,7 +37,8 @@
 
   <app-messages-component [messages]="successeditMaseeg"></app-messages-component>
 </div>
-<button class="beautiful-button" (click)="openForm()">לחץ כאן להוספת עובד</button>
+
+
 
 
 <!-- הוספת עובד -->
@@ -146,7 +171,8 @@
     <div class="row">
       <div class="col-6">
         <label for="isManger">האם מנהל: </label>
-        <input class="form-check-input" #manger id="isManger" type="checkbox" formControlName="isManger" (click)="changeEmployeeToManger(manger.checked,employee)" />
+        <input class="form-check-input" #manger id="isManger" type="checkbox" formControlName="isManger"
+          (click)="changeEmployeeToManger(manger.checked,employee)" />
       </div>
     </div>
 
@@ -156,7 +182,8 @@
         <div class="col-6">
           <label for="password">סיסמא : *</label>
           <!-- <input class="form-control" id="password" type="password" formControlName="password"  /> -->
-          <p-password id="password" formControlName="password" [(ngModel)]="pass1ForEdit" [toggleMask]="true"></p-password>
+          <p-password id="password" formControlName="password" [(ngModel)]="pass1ForEdit"
+            [toggleMask]="true"></p-password>
         </div>
       </div>
       <div class="row">
@@ -169,9 +196,10 @@
         </div>
       </div>
     </div>
- 
 
-    <input class="btn btn-primary" type="submit" value="לחץ לעריכה" [disabled]="!employeeFormToEdit.valid ||pass1ForEdit != pass2ForEdit|| (IsMangerToEdit && pass1ForEdit.length < 2)  ">
+
+    <input class="btn btn-primary" type="submit" value="לחץ לעריכה"
+      [disabled]="!employeeFormToEdit.valid ||pass1ForEdit != pass2ForEdit|| (IsMangerToEdit && pass1ForEdit.length < 2)  ">
   </form>
 
 </p-sidebar>
@@ -220,7 +248,7 @@
       <td class="text-center">{{ employee.firstName }}</td>
       <td class="text-center">{{ employee.lastName }}</td>
       <td class="text-center">{{ employee.idEmployee }}</td>
-      
+
       <td *ngIf="employee.isWorkNow" class="text-center bg-info">
         <i class="fa-solid fa-check bg-info"></i>
       </td>

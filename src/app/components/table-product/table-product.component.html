@@ -1,8 +1,26 @@
 <app-header-admin class="mb-2"></app-header-admin>
 <h2 class="text-center bg-primary text-light p-3 rounded col-12 h2-header">ניהול מוצרים</h2>
 
-<button class="beautiful-button" (click)="openForm()">לחץ כאן להוספת מוצר</button>
+<!-- <button class="beautiful-button" (click)="openForm()">לחץ להוספת מוצר</button> -->
 
+
+
+<div class="row m-1">
+  <div class="col-2">
+
+    <button class="beautiful-button" (click)="openForm()">לחץ להוספת מוצר </button>
+  </div>
+  <div class="col-8">
+
+  </div>
+  <div class="col-2 search-container">
+    <label for="search-input" class="search-label">חיפוש לפי שם מוצר</label>
+    <input id="search-input" class="search-input form-control" type="text" [(ngModel)]="searchText"
+      (keyup)="applyFilter()">
+  </div>
+
+
+</div>
 
 
 

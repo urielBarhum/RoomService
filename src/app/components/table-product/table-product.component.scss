@@ -1,46 +1,85 @@
+.search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-.h2-header{
-    font-size: 2rem;
-    text-align: center;
-    color: #ffffff;
-    background-color: #007bff;
-    padding: 20px;
-    border-radius: 8px;
+.search-label {
+  font-size: 1.2rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.search-input:focus {
+  border-color: #0056b3;
+  outline: none;
+}
+
+.h2-header {
+  font-size: 2rem;
+  text-align: center;
+  color: #ffffff;
+  background-color: #007bff;
+  padding: 20px;
+  border-radius: 8px;
 }
 .beautiful-button {
-    background-color: #74bf03; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
+  background-color: #74bf03; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition-duration: 0.4s;
+}
+
+.beautiful-button:hover {
+  background-color: #45a049; /* Darker Green */
+}
+.fa-trash {
+  color: red;
+}
+.fa-pen-to-square {
+  color: yellowgreen;
+}
+.deteles {
+  border-radius: 1;
+  border: 1px solid black;
+}
+tr {
+  :hover {
+    background-color: aquamarine;
+  }
+}
+.fa-check {
+  color: green;
+}
+.search-input {
+    width: 200px;
+    height: 40px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
     font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 10px;
-    transition-duration: 0.4s;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
   }
   
-  .beautiful-button:hover {
-    background-color: #45a049; /* Darker Green */
+  .search-input:focus {
+    border-color: dodgerblue;
   }
-.fa-trash{
-    color: red;
-}
-.fa-pen-to-square{
-    color: yellowgreen;
-}
-.deteles{
-    border-radius: 1;
-    border: 1px solid black;
-   
-}
-tr{
-    :hover{
-        background-color: aquamarine;
-    }
-}
-.fa-check{
-    color: green;
-}

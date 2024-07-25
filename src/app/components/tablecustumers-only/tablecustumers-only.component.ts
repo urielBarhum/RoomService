@@ -67,8 +67,9 @@ export class TablecustumersOnlyComponent {
   applyFilter(): void {
     this.custumerService.getCusrumers().subscribe(res => {
       this.tableCustumers = res.filter(custumer =>
-        custumer.tzCustomer.includes(this.searchText)
-      )
+        custumer.tzCustomer.includes(this.searchText) ||
+        custumer.fullName.includes(this.searchText)
+      );
     })
   }
   addNewOrder() {
@@ -117,9 +118,6 @@ export class TablecustumersOnlyComponent {
       )
     }
   }
-
-
-
 
   saveCustumerChanges() {
     debugger

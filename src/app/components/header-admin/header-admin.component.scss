@@ -1,3 +1,90 @@
-.header{
-width: auto;
-}
+
+.header {
+    padding: 20px;
+    background-color: #17a2b8;
+    border-radius: 8px;
+    max-width: 100%;
+    box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+  }
+  
+  .header h1 {
+    font-size: 2.5rem;
+    color: #ffffff;
+    font-weight: bold;
+    word-wrap: break-word; /* Wraps long words to prevent overflow */
+    white-space: nowrap; /* Prevents text from wrapping to a new line */
+    overflow: hidden; /* Ensures the text does not overflow its container */
+    text-overflow: ellipsis; /* Adds ellipsis (...) if the text overflows */
+  }
+  
+  .header button {
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 1.5rem;
+  }
+  
+  .header button:hover {
+    color: #d4d4d4;
+  }
+  
+  .header .btn-light {
+    background-color: #ffffff;
+    color: #17a2b8;
+    border: none;
+    padding: 10px;
+    font-size: 1.25rem;
+    border-radius: 50%;
+  }
+  
+  .header .btn-light:hover {
+    background-color: #e0e0e0;
+    color: #107a8b;
+  }
+  
+
+
+
+
+
+
+
+
+
+
+// .header{
+//     padding: 20px;
+//     background-color: #17a2b8;
+//     border-radius: 8px;
+// }
+
+// .header h1 {
+//     font-size: 2.5rem;
+//     color: #ffffff;
+//     font-weight: bold;
+// }
+
+// .header button {
+//     background-color: transparent;
+//     border: none;
+//     color: #ffffff;
+//     font-size: 1.5rem;
+// }
+
+// .header button:hover {
+//     color: #d4d4d4;
+// }
+
+// .header .btn-light {
+//     background-color: #ffffff;
+//     color: #17a2b8;
+//     border: none;
+//     padding: 10px;
+//     font-size: 1.25rem;
+//     border-radius: 50%;
+// }
+
+// .header .btn-light:hover {
+//     background-color: #e0e0e0;
+//     color: #107a8b;
+// }

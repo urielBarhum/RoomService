@@ -1,10 +1,31 @@
 <app-header-admin class="mb-2"></app-header-admin>
 <h2 class="text-center bg-primary text-light p-3 rounded col-12 h2-header">ניהול הזמנות אורחים</h2>
 
-<!-- <h1 class="card text-center text-warning m-2 bg-primary">ניהול הזמנות אורחים </h1> -->
-<!-- <h4> המחיר ללילה הוא </h4> -->
-<!-- <button class="m-2 col-1" (click)="addNewCustumer()">לחץ כאן להוספת הזמנה חדשה ללקוח קיים</button> -->
-<button class="beautiful-button" (click)="addNewCustumer()"> להוספת הזמנה חדשה </button>
+
+<!-- <button class="beautiful-button" (click)="addNewCustumer()"> להוספת הזמנה חדשה </button> -->
+
+<div class="col-12">
+
+    <div class="row m-1">
+        <div class="col-2">
+
+            <button class="beautiful-button"(click)="addNewCustumer()"> להוספת הזמנה חדשה </button>
+        </div>
+        <div class="col-8">
+
+        </div>
+        <div class="col-2 search-container">
+            <label for="search-input" class="search-label">חיפוש לפי תעודת זהות</label>
+            <input id="search-input" class="search-input form-control" type="text" [(ngModel)]="searchText"
+                (keyup)="applyFilter()">
+        </div>
+
+
+    </div>
+</div>
+
+
+
 
 <div *ngIf="suucses">
     <p-messages [value]="messagesSuccess" [enableService]="false" [closable]="false"></p-messages>
@@ -27,12 +48,12 @@
 
 
 
-
+<!-- 
 <div class="row m-1">
 
     <label for="search-input">חיפוש לפי תעודת זהות</label>
     <input class="search-input" type="text" [(ngModel)]="searchText" (keyup)="applyFilter()">
-</div>
+</div> -->
 
 
 <!-- עריכת הזמנה -->

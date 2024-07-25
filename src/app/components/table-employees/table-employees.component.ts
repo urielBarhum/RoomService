@@ -28,13 +28,15 @@ export class TableEmployeesComponent implements OnInit {
   employee: employee = new employee();
   pass1: string = "";
   pass2: string = "";
-  pass1ForEdit: string="";
-  pass2ForEdit: string ="";
+  pass1ForEdit: string = "";
+  pass2ForEdit: string = "";
+
+  searchText: string = '';
 
   employeeIsManger: boolean = false;
   employeeIsWork: boolean = false;
   employeeIsBusy: boolean = false;
-  checkIsMangerAndPassword :boolean = false;
+  checkIsMangerAndPassword: boolean = false;
 
   employeeForm = new FormGroup({
     tzEmployee: new FormControl('', [Validators.required, Validators.minLength(1)]),
@@ -73,37 +75,31 @@ export class TableEmployeesComponent implements OnInit {
 
     )
   }
-  check():boolean{
-    
-      if(this.employeeForm.valid && this.employeeIsManger== false){
-        return true;
-      }
-        
-      if(this.employeeForm.valid && this.employeeIsManger== true &&this.pass1=="" && this.pass2==""){
-        return false;
-      }
-      else if(this.employeeForm.valid && this.employeeIsManger== true &&this.pass1!="" && this.pass2!=""){
-        return true
-      }
-        
-      return false;
+  applyFilter(): void {
+    this.employeeService.getEmployees().subscribe(res => {
+      this.employees = res.filter(employee =>
+        employee.tzEmployee.includes(this.searchText) ||
+        employee.fullName.includes(this.searchText)
+      )
+    })
   }
+
   isMangerAdmin() {
     this.employeeIsManger = !this.employeeIsManger
   }
-  changeEmployeeToManger(isManger: boolean, employee:employee){
+  changeEmployeeToManger(isManger: boolean, employee: employee) {
     debugger
-    if(isManger){
+    if (isManger) {
       this.IsMangerToEdit = true;
 
       // this.pass1 = employee.passWord;
       // this.pass2 = employee.passWord;
-     
+
     }
-    else{
+    else {
       this.IsMangerToEdit = false;
-      this.pass1ForEdit ="";
-      this.pass2ForEdit ="";
+      this.pass1ForEdit = "";
+      this.pass2ForEdit = "";
 
       // this.employeeFormToEdit.patchValue({
       //   password: "",
@@ -128,16 +124,16 @@ export class TableEmployeesComponent implements OnInit {
 
     }
   }
- 
+
 
 
   saveChanges() {
     debugger
     this.IsMangerToEdit = false;
-    if (this.employeeFormToEdit.valid ) {
+    if (this.employeeFormToEdit.valid) {
       const objEmployee = this.employeeFormToEdit.getRawValue()
       const employeeToSave = new employee();
-      
+
       // employeeToSave.idHotel = objEmployee.idHotel!
       employeeToSave.idHotel = 1
 
@@ -147,20 +143,20 @@ export class TableEmployeesComponent implements OnInit {
       employeeToSave.isBusy = objEmployee.isBusy!
       employeeToSave.tzEmployee = objEmployee.tzEmployee!
       employeeToSave.isManger = objEmployee.isManger!
-      if(employeeToSave.isManger == true){
-        if(  objEmployee.password != null &&   objEmployee.passwordConfirm != null &&  objEmployee.passwordConfirm==objEmployee.password ){
+      if (employeeToSave.isManger == true) {
+        if (objEmployee.password != null && objEmployee.passwordConfirm != null && objEmployee.passwordConfirm == objEmployee.password) {
 
           employeeToSave.passWord = objEmployee.password!
-          
+
         }
       }
-      else{
+      else {
         employeeToSave.passWord = "";
       }
-      this.employeeService.editEmployee(employeeToSave).subscribe( res =>{
+      this.employeeService.editEmployee(employeeToSave).subscribe(res => {
         this.employees = res;
-        this.pass1ForEdit ="";
-        this.pass2ForEdit ="";
+        this.pass1ForEdit = "";
+        this.pass2ForEdit = "";
         this.successEditEmployee = true;
         setTimeout(() => {
           this.successEditEmployee = false;
@@ -176,7 +172,7 @@ export class TableEmployeesComponent implements OnInit {
     this.employeeService.deleteEmployee(employeeID).subscribe(
       res => {
         this.employees = res
-        this.successDelete =true;
+        this.successDelete = true;
         setTimeout(() => {
           this.successDelete = false;
 
@@ -193,7 +189,21 @@ export class TableEmployeesComponent implements OnInit {
   addOne() {
     this.add != this.add;
   }
+  check(): boolean {
 
+    if (this.employeeForm.valid && this.employeeIsManger == false) {
+      return true;
+    }
+
+    if (this.employeeForm.valid && this.employeeIsManger == true && this.pass1 == "" && this.pass2 == "") {
+      return false;
+    }
+    else if (this.employeeForm.valid && this.employeeIsManger == true && this.pass1 != "" && this.pass2 != "") {
+      return true
+    }
+
+    return false;
+  }
   addEmployee() {
     debugger;
     console.log(this.employeeIsManger);
@@ -231,19 +241,11 @@ export class TableEmployeesComponent implements OnInit {
           this.successSaveEmployee = true;
 
           this.employeeIsManger = false;
-          this.employeeForm = new FormGroup({
-            tzEmployee: new FormControl('', [Validators.required, Validators.minLength(2)]),
-            idHotel: new FormControl(0, [Validators.required, Validators.min(1)]),
-            firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-            lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-            isWorkNow: new FormControl(false),
-            isBusy: new FormControl(false),
-            password: new FormControl('', [Validators.minLength(4)]),
-            passwordConfirm: new FormControl('', [Validators.minLength(4)]),
-            isManger: new FormControl(false)
-          });
+          this.employeeForm.reset();
 
-
+          this.pass1 = "";
+          this.pass2 = ""
+          this.employeeIsManger = false;
           setTimeout(() => {
             this.successSaveEmployee = false;
 
@@ -251,7 +253,7 @@ export class TableEmployeesComponent implements OnInit {
         },
         error => {
           console.error('Error saving employee:');
-        
+
         }
       );
     }
