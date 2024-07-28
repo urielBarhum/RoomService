@@ -1,5 +1,5 @@
 <app-header-admin class="mb-2"></app-header-admin>
-<h2 class="text-center bg-primary text-light p-3 rounded col-12 h2-header">ניהול הזמנות אורחים</h2>
+<app-scond-heder [text]="'ניהול הזמנות'"></app-scond-heder>
 
 
 <!-- <button class="beautiful-button" (click)="addNewCustumer()"> להוספת הזמנה חדשה </button> -->
@@ -15,7 +15,7 @@
 
         </div>
         <div class="col-2 search-container">
-            <label for="search-input" class="search-label">חיפוש לפי תעודת זהות</label>
+            <label for="search-input" class="search-label">חיפוש לפי ת.ז/שם</label>
             <input id="search-input" class="search-input form-control" type="text" [(ngModel)]="searchText"
                 (keyup)="applyFilter()">
         </div>
@@ -84,7 +84,7 @@
                 <input class="form-control" id="sumPrice" type="number" formControlName="sumPrice" />
             </div>
         </div>
-        <input class="btn btn-primary" type="submit" value="לחץ להוספת הזמנה" [disabled]="!editCustumerForOrder.valid">
+        <input class="btn btn-primary" type="submit" value="לחץ לעריכת הזמנה" [disabled]="!editCustumerForOrder.valid">
     </form>
 </p-sidebar>
 
@@ -137,13 +137,6 @@
             תאריך התחלה לא יכול להיות קטן מתאריך סיום
         </div>
         
-
-        <!-- <div class="row">
-            <div class="col-6">
-                <label for="sumPrice">מחיר ביניים: </label>
-                <input class="form-control" id="sumPrice" type="number" formControlName="sumPrice" />
-            </div>
-        </div> -->
         <div class="row">
             <div class="col-6">
                 <label for="roomNumber">מספר חדר: </label>
@@ -154,7 +147,7 @@
 
 
 
-        <input class="btn btn-primary" type="submit" value="לחץ להוספת הזמנה" [disabled]="!orderForm.valid">
+        <input class="btn btn-primary" type="submit" value="לחץ להוספת הזמנה" [disabled]="!orderForm.valid||datesInvalid">
     </form>
 
 

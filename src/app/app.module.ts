@@ -35,6 +35,7 @@ import { HeaderUserComponent } from './components/header-user/header-user.compon
 import { TableOrderRoomServiceComponent } from './components/table-order-room-service/table-order-room-service.component';
 import { TablecustumersOnlyComponent } from './components/tablecustumers-only/tablecustumers-only.component';
 import { DatePipe } from '@angular/common';
+import { ScondHederComponent } from './components/scond-heder/scond-heder.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { DatePipe } from '@angular/common';
     HeaderUserComponent,
     TableOrderRoomServiceComponent,
     TablecustumersOnlyComponent,
+    ScondHederComponent,
  
   ],
   imports: [

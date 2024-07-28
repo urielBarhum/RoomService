@@ -1,0 +1,18 @@
+.h2-header-container {
+    display: flex;
+    justify-content: center; /* Centers the content horizontally */
+  }
+  
+  .h2-header {
+    font-size: 2rem;
+    text-align: center;
+    color: #ffffff;
+    background-color: #1b7ce3;
+    padding: 20px;
+    border-radius: 8px;
+    width: 20%;
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  }

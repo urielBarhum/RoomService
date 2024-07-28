@@ -79,7 +79,8 @@ export class TableOrderCustumersComponent implements OnInit {
   applyFilter(): void {
     this.custumerService.getCustumersAndOrdersHotels().subscribe(res => {
       this.custumersAndOrdersHotels = res.filter(custumer =>
-        custumer.tzCustomer.includes(this.searchText)
+        custumer.tzCustomer.includes(this.searchText)||
+        custumer.fullName.includes(this.searchText)
       )
     })
   }
@@ -133,7 +134,11 @@ export class TableOrderCustumersComponent implements OnInit {
           this.meseegeErorFromEdit = 'יש בעיה עם התאריכים שנבחרו ';
         } else if (error.status === 453) {
           this.meseegeErorFromEdit = 'מספר הימים קטן מ 1 או מלון לא נמצא ';
-        } else {
+        }
+        else if (error.status === 470) {
+          this.meseegeErorFromEdit = 'מספר החדר לא יכול להיות 0 ';
+        }
+        else {
           this.meseegeErorFromEdit = 'An unknown error occurred!';
         }
         this.erorEdit = true;
