@@ -1,23 +1,22 @@
-<div class="card text-center menu">
-    <div class="row">
-    
-        <h2 class="col-12 text-info">
-          ברוכים הבאים למלון דן מקווים שאתם נהנים בחופשה שלכם
-        </h2>
-      
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <div class="card text-center ">
-         
-            <p-galleria [value]="images" [autoPlay]="true" [showIndicators]="true" [showThumbnails]="false"
-              [responsiveOptions]="responsiveOptions" class="p-galleria">
-              <ng-template pTemplate="item" let-item>
-                <img [src]="item.itemImageSrc" class="gallery-image" />
-              </ng-template>
-            </p-galleria>
-        </div>
-      </div>
+<div class="text-center menu">
+  <div class="row">
+
+    <h2 class="col-12 text-info">
+      ברוכים הבאים למלון דן מקווים שאתם נהנים בחופשה שלכם
+    </h2>
+
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <!-- <div class="card text-center "> -->
+
+      <p-galleria [value]="images" [autoPlay]="true" [showIndicators]="true" [showThumbnails]="false"
+        [responsiveOptions]="responsiveOptions"  [circular]="true" class="p-galleria">
+        <ng-template pTemplate="item" let-item>
+          <img [src]="item.itemImageSrc" class="gallery-image" />
+        </ng-template>
+      </p-galleria>
+      <!-- </div> -->
     </div>
   </div>
-  
+</div>

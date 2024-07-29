@@ -20,6 +20,7 @@ export class ProductsComponent implements OnChanges,OnInit,OnDestroy {
   products: Product[] = []
   productFromChild!:Product 
   priceForAll: number =0;
+  searchText:string=""
    suucses: boolean = false;
   messages: Message[] = [{ severity: 'success', summary: 'ההזמנה נשלחה בהצלחה  ' }];
   ngOnChanges(changes: SimpleChanges): void {
@@ -42,6 +43,17 @@ export class ProductsComponent implements OnChanges,OnInit,OnDestroy {
     if (this.moneSubscription) {
       this.moneSubscription.unsubscribe();
     }
+  }
+  applyFilter(): void {
+    this.productService.getProduct().subscribe(res => {
+      this.products = res.filter(product =>
+        product.nameProduct.includes(this.searchText)||
+      product.descriptionProduct?.includes(this.searchText)||
+      product.manufacturer.includes(this.searchText)
+
+      
+      )
+    });
   }
   productFromChildToSave(product :Product){
     this.productFromChild = product

@@ -267,7 +267,7 @@
       <td class="bg-danger text-center" *ngIf="!employee.isManger">
         <i class="fa-solid fa-x"></i>
       </td>
-      <td class="text-center">{{ employee.lastTimeSend | date: 'dd/MM/yyyy HH:mm' }}</td>
+      <td class="text-center dateEmployee">{{ employee.lastTimeSend | date: 'dd/MM/yyyy HH:mm' }}</td>
       <td class="text-center">
         <button (click)="editEmployee(employee)">
           <i class="fa-solid fa-pen-to-square"></i>

@@ -166,7 +166,7 @@
 
 
 
-<p-table [value]="tableCustumers" [tableStyle]="{ 'min-width': '60rem' }">
+<p-table [value]="tableCustumers" [paginator]="true" [rows]="30" [tableStyle]="{ 'min-width': '60rem' }">
     <ng-template pTemplate="header">
         <tr>
             <th class="text-center" pSortableColumn="tzCustomer" style="width: 10%">

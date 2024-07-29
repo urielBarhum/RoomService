@@ -143,7 +143,14 @@
                 <input class="form-control" id="roomNumber" type="number" formControlName="roomNumber" />
             </div>
         </div>
-
+        <div *ngIf="availableRooms && availableRooms.length > 0" class="row">
+            <div class="col-12">
+                <small>חדרים פנויים:</small>
+                <ul>
+                    <li *ngFor="let room of availableRooms">{{ room }}</li>
+                </ul>
+            </div>
+        </div>
 
 
 

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { orderHotel } from '../models/orderHotel';
@@ -20,5 +20,11 @@ export class OrderHotelService {
  }
  editOrderHotel(orderToEdit:editOrder) :Observable<CustumersAndOrdersHotels[]>{
   return this.http.put<CustumersAndOrdersHotels[]>('https://localhost:44382/api/OrderesHotels/EditOrder' ,orderToEdit)
+ }
+ GetAvailableRooms(dateFrom:Date,dateTo:Date):Observable<number[]>{
+  const params = new HttpParams()
+    .set('dateFrom', dateFrom.toISOString())
+    .set('dateTo', dateTo.toISOString());
+  return this.http.get<number[]> ('https://localhost:44382/api/OrderesHotels/GetAvailableRooms',{params})
  }
 }

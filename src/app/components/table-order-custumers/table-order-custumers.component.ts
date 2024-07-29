@@ -45,6 +45,8 @@ export class TableOrderCustumersComponent implements OnInit {
   editCstumer: boolean = false;
   searchText: string = '';
 
+  availableRooms: number[] = [];
+
   editCustumerForOrder = new FormGroup({
     idOrderHotel: new FormControl<number>(0),
     dateFrom: new FormControl<string | null>(null, [Validators.required]),
@@ -75,6 +77,7 @@ export class TableOrderCustumersComponent implements OnInit {
 
     })
   }
+  
 
   applyFilter(): void {
     this.custumerService.getCustumersAndOrdersHotels().subscribe(res => {
@@ -150,15 +153,63 @@ export class TableOrderCustumersComponent implements OnInit {
     );
 
   }
+  
+  // validateDates() {
+  //   const obgOrder = this.orderForm.getRawValue();
+  //   const dateFrom = new Date(obgOrder.dateFrom!);
+  //   const dateTo = new Date(obgOrder.dateTo!);
+
+  //   if (dateFrom && dateTo) {
+  //     this.datesInvalid = dateFrom > dateTo;
+  //     this.getAvailableRooms(dateFrom, dateTo);
+  //   }
+  // }
   validateDates() {
     const obgOrder = this.orderForm.getRawValue();
     const dateFrom = new Date(obgOrder.dateFrom!);
     const dateTo = new Date(obgOrder.dateTo!);
-
+  
+    // בדוק אם התאריכים קיימים
     if (dateFrom && dateTo) {
-      this.datesInvalid = dateFrom > dateTo;
+      // אם תאריך ההתחלה גדול מתאריך הסיום
+      if ( dateTo >= dateFrom) {
+        this.datesInvalid = false;
+        this.getAvailableRooms(dateFrom, dateTo);
+        
+      }
+      else {
+        this.datesInvalid = true;
+        this.availableRooms=[]
+        // קריאה לפונקציה לקבלת חדרים פנויים רק אם התאריכים תקינים
+      }
     }
+     else
+    {
+      // אם אחד מהתאריכים לא הוזן, נניח שהתאריכים אינם תקינים
+      this.datesInvalid = false;
+      this.availableRooms=[]
+    }
+    console.log(this.datesInvalid);
+    console.log(this.availableRooms);
+    
+    
+    
   }
+  
+ 
+ 
+ 
+ 
+  getAvailableRooms(dateFrom: Date, dateTo: Date): void {
+    this.ordersHotelService.GetAvailableRooms(dateFrom,dateTo).subscribe(
+      res=>{
+        this.availableRooms = res;
+        console.log(this.availableRooms);
+        
+      }
+    )
+  }
+
   addNewCustumer() {
     this.swNewOrder = true;
     this.addCustumerForOrder = true;

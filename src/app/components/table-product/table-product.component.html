@@ -161,7 +161,7 @@
   <!-- <button (click)="addProduct()">לחץ להוספה</button> -->
 </p-sidebar>
 
-<p-table [value]="products" [tableStyle]="{ 'min-width': '60rem' }">
+<p-table [value]="products" [paginator]="true" [rows]="30" [tableStyle]="{ 'min-width': '60rem' }">
   <ng-template pTemplate="header">
     <tr>
       <th class="text-center" pSortableColumn="nameProduct" style="width: 10%">
@@ -176,8 +176,15 @@
         ברקוד מוצר
         <p-sortIcon [field]="'idProduct'"></p-sortIcon>
       </th>
+
+      <th class="text-center" pSortableColumn="Image" style="width: 10%">
+        תמונת מוצר
+        <p-sortIcon [field]="'Image'"></p-sortIcon>
+      </th>
+
+
       <th class="text-center" pSortableColumn="descriptionProduct" style="width: 10%">
-        תיאור פרטי המוצר
+        תיאור המוצר
         <p-sortIcon [field]="'descriptionProduct'"></p-sortIcon>
       </th>
       <th class="text-center" pSortableColumn="manufacturer" style="width: 10%">
@@ -208,6 +215,10 @@
       <td class="text-center">{{ product.nameProduct }}</td>
       <td class="text-center">{{ product.priceProduct }}</td>
       <td class="text-center">{{ product.idProduct }}</td>
+      <td class="text-center">
+       <img src="./../../../assets/imagesForStor/{{product.productImage}}" alt=""> 
+      </td>
+
       <td class="text-center">
         {{ product.descriptionProduct }}
       </td>
