@@ -17,7 +17,7 @@ import { TablecustumersOnlyComponent } from './components/tablecustumers-only/ta
 
 
 const routes: Routes = [
-  { path: "", component: MainComponent },
+  { path: "", redirectTo: "mainForAll", pathMatch: "full" },
   { path: "mainForAll", component: MainComponent },
   { path: "orderRoomServiceByCustumer", component: OrderRoomServiceByCustumerComponent },
   { path: "tableOrdersCustumers", component: TableOrderCustumersComponent },

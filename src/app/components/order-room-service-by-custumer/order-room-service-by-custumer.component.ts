@@ -18,6 +18,7 @@ export class OrderRoomServiceByCustumerComponent implements OnInit, OnDestroy {
   public priceForAll: number = 0;
   private intervalId: any;
   public ordersForCustumer: OrdersForCustumer[] = []
+  loading: boolean = true;
 
   constructor(private http: HttpClient, private router: Router, private autoService: AuthService, private orderRoomService: OrderRoomServiceService) {
     // if (this.autoService.UserInside == false) {
@@ -26,7 +27,8 @@ export class OrderRoomServiceByCustumerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    debugger;
+    this.loading = true;
+
     // בדוק אם יש טוקן בסשן סטורג'
     const token = sessionStorage.getItem('token');
     if (!token) {
@@ -39,9 +41,13 @@ export class OrderRoomServiceByCustumerComponent implements OnInit, OnDestroy {
       next: (res) => {
         this.ordersForCustumer = res;
         this.priceForAll = this.ordersForCustumer.reduce((sum, order) => sum + order.priceForAll, 0);
+        this.loading = false;
+
       },
       error: (err) => {
         console.error('Error fetching orders:', err);
+        this.loading = false;
+
         if (err.status === 401) {
           // אם יש שגיאת אימות, נווט חזרה לדף ההתחברות
           this.router.navigateByUrl('login');
