@@ -38,7 +38,7 @@ export class TableOrderCustumersComponent implements OnInit {
   suucsesEdit: boolean = false;
   erorEdit: boolean = false;
   messagesSuccessEdit: Message[] = [{ severity: 'success', summary: 'ההזמנה נערכה בהצלחה ' }]
-  messagesErorEdit: Message[] = [{ severity: 'error', summary:this.meseegeErorFromEdit }];
+  messagesErorEdit: Message[] = [{ severity: 'error', summary: this.meseegeErorFromEdit }];
 
   datesInvalid: boolean = false;
 
@@ -46,7 +46,7 @@ export class TableOrderCustumersComponent implements OnInit {
   searchText: string = '';
 
   availableRooms: number[] = [];
-
+  floor: number = 0;
   editCustumerForOrder = new FormGroup({
     idOrderHotel: new FormControl<number>(0),
     dateFrom: new FormControl<string | null>(null, [Validators.required]),
@@ -63,7 +63,6 @@ export class TableOrderCustumersComponent implements OnInit {
     dateTo: new FormControl(formatDate(new Date(), "dd-MM-yyyy", "en"), [Validators.required]),
     // sumPrice: new FormControl(''),
     roomNumber: new FormControl<number>(0, [Validators.required, Validators.minLength(3)]),
-
   })
   submitted = false;
   isValid: boolean = false;
@@ -77,12 +76,11 @@ export class TableOrderCustumersComponent implements OnInit {
 
     })
   }
-  
-
+ 
   applyFilter(): void {
     this.custumerService.getCustumersAndOrdersHotels().subscribe(res => {
       this.custumersAndOrdersHotels = res.filter(custumer =>
-        custumer.tzCustomer.includes(this.searchText)||
+        custumer.tzCustomer.includes(this.searchText) ||
         custumer.fullName.includes(this.searchText)
       )
     })
@@ -153,7 +151,7 @@ export class TableOrderCustumersComponent implements OnInit {
     );
 
   }
-  
+
   // validateDates() {
   //   const obgOrder = this.orderForm.getRawValue();
   //   const dateFrom = new Date(obgOrder.dateFrom!);
@@ -168,44 +166,34 @@ export class TableOrderCustumersComponent implements OnInit {
     const obgOrder = this.orderForm.getRawValue();
     const dateFrom = new Date(obgOrder.dateFrom!);
     const dateTo = new Date(obgOrder.dateTo!);
-  
+    console.log(this.floor);
     // בדוק אם התאריכים קיימים
     if (dateFrom && dateTo) {
       // אם תאריך ההתחלה גדול מתאריך הסיום
-      if ( dateTo >= dateFrom) {
+      if (dateTo >= dateFrom) {
         this.datesInvalid = false;
-        this.getAvailableRooms(dateFrom, dateTo);
-        
+        if (this.floor > 0) {
+          this.getAvailableRooms(dateFrom, dateTo, this.floor);
+        }
+
       }
       else {
         this.datesInvalid = true;
-        this.availableRooms=[]
-        // קריאה לפונקציה לקבלת חדרים פנויים רק אם התאריכים תקינים
+        this.availableRooms = []
       }
     }
-     else
-    {
-      // אם אחד מהתאריכים לא הוזן, נניח שהתאריכים אינם תקינים
+    else {
       this.datesInvalid = false;
-      this.availableRooms=[]
+      this.availableRooms = []
     }
-    console.log(this.datesInvalid);
-    console.log(this.availableRooms);
-    
-    
-    
   }
-  
- 
- 
- 
- 
-  getAvailableRooms(dateFrom: Date, dateTo: Date): void {
-    this.ordersHotelService.GetAvailableRooms(dateFrom,dateTo).subscribe(
-      res=>{
+
+  getAvailableRooms(dateFrom: Date, dateTo: Date, floorCustumerChuse: number): void {
+    this.ordersHotelService.GetAvailableRooms(dateFrom, dateTo, floorCustumerChuse).subscribe(
+      res => {
         this.availableRooms = res;
         console.log(this.availableRooms);
-        
+
       }
     )
   }
@@ -234,15 +222,7 @@ export class TableOrderCustumersComponent implements OnInit {
       }
     }
     )
-    // let exsit = this.custumerService.getCustumerById(tzCustomer).subscribe(
-    //   (isValid => {
-    //     if (isValid) {
-    //       console.log('ת.ז קיים');
-    //     } else {
-    //       console.log('ת.ז לא קיים');
-    //     }
-    //   })
-    // )
+
   }
   goToCustumersTable() {
     this.router.navigateByUrl('tableCustumers')
@@ -302,6 +282,21 @@ export class TableOrderCustumersComponent implements OnInit {
       }
     })
   }
+  onRoomNumberInput(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    let value = parseInt(inputElement.value, 10);
 
+    if (value < 1) {
+      this.floor = 1;
+      inputElement.value = '1';
+    } else if (value > 10) {
+      this.floor = 10;
+      inputElement.value = '10';
+    } else {
+      this.floor = value;
+    }
+    console.log(this.floor);
+
+  }
 
 }

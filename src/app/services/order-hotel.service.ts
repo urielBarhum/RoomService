@@ -21,10 +21,12 @@ export class OrderHotelService {
  editOrderHotel(orderToEdit:editOrder) :Observable<CustumersAndOrdersHotels[]>{
   return this.http.put<CustumersAndOrdersHotels[]>('https://localhost:44382/api/OrderesHotels/EditOrder' ,orderToEdit)
  }
- GetAvailableRooms(dateFrom:Date,dateTo:Date):Observable<number[]>{
+ GetAvailableRooms(dateFrom:Date,dateTo:Date ,floorCustumerChuse:number):Observable<number[]>{
   const params = new HttpParams()
     .set('dateFrom', dateFrom.toISOString())
-    .set('dateTo', dateTo.toISOString());
+    .set('dateTo', dateTo.toISOString())
+    .set('floorCustumerChuse',floorCustumerChuse)
+    ;
   return this.http.get<number[]> ('https://localhost:44382/api/OrderesHotels/GetAvailableRooms',{params})
  }
 }

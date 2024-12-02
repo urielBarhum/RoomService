@@ -8,8 +8,8 @@ import { Hotel } from '../models/hotel';
 })
 export class HotelService {
 
-  constructor(private http:HttpClient) { }
-  getHotels() : Observable<Hotel[]>{
-return this.http.get<Hotel[]>('https://localhost:44382/api/hotel/gethotels')
+  constructor(private http: HttpClient) { }
+  getHotels(): Observable<Hotel[]> {
+    return this.http.get<Hotel[]>('https://localhost:44382/api/hotel/gethotels')
   }
 }

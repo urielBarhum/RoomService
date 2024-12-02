@@ -9,7 +9,7 @@
     <div class="row m-1">
         <div class="col-2">
 
-            <button class="beautiful-button"(click)="addNewCustumer()"> להוספת הזמנה חדשה </button>
+            <button class="beautiful-button" (click)="addNewCustumer()"> להוספת הזמנה חדשה </button>
         </div>
         <div class="col-8">
 
@@ -116,7 +116,7 @@
                 <!-- <button (click)="goToCustumersTable()">לקוח לא קיים? לחץ כאן להוספה</button> -->
                 <a href="/tableCustumers" target="_blank" rel="noopener noreferrer">
                     לקוח לא קיים? לחץ כאן להוספה
-                  </a>
+                </a>
             </div>
         </div>
 
@@ -124,39 +124,56 @@
         <div class="row">
             <div class="col-6">
                 <label for="dateFrom">מתאריך:</label>
-                <input class="form-control" id="dateFrom" type="date" formControlName="dateFrom" (change)="validateDates()" />
+                <input class="form-control" id="dateFrom" type="date" formControlName="dateFrom"
+                    (change)="validateDates()" />
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-6">
                 <label for="dateTo">עד תאריך:</label>
-                <input class="form-control" id="dateTo" type="date" formControlName="dateTo" (change)="validateDates()" />
+                <input class="form-control" id="dateTo" type="date" formControlName="dateTo"
+                    (change)="validateDates()" />
             </div>
         </div>
-        
+
         <div *ngIf="datesInvalid" class="text-danger">
             תאריך התחלה לא יכול להיות קטן מתאריך סיום
         </div>
-        
+
+        <div class="row">
+            <div class="col-6">
+                <label for="floor">קומה: </label>
+                <input class="form-control" id="floor" type="number" min="1" max="10" 
+                    (input)="onRoomNumberInput($event)" (change)="validateDates()"/>
+            </div>
+        </div>
+
+
+
+
         <div class="row">
             <div class="col-6">
                 <label for="roomNumber">מספר חדר: </label>
-                <input class="form-control" id="roomNumber" type="number" formControlName="roomNumber" />
+                <input min="100" max="1100" class="form-control" id="roomNumber" type="number"
+                    formControlName="roomNumber" />
             </div>
         </div>
         <div *ngIf="availableRooms && availableRooms.length > 0" class="row">
             <div class="col-12">
-                <small>חדרים פנויים:</small>
-                <ul>
-                    <li *ngFor="let room of availableRooms">{{ room }}</li>
-                </ul>
+              <small>חדרים פנויים:</small>
+              <div class="room-list-grid">
+                <div *ngFor="let room of availableRooms" class="room-item">
+                  {{ room }}
+                </div>
+              </div>
             </div>
-        </div>
+          </div>
 
+<!-- <button (click)="kuku()">log</button> -->
 
-
-        <input class="btn btn-primary" type="submit" value="לחץ להוספת הזמנה" [disabled]="!orderForm.valid||datesInvalid">
+        <input class="btn btn-primary m-2 " type="submit" value="לחץ להוספת הזמנה"
+            [disabled]="!orderForm.valid || datesInvalid">
     </form>
 
 
@@ -164,17 +181,17 @@
 </p-sidebar>
 
 
-<p-table [value]="custumersAndOrdersHotels"  [paginator]="true" [rows]="30" [tableStyle]="{'min-width': '60rem'}">
+<p-table [value]="custumersAndOrdersHotels" [paginator]="true" [rows]="30" [tableStyle]="{'min-width': '60rem'}">
     <ng-template pTemplate="header">
         <tr>
             <th class="text-center" pSortableColumn="fullName" style="width:10%"> שם מלא
                 <p-sortIcon [field]="'fullName'"></p-sortIcon>
             </th>
 
-            <th class="text-center" pSortableColumn="tzCustomer" style="width:10%">תעודת זהות 
+            <th class="text-center" pSortableColumn="tzCustomer" style="width:10%">תעודת זהות
                 <p-sortIcon [field]="'tzCustomer'"></p-sortIcon>
             </th>
-            <th class="text-center" pSortableColumn="idCustomer" style="width:10%">מזהה לקוח להזמנות 
+            <th class="text-center" pSortableColumn="idCustomer" style="width:10%">מזהה לקוח להזמנות
                 <p-sortIcon [field]="'idCustomer'"></p-sortIcon>
             </th>
             <th class="text-center" pSortableColumn="roomNumber" style="width:8%">מספר חדר
@@ -204,7 +221,7 @@
             <th class="text-center" pSortableColumn="edit" style="width: 5%">
                 עריכה
                 <p-sortIcon [field]="'edit'"></p-sortIcon>
-              </th>
+            </th>
             <th class="text-center" pSortableColumn="ishur" style="width:8%">אישור הזמנה
                 <p-sortIcon [field]="'ishur'"></p-sortIcon>
             </th>
@@ -235,11 +252,11 @@
                 </button>
             </td> -->
             <td class="text-center">
-                <button [disabled]="custumersAndOrdersHotels.active == false" 
-                (click)="editOrderForCustumer(custumersAndOrdersHotels)">
-                  <i class="fa-solid fa-pen-to-square"></i>
+                <button [disabled]="custumersAndOrdersHotels.active == false"
+                    (click)="editOrderForCustumer(custumersAndOrdersHotels)">
+                    <i class="fa-solid fa-pen-to-square"></i>
                 </button>
-              </td>
+            </td>
             <td *ngIf="custumersAndOrdersHotels.active == true" class="text-center">
                 <button (click)="finishOrder(custumersAndOrdersHotels)">
                     <i class="fa-solid fa-circle-check"></i>
@@ -247,8 +264,8 @@
             </td>
             <td *ngIf="custumersAndOrdersHotels.active == false" class="text-center">
                 <i class="fa-solid fa-check-double"></i>
-               ההזמנה סופקה
-              </td>
+                ההזמנה סופקה
+            </td>
 
         </tr>
     </ng-template>

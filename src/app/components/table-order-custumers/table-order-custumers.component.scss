@@ -1,3 +1,26 @@
+.room-list-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 חדרים בשורה */
+  gap: 10px; /* רווח בין החדרים */
+  margin-top: 10px;
+}
+
+.room-item {
+  background-color: #4caf50; /* צבע רקע יפה (ירוק בהיר) */
+  color: white; /* צבע טקסט לבן */
+  padding: 10px; /* הקטנתי את הגודל */
+  text-align: center;
+  border-radius: 8px; /* פינות מעוגלות */
+  font-size: 14px; /* הקטנתי את גודל הטקסט */
+  font-weight: bold;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* צל קל */
+  transition: transform 0.3s; /* אפקט של שינוי מידה */
+}
+
+.room-item:hover {
+  transform: translateY(-5px); /* הגדלה קלה של הקוביה בהעברת העכבר */
+}
+
 .search-container {
   display: flex;
   flex-direction: column;
