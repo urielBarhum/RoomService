@@ -58,34 +58,82 @@
 
 <!-- עריכת הזמנה -->
 <p-sidebar [(visible)]="editCstumer" position="left">
-    <h3>עריכת הזמנה ללקוח קיים</h3>
-    <form [formGroup]="editCustumerForOrder" (ngSubmit)="saveOrderToEdit()">
-        <div class="row">
+    <h3 class="text-center m-5">עריכת הזמנה ללקוח קיים</h3>
+    <div class="row">
+      <!-- טופס עריכת הזמנה -->
+      <div class="col-6">
+        <form [formGroup]="editCustumerForOrder" (ngSubmit)="saveOrderToEdit()">
+          <!-- תאריך התחלה -->
+          <div class="row mb-3">
             <div class="col-6">
-                <label for="dateFrom">מתאריך:</label>
-                <input class="form-control" id="dateFrom" type="date" formControlName="dateFrom" />
+              <label for="dateFrom">מתאריך:</label>
+              <input class="form-control" id="dateFrom" type="date" formControlName="dateFrom" />
             </div>
-        </div>
-        <div class="row">
+          </div>
+    
+          <!-- תאריך סיום -->
+          <div class="row mb-3">
             <div class="col-6">
-                <label for="dateTo">עד תאריך:</label>
-                <input class="form-control" id="dateTo" type="date" formControlName="dateTo" />
+              <label for="dateTo">עד תאריך:</label>
+              <input class="form-control" id="dateTo" type="date" formControlName="dateTo" />
             </div>
-        </div>
-        <div class="row">
+          </div>
+    
+          <!-- מספר חדר -->
+          <div class="row mb-3">
             <div class="col-6">
-                <label for="roomNumber">מספר חדר:</label>
-                <input class="form-control" id="roomNumber" type="number" formControlName="roomNumber" />
+              <label for="roomNumber">מספר חדר:</label>
+              <input class="form-control" id="roomNumber" type="number" formControlName="roomNumber" />
             </div>
-        </div>
-        <div class="row">
+          </div>
+    
+          <!-- מחיר -->
+          <div class="row mb-3">
             <div class="col-6">
-                <label for="sumPrice">מחיר:</label>
-                <input class="form-control" id="sumPrice" type="number" formControlName="sumPrice" />
+              <label for="sumPrice">מחיר:</label>
+              <input class="form-control" id="sumPrice" type="number" formControlName="sumPrice" />
             </div>
+          </div>
+    
+          <!-- כפתור לשליחת הטופס -->
+          <input class="btn btn-primary" type="submit" value="לחץ לעריכת הזמנה" [disabled]="!editCustumerForOrder.valid">
+        </form>
+      </div>
+    
+      <!-- קטע בחירת קומה והצגת החדרים הפנויים -->
+      <div class="col-5">
+        <h4>פרטי החדרים הפנויים</h4>
+    
+        <!-- שדה קלט עבור קומה -->
+        <div class="row mb-3">
+          <div class="col-12">
+            <label for="floorToEdit">קומה:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="floorToEdit"
+              (input)="onRoomNumberInput($event)"
+              (change)="checkRoomAvailability()"
+              placeholder="הכנס מספר קומה"
+            />
+          </div>
         </div>
-        <input class="btn btn-primary" type="submit" value="לחץ לעריכת הזמנה" [disabled]="!editCustumerForOrder.valid">
-    </form>
+    
+        <!-- גריד להצגת החדרים הפנויים -->
+        <div *ngIf="roomesToedit && roomesToedit.length > 0" class="row mt-3">
+          <div class="col-12">
+            <small>חדרים פנויים:</small>
+            <div class="room-list-grid">
+              <div *ngFor="let room of roomesToedit" class="room-item">
+                {{ room }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
 </p-sidebar>
 
 <!-- הוספת הזמנה -->

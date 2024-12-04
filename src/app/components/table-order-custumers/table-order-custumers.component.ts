@@ -66,7 +66,8 @@ export class TableOrderCustumersComponent implements OnInit {
   })
   submitted = false;
   isValid: boolean = false;
-
+  floorToEdit!: number;
+  roomesToedit: number[] = []
 
   constructor(private datePipe: DatePipe, private router: Router, private custumerService: CustumerService, private ordersHotelService: OrderHotelService, private formBuilder: FormBuilder) { }
   ngOnInit(): void {
@@ -76,7 +77,22 @@ export class TableOrderCustumersComponent implements OnInit {
 
     })
   }
- 
+
+  checkRoomAvailability() {
+    debugger
+    const obgOrder = this.editCustumerForOrder.getRawValue();
+    const dateFrom = new Date(obgOrder.dateFrom!);
+    const dateTo = new Date(obgOrder.dateTo!);
+
+    if (dateTo > dateFrom && this.floor > 0) {
+      this.getAvailableRoomsForEdit(dateFrom, dateTo, this.floor);
+    }
+    else {
+      this.roomesToedit = [];
+    }
+  }
+
+
   applyFilter(): void {
     this.custumerService.getCustumersAndOrdersHotels().subscribe(res => {
       this.custumersAndOrdersHotels = res.filter(custumer =>
@@ -121,6 +137,8 @@ export class TableOrderCustumersComponent implements OnInit {
     this.ordersHotelService.editOrderHotel(this.orderToEdit).subscribe(
       res => {
         this.custumersAndOrdersHotels = res;
+        this.floorToEdit = 0;
+        this.roomesToedit = [];
         this.suucsesEdit = true;
         setTimeout(() => {
           this.suucsesEdit = false;
@@ -197,7 +215,15 @@ export class TableOrderCustumersComponent implements OnInit {
       }
     )
   }
+  getAvailableRoomsForEdit(dateFrom: Date, dateTo: Date, floorCustumerChuse: number): void {
+    this.ordersHotelService.GetAvailableRooms(dateFrom, dateTo, floorCustumerChuse).subscribe(
+      res => {
+        this.roomesToedit = res;
+        console.log(this.roomesToedit);
 
+      }
+    )
+  }
   addNewCustumer() {
     this.swNewOrder = true;
     this.addCustumerForOrder = true;
