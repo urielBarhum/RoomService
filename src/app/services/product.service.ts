@@ -115,11 +115,11 @@ export class ProductService {
   deleteProduct(idProduct: number): Observable<Product[]> {
     return this.http.delete<Product[]>('https://localhost:44382/api/Product/DeleteProduct/' + idProduct);
   }
-  addProduct(productToAdd: Product): Observable<Product[]> {
+  addProduct(productToAdd: FormData): Observable<Product[]> {
     return this.http.post<Product[]>('https://localhost:44382/api/Product/AddProduct', productToAdd)
   }
 
-  editProduct(productToEdit : Product) : Observable <Product[]>{
+  editProduct(productToEdit : FormData) : Observable <Product[]>{
     return this.http.put <Product[]> ('https://localhost:44382/api/Product/EditProduct' , productToEdit )
   }
 

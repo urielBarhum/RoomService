@@ -6,7 +6,8 @@
         <h6>{{ product.manufacturer }}</h6>
     </div>
     <div class="product-image">
-        <img src="../../../assets/imagesForStor/{{ product.productImage }}" alt="{{ product.nameProduct }}">
+        <!-- <img src="../../../assets/imagesForStor/{{ product.productImage }}" alt="{{ product.nameProduct }}"> -->
+        <img src="https://localhost:44382/images/{{product.idProduct}}{{product.productImage}}" alt="{{product.descriptionProduct}}">
     </div>
     <div class="price">
         <p>{{ product.priceProduct }}</p>

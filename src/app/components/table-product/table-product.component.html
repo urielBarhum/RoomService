@@ -43,6 +43,12 @@
   <div *ngIf="successEditProduct === true" class="card">
     <p-messages [(value)]="successEditMaseeg" [enableService]="false" [closable]="false"></p-messages>
   </div>
+
+  <div *ngIf="errorDulicate === true" class="card">
+    <p-messages [(value)]="errorDulicateMassage" [enableService]="false" [closable]="false"></p-messages>
+  </div>
+  
+
 </div>
 
 <!-- הוספת מוצר -->
@@ -87,12 +93,24 @@
     </div>
 
 
+
+    <div class="row">
+      <div class="col-6">
+        <label for="productImage">בחר תמונה: </label>
+        <input class="form-control" id="productImage" type="file" (change)="onImageSelected($event)" />
+      </div>
+    </div>
+
+
+
+<!-- 
+
     <div class="row">
       <div class="col-6">
         <label for="productImage">מיקום התמונה: </label>
         <input class="form-control" id="productImage" type="text" formControlName="productImage" />
       </div>
-    </div>
+    </div> -->
     <br>
     <input class="btn btn-success" type="submit" value="לחץ להוספה" [disabled]="!productForm.valid">
 
@@ -143,10 +161,21 @@
 
     <div class="row">
       <div class="col-6">
+        <label for="productImage">בחר תמונה: </label>
+        <input class="form-control" id="productImage" type="file" (change)="onImageSelectedInEdit($event)" />
+      </div>
+    </div>
+
+
+
+
+
+    <!-- <div class="row">
+      <div class="col-6">
         <label for="productImage">מיקום התמונה: </label>
         <input class="form-control" id="productImage" type="text" formControlName="productImage" />
       </div>
-    </div>
+    </div> -->
 
 
     <div class="row">
@@ -195,10 +224,10 @@
         כמות במלאי
         <p-sortIcon [field]="'qty'"></p-sortIcon>
       </th>
-      <th class="text-center" pSortableColumn="productImage" style="width: 10%">
+      <!-- <th class="text-center" pSortableColumn="productImage" style="width: 10%">
         מיקום התמונה
         <p-sortIcon [field]="'productImage'"></p-sortIcon>
-      </th>
+      </th> -->
       <th class="text-center" pSortableColumn="edit" style="width: 5%">
         עריכה
         <p-sortIcon [field]="'edit'"></p-sortIcon>
@@ -216,7 +245,8 @@
       <td class="text-center">{{ product.priceProduct }}</td>
       <td class="text-center">{{ product.idProduct }}</td>
       <td class="text-center">
-       <img src="./../../../assets/imagesForStor/{{product.productImage}}" alt=""> 
+       <!-- <img src="./../../../assets/imagesForStor/{{product.productImage}}" alt="">  -->
+       <img src="https://localhost:44382/images/{{product.idProduct}}{{product.productImage}}" alt="{{product.descriptionProduct}}"> 
       </td>
 
       <td class="text-center">
@@ -226,7 +256,7 @@
         {{ product.manufacturer }}
       </td>
       <td class="text-center">{{ product.qty }}</td>
-      <td class="text-center">{{ product.productImage }}</td>
+      <!-- <td class="text-center">{{ product.productImage }}</td> -->
       <td class="text-center">
         <button (click)="editProduct(product)">
           <i class="fa-solid fa-pen-to-square"></i>

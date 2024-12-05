@@ -65,8 +65,10 @@
           <td class="text-center">{{ order.priceProduct }}</td>
           <td class="text-center">{{ order.qtyProduct }} </td>
           <td class="text-center">{{ order.priceForAll }} </td>
-          <td class="text-center"> <img class="productImage" src="../../../assets/imagesForStor/{{order.productImage}}"
-              alt="{{order.productImage}}"></td>
+          <td class="text-center"> 
+            <!-- <img class="productImage" src="../../../assets/imagesForStor/{{order.productImage}}" alt="{{order.productImage}}"> -->
+            <img class="productImage" src="https://localhost:44382/images/{{order.idProduct}}{{order.productImage}}" alt="{{order.productImage}}">
+            </td>
           <td *ngIf="order.statusID ==1" class="text-center">
             <i class="fa-solid fa-fire-burner"></i>
             בהכנה
